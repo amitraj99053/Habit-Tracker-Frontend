@@ -112,3 +112,25 @@
 .full-width {
     width: 100%;
 }
+
+@media (max-width: 768px) {
+    .habit-form {
+        padding: 1.5rem;
+    }
+
+    .form-row {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .habit-input {
+        width: 100%;
+        /* Ensure full width on mobile */
+    }
+
+    .icon-picker,
+    .color-picker {
+        justify-content: center;
+        /* Center pickers on mobile for better aesthetics */
+    }
+}

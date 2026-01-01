@@ -82,6 +82,25 @@
     color: white;
     font-size: 0.8rem;
     user-select: none;
+    touch-action: manipulation;
+    /* Improves touch response */
+}
+
+@media (max-width: 768px) {
+
+    .habit-col-header,
+    .habit-name-cell {
+        min-width: 140px;
+        /* Compress the name column slightly on mobile */
+        max-width: 140px;
+        font-size: 0.9rem;
+        padding: 0.8rem 0.5rem;
+    }
+
+    .habit-icon {
+        font-size: 1rem;
+        margin-right: 0.3rem;
+    }
 }
 
 .grid-checkbox.checked {

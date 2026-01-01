@@ -46,3 +46,14 @@
         border-bottom: 1px solid #ddd;
     }
 }
+
+@media (max-width: 600px) {
+    .dashboard-container {
+        margin: 1rem;
+        border-radius: 12px;
+    }
+
+    .add-habit-section {
+        padding: 1.5rem;
+    }
+}
