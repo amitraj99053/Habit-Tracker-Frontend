@@ -21,10 +21,14 @@ export const habitService = {
         return response.json();
     },
 
-    // Mark habit as completed for today
-    completeHabit: async (id) => {
-        const response = await fetch(`${API_URL}/habits/${id}/complete`, {
+    // Toggle completion for a specific date
+    toggleHabitDate: async (id, date) => {
+        const response = await fetch(`${API_URL}/habits/${id}/toggle-date`, {
             method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ date }),
         });
         if (!response.ok) throw new Error('Failed to update habit');
         return response.json();

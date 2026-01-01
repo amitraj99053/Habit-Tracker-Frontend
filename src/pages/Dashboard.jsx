@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import HabitForm from '../components/HabitForm';
-import HabitList from '../components/HabitList';
+import SummaryHeader from '../components/SummaryHeader';
+import HabitGrid from '../components/HabitGrid';
+import HabitStats from '../components/HabitStats';
 import { habitService } from '../api/habitService';
 import './Dashboard.css';
 
@@ -8,6 +10,7 @@ const Dashboard = () => {
     const [habits, setHabits] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [currentMonth, setCurrentMonth] = useState(new Date());
 
     useEffect(() => {
         loadHabits();
@@ -32,30 +35,36 @@ const Dashboard = () => {
         setHabits(habits.map(h => h._id === updatedHabit._id ? updatedHabit : h));
     };
 
-    const handleHabitDeleted = (id) => {
-        setHabits(habits.filter(h => h._id !== id));
-    };
-
     return (
-        <div className="dashboard">
-            <div className="dashboard-header">
-                <h1>My Habits</h1>
-                <p>Track your daily wins.</p>
+        <div className="dashboard-container">
+            {/* 1. Summary Header */}
+            <SummaryHeader habits={habits} currentMonth={currentMonth} />
+
+            <div className="dashboard-main-content">
+                <div className="left-panel">
+                    {/* 2. Grid View */}
+                    {loading ? (
+                        <div className="loading">Loading tracking data...</div>
+                    ) : (
+                        <HabitGrid
+                            habits={habits}
+                            currentMonth={currentMonth}
+                            onHabitUpdated={handleHabitUpdated}
+                        />
+                    )}
+
+                    {/* Form could go below or in a modal. For now, keeping it here. */}
+                    <div className="add-habit-section">
+                        <h3>Add New Habit</h3>
+                        <HabitForm onHabitAdded={handleHabitAdded} />
+                    </div>
+                </div>
+
+                {/* 3. Analysis Panel */}
+                <div className="right-panel">
+                    <HabitStats habits={habits} currentMonth={currentMonth} />
+                </div>
             </div>
-
-            {error && <div className="error-message">{error}</div>}
-
-            <HabitForm onHabitAdded={handleHabitAdded} />
-
-            {loading ? (
-                <div className="loading">Loading habits...</div>
-            ) : (
-                <HabitList
-                    habits={habits}
-                    onHabitUpdated={handleHabitUpdated}
-                    onHabitDeleted={handleHabitDeleted}
-                />
-            )}
         </div>
     );
 };
