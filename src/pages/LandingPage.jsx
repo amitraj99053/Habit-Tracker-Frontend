@@ -1,7 +1,11 @@
+
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import './LandingPage.css';
 
 const LandingPage = () => {
+    const navigate = useNavigate();
+
     return (
         <div className="landing-page">
             <section className="hero">
@@ -14,7 +18,7 @@ const LandingPage = () => {
                         Track your progress, stay consistent, and achieve your goals with our beautiful and intuitive habit tracker.
                     </p>
                     <div className="hero-actions">
-                        <button className="cta-btn primary">Start Tracking Free</button>
+                        <button className="cta-btn primary" onClick={() => navigate('/services')}>Start Tracking Free</button>
                         <button className="cta-btn secondary">Learn More</button>
                     </div>
                 </div>
