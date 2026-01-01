@@ -5,7 +5,8 @@ import Footer from './components/Footer';
 import LandingPage from './pages/LandingPage';
 import ServicesPage from './pages/ServicesPage';
 import Dashboard from './pages/Dashboard';
-import './index.css'
+import TaskListPage from './pages/TaskListPage';
+import './App.css'
 
 function App() {
     return (
@@ -17,6 +18,7 @@ function App() {
                         <Route path="/" element={<LandingPage />} />
                         <Route path="/services" element={<ServicesPage />} />
                         <Route path="/dashboard" element={<Dashboard />} />
+                        <Route path="/tasks" element={<TaskListPage />} />
                     </Routes>
                 </main>
                 <Footer />

@@ -1,0 +1,114 @@
+.task-stats-container {
+    background: #f4f4f4;
+    padding: 1.5rem;
+    border-radius: 12px 12px 0 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.task-stats-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.page-title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #333;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.date-display {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.stats-group {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.stat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.stat-item .label {
+    font-size: 0.9rem;
+    color: #666;
+    font-weight: 500;
+}
+
+.value-box {
+    background: white;
+    padding: 0.2rem 1.5rem;
+    border-radius: 4px;
+    font-weight: bold;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    min-width: 60px;
+    text-align: center;
+}
+
+.stat-item.green .value-box {
+    background: #c3e6cb;
+    color: #155724;
+}
+
+.stat-item.red .value-box {
+    background: #f5c6cb;
+    color: #721c24;
+}
+
+.value-box.simple {
+    background: transparent;
+    box-shadow: none;
+    font-size: 1.2rem;
+}
+
+.task-progress-bar-container {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: #e0e0e0;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+}
+
+.progress-text {
+    font-weight: bold;
+    color: #333;
+    min-width: 45px;
+}
+
+.task-progress-bar {
+    flex: 1;
+    height: 20px;
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid #ccc;
+}
+
+.task-progress-fill {
+    height: 100%;
+    background: #90ee90;
+    transition: width 0.5s ease;
+}
+
+@media (max-width: 768px) {
+    .task-stats-header {
+        flex-direction: column;
+    }
+
+    .page-title {
+        order: -1;
+    }
+}

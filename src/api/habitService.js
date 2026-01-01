@@ -34,6 +34,19 @@ export const habitService = {
         return response.json();
     },
 
+    // Update habit details
+    updateHabitDetails: async (id, updates) => {
+        const response = await fetch(`${API_URL}/habits/${id}`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(updates),
+        });
+        if (!response.ok) throw new Error('Failed to update habit');
+        return response.json();
+    },
+
     // Delete a habit
     deleteHabit: async (id) => {
         const response = await fetch(`${API_URL}/habits/${id}`, {

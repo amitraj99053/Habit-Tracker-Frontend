@@ -33,12 +33,22 @@ const ServicesPage = () => {
             description: 'Focus on work deep dives and project milestones.',
             icon: '🚀',
             color: '#4ecdc4'
+        },
+        {
+            id: 'task-list',
+            title: 'Task List',
+            description: 'Manage duties, deadlines, and priorities.',
+            icon: '✅',
+            color: '#90ee90'
         }
     ];
 
     const handleServiceClick = (serviceId) => {
-        // In a real app, you might pass the serviceId to the dashboard or filter data
-        navigate('/dashboard');
+        if (serviceId === 'task-list') {
+            navigate('/tasks');
+        } else {
+            navigate('/dashboard');
+        }
     };
 
     return (

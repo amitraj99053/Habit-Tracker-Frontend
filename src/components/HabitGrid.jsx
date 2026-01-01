@@ -2,7 +2,7 @@ import React from 'react';
 import { habitService } from '../api/habitService';
 import './HabitGrid.css';
 
-const HabitGrid = ({ habits, currentMonth, onHabitUpdated }) => {
+const HabitGrid = ({ habits, currentMonth, onHabitUpdated, onEdit }) => {
     const getDaysInMonth = (date) => {
         return new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
     };
@@ -50,8 +50,13 @@ const HabitGrid = ({ habits, currentMonth, onHabitUpdated }) => {
                     {habits.map(habit => (
                         <tr key={habit._id}>
                             <td className="habit-name-cell">
-                                <span className="habit-icon">{habit.icon}</span>
-                                <span className="habit-name">{habit.name}</span>
+                                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                                    <div>
+                                        <span className="habit-icon">{habit.icon}</span>
+                                        <span className="habit-name">{habit.name}</span>
+                                    </div>
+                                    <button className="edit-icon-btn" onClick={() => onEdit(habit)}>✎</button>
+                                </div>
                             </td>
                             {daysArray.map(day => {
                                 const completed = isCompletedOnDate(habit, day);

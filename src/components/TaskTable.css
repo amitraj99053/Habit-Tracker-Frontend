@@ -1,0 +1,82 @@
+.task-table-container {
+    overflow-x: auto;
+    background: white;
+}
+
+.task-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 800px;
+}
+
+.task-table th {
+    background: #e0e0e0;
+    color: #333;
+    font-weight: bold;
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 2px solid #ccc;
+}
+
+.task-table td {
+    padding: 0.8rem 1rem;
+    border-bottom: 1px solid #eee;
+    color: #444;
+    vertical-align: middle;
+}
+
+.task-table tr:hover {
+    background: #f9f9f9;
+}
+
+.check-col {
+    width: 40px;
+    text-align: center !important;
+}
+
+.task-title {
+    font-weight: 500;
+    font-size: 1rem;
+}
+
+.task-done .task-title {
+    text-decoration: line-through;
+    color: #aaa;
+}
+
+.table-select {
+    border: none;
+    background: transparent;
+    font-family: inherit;
+    font-size: 0.9rem;
+    cursor: pointer;
+    padding: 0.2rem;
+}
+
+.status-badge {
+    border-radius: 4px;
+    padding: 0.2rem 0.5rem;
+    font-size: 0.85rem;
+    border: 1px solid transparent;
+}
+
+.icon-btn.delete {
+    background: none;
+    border: none;
+    cursor: pointer;
+    opacity: 0.3;
+    transition: opacity 0.2s;
+}
+
+.icon-btn.delete:hover {
+    opacity: 1;
+}
+
+@media (max-width: 768px) {
+
+    .task-table th,
+    .task-table td {
+        padding: 0.5rem;
+        font-size: 0.85rem;
+    }
+}

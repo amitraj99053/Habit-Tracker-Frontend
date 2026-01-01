@@ -33,6 +33,7 @@ const Dashboard = () => {
 
     const handleHabitUpdated = (updatedHabit) => {
         setHabits(habits.map(h => h._id === updatedHabit._id ? updatedHabit : h));
+        setEditingHabit(null); // Close edit form if open
     };
 
     return (
@@ -50,13 +51,21 @@ const Dashboard = () => {
                             habits={habits}
                             currentMonth={currentMonth}
                             onHabitUpdated={handleHabitUpdated}
+                            onEdit={(habit) => setEditingHabit(habit)}
                         />
                     )}
 
                     {/* Form could go below or in a modal. For now, keeping it here. */}
                     <div className="add-habit-section">
-                        <h3>Add New Habit</h3>
-                        <HabitForm onHabitAdded={handleHabitAdded} />
+                        <h3>{editingHabit ? 'Edit Habit' : 'Add New Habit'}</h3>
+                        {editingHabit && <button className="cancel-edit" onClick={() => setEditingHabit(null)}>Cancel Edit</button>}
+                        <HabitForm
+                            onHabitAdded={handleHabitAdded}
+                            onHabitUpdated={handleHabitUpdated}
+                            className={editingHabit ? 'editing' : ''}
+                            existingHabit={editingHabit}
+                            key={editingHabit ? editingHabit._id : 'new'}
+                        />
                     </div>
                 </div>
 
