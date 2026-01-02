@@ -17,10 +17,11 @@ const HabitStats = ({ habits, currentMonth }) => {
 
     return (
         <div className="habit-stats-container">
-            <h3>Analysis</h3>
+            <h3>Performance</h3>
             <table className="stats-table">
                 <thead>
                     <tr>
+                        <th>Habit</th>
                         <th>Goal</th>
                         <th>Actual</th>
                         <th>Progress</th>
@@ -31,6 +32,12 @@ const HabitStats = ({ habits, currentMonth }) => {
                         const { goal, actual, progressPercent } = calculateStats(habit);
                         return (
                             <tr key={habit._id}>
+                                <td>
+                                    <div className="habit-name-cell">
+                                        <div className="habit-icon-small">{habit.icon}</div>
+                                        <span>{habit.name}</span>
+                                    </div>
+                                </td>
                                 <td>{goal}</td>
                                 <td>{actual}</td>
                                 <td className="progress-cell">
@@ -39,7 +46,7 @@ const HabitStats = ({ habits, currentMonth }) => {
                                             className="stats-progress-fill"
                                             style={{
                                                 width: `${progressPercent}%`,
-                                                backgroundColor: habit.color || '#646cff'
+                                                backgroundColor: habit.color || '#D7FF00'
                                             }}
                                         ></div>
                                     </div>

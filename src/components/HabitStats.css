@@ -1,52 +1,85 @@
 .habit-stats-container {
-    background: white;
-    border: 1px solid #ddd;
-    padding: 1rem;
-    /* border-radius: 16px; handled by wrapper if needed */
-    min-width: 250px;
+    background: var(--card-bg);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--card-shadow);
 }
 
 .habit-stats-container h3 {
     margin-top: 0;
-    margin-bottom: 1rem;
-    text-align: center;
-    font-size: 1.2rem;
-    color: #444;
+    margin-bottom: 2rem;
+    font-size: 1.5rem;
+    color: var(--text-primary);
+    font-weight: 800;
 }
 
 .stats-table {
     width: 100%;
-    border-collapse: collapse;
+    border-collapse: separate;
+    border-spacing: 0 0.8rem;
 }
 
 .stats-table th {
-    text-align: center;
-    font-size: 0.8rem;
-    color: #666;
-    padding-bottom: 0.5rem;
-    border-bottom: 1px solid #eee;
+    text-align: left;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    padding: 0 1rem 0.5rem 1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
 }
 
 .stats-table td {
-    padding: 0.8rem 0.5rem;
-    text-align: center;
-    border-bottom: 1px solid #eee;
-    font-size: 0.9rem;
+    padding: 1.2rem 1rem;
+    background: #FAFAFA;
+    font-size: 0.95rem;
+    color: var(--text-primary);
+    font-weight: 500;
+}
+
+.stats-table tr td:first-child {
+    border-top-left-radius: 12px;
+    border-bottom-left-radius: 12px;
+}
+
+.stats-table tr td:last-child {
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
 }
 
 .progress-cell {
-    width: 100px;
+    width: 200px;
 }
 
 .stats-progress-bar {
     width: 100%;
-    height: 8px;
-    background: #eee;
-    border-radius: 4px;
+    height: 10px;
+    background: #e0e0e0;
+    border-radius: 50px;
     overflow: hidden;
 }
 
 .stats-progress-fill {
     height: 100%;
-    transition: width 0.3s ease;
+    border-radius: 50px;
+    transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.habit-name-cell {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.habit-icon-small {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
 }

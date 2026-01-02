@@ -1,78 +1,110 @@
 .summary-header {
-    background: #f0f0f0;
-    /* Light gray background like the image */
-    color: #333;
-    padding: 1.5rem 2rem;
-    border-radius: 16px 16px 0 0;
-    /* Rounded top */
+    background: var(--card-bg);
+    color: var(--text-primary);
+    padding: 2.5rem;
+    border-radius: var(--border-radius);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 0;
-    border-bottom: 1px solid #ddd;
+    margin-bottom: 2rem;
+    box-shadow: var(--card-shadow);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Neon accent bar at top */
+.summary-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary-color), var(--accent-orange));
+}
+
+.header-left {
+    flex: 1;
+}
+
+.greeting {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
 }
 
 .month-title {
-    font-size: 2rem;
-    font-weight: 600;
+    font-size: 2.5rem;
+    font-weight: 900;
     margin: 0;
-    color: #444;
+    color: var(--text-primary);
+    line-height: 1.1;
+}
+
+.header-stats {
+    display: flex;
+    gap: 3rem;
+    align-items: center;
 }
 
 .stat-box {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 0.5rem;
+    align-items: flex-start;
 }
 
 .stat-label {
-    font-size: 0.8rem;
-    color: #666;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+    margin-bottom: 0.3rem;
 }
 
 .stat-value {
-    font-size: 1.2rem;
-    font-weight: 700;
-    color: #222;
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--text-primary);
 }
 
-.progress-box {
-    min-width: 150px;
+.progress-container {
+    background: #f0f0f0;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: conic-gradient(var(--primary-color) var(--progress), transparent 0);
 }
 
-.header-progress-bar {
-    width: 100%;
-    height: 12px;
-    background: #aaa;
-    border-radius: 6px;
-    overflow: hidden;
-}
-
-.header-progress-fill {
-    height: 100%;
-    background: #90ee90;
-    /* Light green */
-    transition: width 0.5s ease;
+.progress-inner {
+    width: 50px;
+    height: 50px;
+    background: var(--card-bg);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    font-weight: 800;
 }
 
 @media (max-width: 768px) {
     .summary-header {
         flex-direction: column;
-        gap: 1.5rem;
-        border-radius: 12px 12px 0 0;
+        align-items: flex-start;
+        gap: 2rem;
         padding: 1.5rem;
     }
 
-    .stat-box {
+    .header-stats {
         width: 100%;
-        align-items: center;
-        /* Center stats on mobile */
-    }
-
-    .progress-box {
-        width: 100%;
+        justify-content: space-between;
+        gap: 1rem;
     }
 }

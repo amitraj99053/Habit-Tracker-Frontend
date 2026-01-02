@@ -1,3 +1,38 @@
+:root {
+    /* Colors */
+    --primary-color: #D7FF00;
+    /* Neon Green */
+    --primary-hover: #C0E600;
+    --accent-orange: #FF6B00;
+
+    --text-primary: #111111;
+    --text-secondary: #666666;
+
+    --bg-color: #F5F5F7;
+    --card-bg: #FFFFFF;
+
+    /* Layout */
+    --header-height: 70px;
+    --border-radius: 24px;
+
+    /* Shadows */
+    --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    --card-shadow-hover: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    -webkit-font-smoothing: antialiased;
+}
+
 .app-container {
     display: flex;
     flex-direction: column;
@@ -6,4 +41,18 @@
 
 main {
     flex: 1;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin: 0;
+    font-weight: 700;
+}
+
+button {
+    font-family: inherit;
 }

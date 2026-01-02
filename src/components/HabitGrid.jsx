@@ -24,7 +24,7 @@ const HabitGrid = ({ habits, currentMonth, onHabitUpdated, onEdit }) => {
     const toggleDate = async (habit, day) => {
         const targetDate = new Date(currentMonth.getFullYear(), currentMonth.getMonth(), day);
         try {
-            // Optimistic update (optional, but good for UX - here we wait for server)
+            // Updated directly to backend
             const updatedHabit = await habitService.toggleHabitDate(habit._id, targetDate);
             onHabitUpdated(updatedHabit);
         } catch (error) {
@@ -37,11 +37,10 @@ const HabitGrid = ({ habits, currentMonth, onHabitUpdated, onEdit }) => {
             <table className="habit-grid">
                 <thead>
                     <tr>
-                        <th className="habit-col-header">My Habits</th>
+                        <th className="habit-col-header">Habits</th>
                         {daysArray.map(day => (
                             <th key={day} className="day-header">
                                 <div className="day-number">{day}</div>
-                                {/* Optional: Add day of week logic here if needed */}
                             </th>
                         ))}
                     </tr>
@@ -50,22 +49,19 @@ const HabitGrid = ({ habits, currentMonth, onHabitUpdated, onEdit }) => {
                     {habits.map(habit => (
                         <tr key={habit._id}>
                             <td className="habit-name-cell">
-                                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                                    <div>
-                                        <span className="habit-icon">{habit.icon}</span>
-                                        <span className="habit-name">{habit.name}</span>
-                                    </div>
+                                <div className="habit-info">
+                                    <div className="habit-icon">{habit.icon}</div>
+                                    <span className="habit-name">{habit.name}</span>
                                     <button className="edit-icon-btn" onClick={() => onEdit(habit)}>✎</button>
                                 </div>
                             </td>
                             {daysArray.map(day => {
                                 const completed = isCompletedOnDate(habit, day);
                                 return (
-                                    <td key={day} className="checkbox-cell">
+                                    <td key={day} className="checkbox-cell" onClick={() => toggleDate(habit, day)}>
                                         <div
                                             className={`grid-checkbox ${completed ? 'checked' : ''}`}
-                                            onClick={() => toggleDate(habit, day)}
-                                            style={completed ? { backgroundColor: habit.color || '#646cff' } : {}}
+                                            style={completed ? { backgroundColor: habit.color || '#D7FF00', color: '#111' } : {}}
                                         >
                                             {completed && '✓'}
                                         </div>
