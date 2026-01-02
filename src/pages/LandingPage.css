@@ -36,7 +36,7 @@
 
 .hero-label {
     display: inline-block;
-    background-color: rgba(0, 0, 0, 0.05);
+    background-color: rgba(255, 255, 255, 0.1);
     padding: 0.5rem 1rem;
     border-radius: 50px;
     font-weight: 600;
@@ -145,7 +145,8 @@
     gap: 1rem;
     margin-bottom: 1rem;
     padding: 1rem;
-    background: #FAFAFA;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 16px;
 }
 
@@ -163,7 +164,7 @@
 /* STATS SECTION */
 .stats-section {
     padding: 4rem 8%;
-    background: #fff;
+    background: var(--card-bg);
     display: flex;
     justify-content: space-around;
     border-top: 1px solid #eee;
@@ -232,7 +233,7 @@
     margin-bottom: 1.5rem;
     display: inline-block;
     padding: 1rem;
-    background: #f0f0f0;
+    background: rgba(255, 255, 255, 0.05);
     border-radius: 20px;
     transition: background 0.3s;
 }
