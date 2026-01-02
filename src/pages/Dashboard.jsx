@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import HabitForm from '../components/HabitForm';
 import SummaryHeader from '../components/SummaryHeader';
 import HabitGrid from '../components/HabitGrid';
@@ -11,15 +12,40 @@ const Dashboard = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [currentMonth, setCurrentMonth] = useState(new Date());
+    const [editingHabit, setEditingHabit] = useState(null);
+
+    const location = useLocation();
+    const [journey, setJourney] = useState(location.state?.journey || 'all');
+
+    useEffect(() => {
+        if (location.state?.journey) {
+            setJourney(location.state.journey);
+        }
+    }, [location.state]);
 
     useEffect(() => {
         loadHabits();
-    }, []);
+    }, [journey]); // Reload or Re-filter when journey changes
 
     const loadHabits = async () => {
         try {
             const data = await habitService.getAllHabits();
-            setHabits(data);
+            // Filter locally for now (could move to backend)
+            let filtered = data;
+            if (journey === 'daily') {
+                // specific logic for 'daily' journey? for now just show all or filter by frequency
+                // filtered = data.filter(h => h.frequency === 'daily'); 
+                // actually standard dashboard usually shows daily habits. 
+            } else if (journey !== 'all' && journey !== 'daily') {
+                // weekly, wellness, productivity
+                filtered = data.filter(h => h.category === journey || h.frequency === journey); // broad match
+            }
+            // For 'daily', we might want to also include 'general' category
+            if (journey === 'daily') {
+                filtered = data.filter(h => h.frequency === 'daily' || h.category === 'general');
+            }
+
+            setHabits(filtered);
         } catch (err) {
             setError(err.message);
         } finally {

@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import './LandingPage.css';
@@ -10,43 +9,84 @@ const LandingPage = () => {
         <div className="landing-page">
             <section className="hero">
                 <div className="hero-content">
+                    <span className="hero-label">🚀 #1 Habit Tracking Tool</span>
                     <h1 className="hero-title">
-                        Build Better Habits,<br />
-                        <span className="highlight">One Day at a Time.</span>
+                        Crush Goals with <br />
+                        <span className="highlight">Focus & Clarity.</span>
                     </h1>
                     <p className="hero-subtitle">
-                        Track your progress, stay consistent, and achieve your goals with our beautiful and intuitive habit tracker.
+                        Stop dreaming and start doing. The ultimate tracking system designed to build consistency and accelerate your growth.
                     </p>
                     <div className="hero-actions">
-                        <button className="cta-btn primary" onClick={() => navigate('/services')}>Start Tracking Free</button>
-                        <button className="cta-btn secondary">Learn More</button>
+                        <button className="cta-btn primary" onClick={() => navigate('/services')}>Choose Tracker</button>
+                        <button className="cta-btn secondary">View Demo</button>
                     </div>
                 </div>
                 <div className="hero-visual">
-                    {/* Placeholder for a cool visual or 3D element */}
-                    <div className="visual-circle"></div>
                     <div className="visual-card">
-                        <span>Running</span>
-                        <div className="progress-bar"><div className="fill" style={{ width: '75%' }}></div></div>
+                        <h3>Daily Overview</h3>
+                        <div className="mock-stat">
+                            <div className="stat-icon">🔥</div>
+                            <div>
+                                <strong>Current Streak</strong>
+                                <div style={{ fontSize: '0.9rem', color: '#666' }}>12 Days Consistent</div>
+                            </div>
+                        </div>
+                        <div className="mock-stat">
+                            <div className="stat-icon">✅</div>
+                            <div>
+                                <strong>Tasks Completed</strong>
+                                <div style={{ fontSize: '0.9rem', color: '#666' }}>8/10 Today</div>
+                            </div>
+                        </div>
+                        <div className="mock-stat">
+                            <div className="stat-icon">📈</div>
+                            <div>
+                                <strong>Productivity Score</strong>
+                                <div style={{ fontSize: '0.9rem', color: '#666' }}>94% Efficiency</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
 
+            <section className="stats-section">
+                <div className="stat-item">
+                    <span className="stat-number">900+</span>
+                    <span className="stat-label">Active Users</span>
+                </div>
+                <div className="stat-item">
+                    <span className="stat-number">98%</span>
+                    <span className="stat-label">Success Rate</span>
+                </div>
+                <div className="stat-item">
+                    <span className="stat-number">30d</span>
+                    <span className="stat-label">Avg. Streak</span>
+                </div>
+            </section>
+
             <section className="features">
-                <div className="feature-card">
-                    <div className="icon">📊</div>
-                    <h3>Visualize Progress</h3>
-                    <p>See your streaks and consistency with beautiful charts.</p>
+                <div className="section-header">
+                    <h2 className="section-title">Why Choose Us?</h2>
+                    <p>Features designed for peak performers.</p>
                 </div>
-                <div className="feature-card">
-                    <div className="icon">🔔</div>
-                    <h3>Smart Reminders</h3>
-                    <p>Get notified at the right time to keep your streak alive.</p>
-                </div>
-                <div className="feature-card">
-                    <div className="icon">🎯</div>
-                    <h3>Set Goals</h3>
-                    <p>Define clear objectives and track your journey towards them.</p>
+
+                <div className="features-grid">
+                    <div className="feature-card">
+                        <div className="feature-icon">📊</div>
+                        <h3>Deep Analytics</h3>
+                        <p>Visualize your progress with stunning charts and uncover hidden patterns in your behavior.</p>
+                    </div>
+                    <div className="feature-card">
+                        <div className="feature-icon">🔔</div>
+                        <h3>Smart Nudges</h3>
+                        <p>Intelligent reminders that adapt to your schedule, ensuring you never miss a beat.</p>
+                    </div>
+                    <div className="feature-card">
+                        <div className="feature-icon">🎯</div>
+                        <h3>Goal Architecture</h3>
+                        <p>Break down massive goals into manageable daily actions. The clarity you need to succeed.</p>
+                    </div>
                 </div>
             </section>
         </div>

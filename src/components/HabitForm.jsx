@@ -2,12 +2,13 @@ import React, { useState } from 'react';
 import { habitService } from '../api/habitService';
 import './HabitForm.css';
 
-const HabitForm = ({ onHabitAdded, onHabitUpdated, existingHabit }) => {
+const HabitForm = ({ onHabitAdded, onHabitUpdated, existingHabit, defaultCategory = 'general' }) => {
     const [name, setName] = useState(existingHabit ? existingHabit.name : '');
     const [description, setDescription] = useState(existingHabit ? existingHabit.description : '');
     const [goal, setGoal] = useState(existingHabit ? existingHabit.goal : 30);
     const [icon, setIcon] = useState(existingHabit ? existingHabit.icon : '📝');
     const [color, setColor] = useState(existingHabit ? existingHabit.color : '#646cff');
+    const [category, setCategory] = useState(existingHabit ? existingHabit.category : defaultCategory);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -17,7 +18,7 @@ const HabitForm = ({ onHabitAdded, onHabitUpdated, existingHabit }) => {
             if (existingHabit) {
                 // Update existing
                 const updated = await habitService.updateHabitDetails(existingHabit._id, {
-                    name, description, goal, icon, color
+                    name, description, goal, icon, color, category
                 });
                 onHabitUpdated(updated);
             } else {
@@ -27,7 +28,8 @@ const HabitForm = ({ onHabitAdded, onHabitUpdated, existingHabit }) => {
                     description,
                     goal,
                     icon,
-                    color
+                    color,
+                    category
                 });
                 onHabitAdded(newHabit);
             }
@@ -39,6 +41,7 @@ const HabitForm = ({ onHabitAdded, onHabitUpdated, existingHabit }) => {
                 setGoal(30);
                 setIcon('📝');
                 setColor('#646cff');
+                setCategory(defaultCategory);
             }
         } catch (error) {
             console.error('Error saving habit:', error);
@@ -52,6 +55,7 @@ const HabitForm = ({ onHabitAdded, onHabitUpdated, existingHabit }) => {
         '📵', '🤝', '🗣️', '🎸', '⚽', '🏊', '👣', '🎯'
     ];
     const presetColors = ['#646cff', '#ff6b6b', '#4ecdc4', '#ffd700', '#90ee90', '#ff9f43'];
+    const categories = ['general', 'wellness', 'productivity', 'health', 'finance', 'social', 'other'];
 
     return (
         <form className="habit-form" onSubmit={handleSubmit}>
@@ -65,6 +69,19 @@ const HabitForm = ({ onHabitAdded, onHabitUpdated, existingHabit }) => {
                     onChange={(e) => setName(e.target.value)}
                     required
                 />
+            </div>
+
+            <div className="form-group full-width">
+                <label>Category</label>
+                <select
+                    className="habit-input"
+                    value={category}
+                    onChange={(e) => setCategory(e.target.value)}
+                >
+                    {categories.map(cat => (
+                        <option key={cat} value={cat}>{cat.charAt(0).toUpperCase() + cat.slice(1)}</option>
+                    ))}
+                </select>
             </div>
 
             <div className="form-row">

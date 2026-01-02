@@ -9,37 +9,47 @@ const ServicesPage = () => {
         {
             id: 'daily',
             title: 'Daily Habits',
-            description: 'Build consistency with small daily actions.',
+            description: 'The foundation of success. Build consistency with small daily actions that compound over time.',
             icon: '☀️',
-            color: '#FFD700'
+            color: '#FFD700',
+            tags: ['Consistency', 'Routine', 'Growth'],
+            previewColor: '#FFF9C4'
         },
         {
             id: 'weekly',
             title: 'Weekly Goals',
-            description: 'Track larger objectives week by week.',
+            description: 'Zoom out and track larger objectives. Perfect for reviews, meal prep, and skill building.',
             icon: '📅',
-            color: '#646cff'
+            color: '#646cff',
+            tags: ['Planning', 'Overview', 'Strategy'],
+            previewColor: '#E8EAF6'
         },
         {
             id: 'wellness',
             title: 'Wellness Tracker',
-            description: 'Monitor your health, sleep, and mood.',
+            description: 'Prioritize your health. Monitor sleep, mood, water intake, and mindfulness practices.',
             icon: '❤️',
-            color: '#ff6b6b'
+            color: '#ff6b6b',
+            tags: ['Health', 'Mindfulness', 'Self-care'],
+            previewColor: '#FFEBEE'
         },
         {
             id: 'productivity',
             title: 'Productivity',
-            description: 'Focus on work deep dives and project milestones.',
+            description: 'Deep work and project tracking. Measure focus time and hit your professional milestones.',
             icon: '🚀',
-            color: '#4ecdc4'
+            color: '#4ecdc4',
+            tags: ['Work', 'Focus', 'Projects'],
+            previewColor: '#E0F2F1'
         },
         {
             id: 'task-list',
-            title: 'Task List',
-            description: 'Manage duties, deadlines, and priorities.',
+            title: 'Task Master',
+            description: 'A powerful todo list to manage duties, deadlines, and priorities alongside your habits.',
             icon: '✅',
-            color: '#90ee90'
+            color: '#90ee90',
+            tags: ['To-Do', 'Deadlines', 'Organization'],
+            previewColor: '#F1F8E9'
         }
     ];
 
@@ -47,14 +57,14 @@ const ServicesPage = () => {
         if (serviceId === 'task-list') {
             navigate('/tasks');
         } else {
-            navigate('/dashboard');
+            navigate('/dashboard', { state: { journey: serviceId } });
         }
     };
 
     return (
         <div className="services-page">
-            <h1 className="services-title">Choose Your Tracking Journey</h1>
-            <p className="services-subtitle">Select a category to get started.</p>
+            <h1 className="services-title">Choose Your Bundle</h1>
+            <p className="services-subtitle">Select a tracking system tailored to your current goals.</p>
 
             <div className="services-grid">
                 {services.map((service) => (
@@ -63,12 +73,23 @@ const ServicesPage = () => {
                         className="service-card"
                         onClick={() => handleServiceClick(service.id)}
                     >
-                        <div className="service-icon" style={{ borderColor: service.color }}>
-                            {service.icon}
+                        <div className="card-preview" style={{ backgroundColor: service.previewColor }}>
+                            {/* Abstract visual representation of the tracker */}
+                            <div style={{ fontSize: '4rem', opacity: 0.2 }}>{service.icon}</div>
                         </div>
-                        <h3>{service.title}</h3>
-                        <p>{service.description}</p>
-                        <div className="service-arrow">→</div>
+                        <div className="service-content">
+                            <div className="service-icon">
+                                {service.icon}
+                            </div>
+                            <h3>{service.title}</h3>
+                            <p>{service.description}</p>
+                            <div className="service-tags">
+                                {service.tags.map(tag => (
+                                    <span key={tag} className="tag">{tag}</span>
+                                ))}
+                            </div>
+                            <button className="select-btn">Start Tracking</button>
+                        </div>
                     </div>
                 ))}
             </div>
