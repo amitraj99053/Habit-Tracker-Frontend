@@ -1,11 +1,10 @@
 .habit-grid-container {
     overflow-x: auto;
     background: var(--card-bg);
-    border: 1px solid rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: var(--border-radius);
     box-shadow: var(--card-shadow);
     margin-bottom: 2rem;
-    padding-bottom: 0.5rem;
 }
 
 .habit-grid {
@@ -15,13 +14,14 @@
     min-width: 800px;
 }
 
+/* Header Styles */
 .habit-grid th {
-    background: #FAFAFA;
-    padding: 1rem 0;
-    font-size: 0.8rem;
+    background: rgba(255, 255, 255, 0.03);
     color: var(--text-secondary);
-    border-bottom: 1px solid #eee;
+    font-size: 0.8rem;
     font-weight: 600;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    border-right: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .habit-col-header {
@@ -29,107 +29,116 @@
     padding-left: 1.5rem !important;
     position: sticky;
     left: 0;
-    z-index: 10;
-    background: #FAFAFA;
-    min-width: 220px;
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.02);
+    z-index: 20;
+    background: var(--card-bg) !important;
+    border-right: 2px solid rgba(255, 255, 255, 0.1) !important;
+    min-width: 250px;
+    font-size: 1rem !important;
+    color: var(--text-primary) !important;
+}
+
+.week-header {
+    text-align: center;
+    padding: 0.5rem 0;
+    background: rgba(255, 255, 255, 0.08) !important;
+    border-right: 2px solid rgba(255, 255, 255, 0.1) !important;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 0.75rem !important;
 }
 
 .day-header {
-    min-width: 36px;
-    width: 36px;
+    min-width: 32px;
+    width: 32px;
+    padding: 0.4rem 0 !important;
+    text-align: center;
+    font-family: monospace;
+    font-size: 0.9rem !important;
 }
 
-.day-number {
-    width: 24px;
-    height: 24px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto;
-    border-radius: 50%;
-    font-size: 0.75rem;
-}
+/* Add border to right of every 7th day (end of week) roughly */
+/* Note: Since we have week grouping now, we can target specific columns if needed, 
+   but the colSpan header visually groups them effectively. */
 
-/* Highlight current day column if implemented later */
-.day-scol.today .day-number {
-    background: var(--text-primary);
-    color: var(--primary-color);
-}
-
+/* Body Styles */
 .habit-name-cell {
     background: var(--card-bg);
-    padding: 1rem 1.5rem;
+    padding: 0.8rem 1.5rem;
     position: sticky;
     left: 0;
-    z-index: 5;
-    border-bottom: 1px solid #f5f5f5;
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.02);
+    z-index: 10;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    border-right: 2px solid rgba(255, 255, 255, 0.1);
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.habit-name-cell:hover {
+    background: rgba(255, 255, 255, 0.05);
+    /* Highlight whole name cell */
 }
 
 .habit-info {
     display: flex;
     align-items: center;
     gap: 0.8rem;
+    position: relative;
 }
 
 .habit-icon {
     font-size: 1.2rem;
-    width: 36px;
-    height: 36px;
+    width: 32px;
+    height: 32px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #f9f9f9;
-    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
 }
 
 .habit-name {
-    font-weight: 600;
+    font-weight: 500;
     color: var(--text-primary);
     font-size: 0.95rem;
 }
 
-.edit-icon-btn {
+.edit-hint {
     opacity: 0;
-    background: none;
-    border: none;
-    font-size: 1rem;
-    cursor: pointer;
-    color: #ccc;
-    transition: all 0.2s;
+    margin-left: auto;
+    color: var(--text-secondary);
+    transition: opacity 0.2s;
 }
 
-.habit-info:hover .edit-icon-btn {
+.habit-name-cell:hover .edit-hint {
     opacity: 1;
 }
 
 .checkbox-cell {
-    border-bottom: 1px solid #f5f5f5;
-    border-left: 1px solid #fafafa;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    border-right: 1px solid rgba(255, 255, 255, 0.05);
     cursor: pointer;
-    transition: background 0.2s;
-    height: 50px;
+    height: 48px;
+    padding: 0 !important;
+    transition: background 0.1s;
 }
 
 .checkbox-cell:hover {
-    background: #f9f9f9;
+    background: rgba(255, 255, 255, 0.05);
 }
 
 .grid-checkbox {
-    width: 28px;
-    height: 28px;
-    margin: 0 auto;
-    border-radius: 8px;
+    width: 100%;
+    height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: white;
+    color: transparent;
+    /* Checkmark only visible if we want, typically filled box is enough */
     font-size: 0.9rem;
-    transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    background: #f0f0f0;
+    background: transparent;
 }
 
 .grid-checkbox.checked {
-    transform: scale(1.1);
+    color: #111;
+    /* Checkmark color when checked (bg will be neon) */
 }

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { habitService } from '../api/habitService';
 import './HabitGrid.css';
 
@@ -8,7 +8,21 @@ const HabitGrid = ({ habits, currentMonth, onHabitUpdated, onEdit }) => {
     };
 
     const daysInMonth = getDaysInMonth(currentMonth);
-    const daysArray = Array.from({ length: daysInMonth }, (_, i) => i + 1);
+
+    // Group days into weeks
+    const weeks = useMemo(() => {
+        const weeksArray = [];
+        let currentWeek = [];
+
+        for (let i = 1; i <= daysInMonth; i++) {
+            currentWeek.push(i);
+            if (currentWeek.length === 7 || i === daysInMonth) {
+                weeksArray.push(currentWeek);
+                currentWeek = [];
+            }
+        }
+        return weeksArray;
+    }, [daysInMonth]);
 
     const isCompletedOnDate = (habit, day) => {
         const targetDate = new Date(currentMonth.getFullYear(), currentMonth.getMonth(), day);
@@ -24,7 +38,6 @@ const HabitGrid = ({ habits, currentMonth, onHabitUpdated, onEdit }) => {
     const toggleDate = async (habit, day) => {
         const targetDate = new Date(currentMonth.getFullYear(), currentMonth.getMonth(), day);
         try {
-            // Updated directly to backend
             const updatedHabit = await habitService.toggleHabitDate(habit._id, targetDate);
             onHabitUpdated(updatedHabit);
         } catch (error) {
@@ -36,11 +49,20 @@ const HabitGrid = ({ habits, currentMonth, onHabitUpdated, onEdit }) => {
         <div className="habit-grid-container">
             <table className="habit-grid">
                 <thead>
+                    {/* Week Header Row */}
                     <tr>
-                        <th className="habit-col-header">Habits</th>
-                        {daysArray.map(day => (
+                        <th className="habit-col-header" rowSpan="2">My Habits</th>
+                        {weeks.map((week, index) => (
+                            <th key={index} colSpan={week.length} className="week-header">
+                                Week {index + 1}
+                            </th>
+                        ))}
+                    </tr>
+                    {/* Day Number Row */}
+                    <tr>
+                        {weeks.flat().map(day => (
                             <th key={day} className="day-header">
-                                <div className="day-number">{day}</div>
+                                {day}
                             </th>
                         ))}
                     </tr>
@@ -48,14 +70,19 @@ const HabitGrid = ({ habits, currentMonth, onHabitUpdated, onEdit }) => {
                 <tbody>
                     {habits.map(habit => (
                         <tr key={habit._id}>
-                            <td className="habit-name-cell">
+                            <td
+                                className="habit-name-cell"
+                                onClick={() => onEdit(habit)}
+                                title="Click to edit habit"
+                            >
                                 <div className="habit-info">
                                     <div className="habit-icon">{habit.icon}</div>
                                     <span className="habit-name">{habit.name}</span>
-                                    <button className="edit-icon-btn" onClick={() => onEdit(habit)}>✎</button>
+                                    {/* Visual hint for editing */}
+                                    <span className="edit-hint">✎</span>
                                 </div>
                             </td>
-                            {daysArray.map(day => {
+                            {weeks.flat().map(day => {
                                 const completed = isCompletedOnDate(habit, day);
                                 return (
                                     <td key={day} className="checkbox-cell" onClick={() => toggleDate(habit, day)}>
