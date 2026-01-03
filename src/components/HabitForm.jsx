@@ -10,9 +10,15 @@ const HabitForm = ({ onHabitAdded, onHabitUpdated, existingHabit, defaultCategor
     const [color, setColor] = useState(existingHabit ? existingHabit.color : '#646cff');
     const [category, setCategory] = useState(existingHabit ? existingHabit.category : defaultCategory);
 
+    const [error, setError] = useState('');
+    const [isSubmitting, setIsSubmitting] = useState(false);
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (!name) return;
+
+        setIsSubmitting(true);
+        setError('');
 
         try {
             if (existingHabit) {
@@ -45,6 +51,9 @@ const HabitForm = ({ onHabitAdded, onHabitUpdated, existingHabit, defaultCategor
             }
         } catch (error) {
             console.error('Error saving habit:', error);
+            setError(error.message || 'Failed to save habit. Please try again.');
+        } finally {
+            setIsSubmitting(false);
         }
     };
 
@@ -59,6 +68,7 @@ const HabitForm = ({ onHabitAdded, onHabitUpdated, existingHabit, defaultCategor
 
     return (
         <form className="habit-form" onSubmit={handleSubmit}>
+            {error && <div className="form-error" style={{ color: 'red', marginBottom: '1rem' }}>{error}</div>}
             <div className="form-group full-width">
                 <label>Habit Name</label>
                 <input
@@ -129,8 +139,8 @@ const HabitForm = ({ onHabitAdded, onHabitUpdated, existingHabit, defaultCategor
                 </div>
             </div>
 
-            <button type="submit" className="add-btn full-width">
-                {existingHabit ? 'Save Changes' : 'Create Habit'}
+            <button type="submit" className="add-btn full-width" disabled={isSubmitting}>
+                {isSubmitting ? 'Saving...' : (existingHabit ? 'Save Changes' : 'Create Habit')}
             </button>
         </form>
     );
