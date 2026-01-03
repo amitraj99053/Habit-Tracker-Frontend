@@ -62,54 +62,89 @@ const SignUpModal = ({ isOpen, onClose }) => {
     };
 
     return (
-        <div className="modal-overlay">
-            <div className="modal-content">
+        <div className="modal-overlay" onClick={onClose}>
+            <div className="modal-content" onClick={e => e.stopPropagation()}>
                 <button className="close-btn" onClick={onClose}>&times;</button>
                 <h2>Create Account</h2>
-                {error && <div className="error-message">{error}</div>}
-                {success && <div className="success-message">{success}</div>}
+                <p className="modal-subtitle">Start your journey to a better you</p>
+
+                {error && (
+                    <div className="error-message">
+                        <span>⚠️</span> {error}
+                    </div>
+                )}
+                {success && (
+                    <div className="success-message">
+                        <span>✅</span> {success}
+                    </div>
+                )}
+
                 <form onSubmit={handleSubmit}>
                     <div className="form-group">
                         <label>Username</label>
-                        <input
-                            type="text"
-                            name="username"
-                            value={formData.username}
-                            onChange={handleChange}
-                            required
-                        />
+                        <div className="input-wrapper">
+                            <span className="input-icon">👤</span>
+                            <input
+                                type="text"
+                                name="username"
+                                placeholder="e.g. johndoe"
+                                value={formData.username}
+                                onChange={handleChange}
+                                required
+                            />
+                        </div>
                     </div>
+
                     <div className="form-group">
-                        <label>Email</label>
-                        <input
-                            type="email"
-                            name="email"
-                            value={formData.email}
-                            onChange={handleChange}
-                            required
-                        />
+                        <label>Email Address</label>
+                        <div className="input-wrapper">
+                            <span className="input-icon">✉️</span>
+                            <input
+                                type="email"
+                                name="email"
+                                placeholder="john@example.com"
+                                value={formData.email}
+                                onChange={handleChange}
+                                required
+                            />
+                        </div>
                     </div>
+
                     <div className="form-group">
                         <label>Password</label>
-                        <input
-                            type="password"
-                            name="password"
-                            value={formData.password}
-                            onChange={handleChange}
-                            required
-                        />
+                        <div className="input-wrapper">
+                            <span className="input-icon">🔒</span>
+                            <input
+                                type="password"
+                                name="password"
+                                placeholder="••••••••"
+                                value={formData.password}
+                                onChange={handleChange}
+                                required
+                            />
+                        </div>
                     </div>
+
                     <div className="form-group">
                         <label>Confirm Password</label>
-                        <input
-                            type="password"
-                            name="confirmPassword"
-                            value={formData.confirmPassword}
-                            onChange={handleChange}
-                            required
-                        />
+                        <div className="input-wrapper">
+                            <span className="input-icon">🔒</span>
+                            <input
+                                type="password"
+                                name="confirmPassword"
+                                placeholder="••••••••"
+                                value={formData.confirmPassword}
+                                onChange={handleChange}
+                                required
+                            />
+                        </div>
                     </div>
-                    <button type="submit" className="submit-btn">Sign Up</button>
+
+                    <button type="submit" className="submit-btn">Create Account</button>
+
+                    <div style={{ textAlign: 'center', marginTop: '1rem', color: '#64748b', fontSize: '0.9rem' }}>
+                        Already have an account? <span style={{ color: '#6366f1', cursor: 'pointer', fontWeight: '500' }}>Log in</span>
+                    </div>
                 </form>
             </div>
         </div>
