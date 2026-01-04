@@ -57,6 +57,7 @@ const SignUpModal = ({ isOpen, onClose }) => {
                 setError(data.message || 'Signup failed');
             }
         } catch (err) {
+            console.error('Signup Error:', err);
             setError('Failed to connect to server');
         }
     };
