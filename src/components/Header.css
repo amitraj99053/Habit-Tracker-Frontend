@@ -61,14 +61,31 @@
 }
 
 @media (max-width: 600px) {
-    .header-content {
+    .header {
+        padding: 1rem;
         flex-direction: column;
         gap: 1rem;
-        padding: 1rem 0;
     }
 
-    .nav-buttons {
+    .logo {
         width: 100%;
         justify-content: center;
+    }
+
+    nav {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        gap: 0.5rem;
+    }
+
+    .nav-btn {
+        margin-left: 0;
+        font-size: 0.9rem;
+        padding: 0.4rem 0.8rem;
+    }
+
+    .nav-btn.primary {
+        padding: 0.4rem 1rem;
     }
 }
