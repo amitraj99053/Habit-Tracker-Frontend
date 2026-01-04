@@ -4,6 +4,12 @@ import './Header.css';
 
 const Header = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [initiallyLogin, setInitiallyLogin] = useState(false);
+
+    const openModal = (isLogin) => {
+        setInitiallyLogin(isLogin);
+        setIsModalOpen(true);
+    };
 
     return (
         <>
@@ -14,10 +20,15 @@ const Header = () => {
                 </div>
                 <nav>
                     <button className="nav-btn">Features</button>
-                    <button className="nav-btn primary" onClick={() => setIsModalOpen(true)}>Sign Up</button>
+                    <button className="nav-btn" onClick={() => openModal(true)}>Log In</button>
+                    <button className="nav-btn primary" onClick={() => openModal(false)}>Sign Up</button>
                 </nav>
             </header>
-            <SignUpModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+            <SignUpModal
+                isOpen={isModalOpen}
+                onClose={() => setIsModalOpen(false)}
+                initiallyLogin={initiallyLogin}
+            />
         </>
     );
 };

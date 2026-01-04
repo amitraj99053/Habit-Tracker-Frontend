@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './SignUpModal.css';
 
-const SignUpModal = ({ isOpen, onClose }) => {
+const SignUpModal = ({ isOpen, onClose, initiallyLogin = false }) => {
     const [formData, setFormData] = useState({
         username: '',
         email: '',
@@ -10,6 +10,15 @@ const SignUpModal = ({ isOpen, onClose }) => {
     });
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
+
+    const [isLogin, setIsLogin] = useState(initiallyLogin);
+
+    // Update state when modal opens with new prop
+    React.useEffect(() => {
+        if (isOpen) {
+            setIsLogin(initiallyLogin);
+        }
+    }, [isOpen, initiallyLogin]);
 
     if (!isOpen) return null;
 
@@ -20,44 +29,58 @@ const SignUpModal = ({ isOpen, onClose }) => {
         });
     };
 
+    const toggleMode = () => {
+        setIsLogin(!isLogin);
+        setError('');
+        setSuccess('');
+        setFormData({
+            username: '',
+            email: '',
+            password: '',
+            confirmPassword: ''
+        });
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError('');
         setSuccess('');
 
-        if (formData.password !== formData.confirmPassword) {
+        if (!isLogin && formData.password !== formData.confirmPassword) {
             setError('Passwords do not match');
             return;
         }
 
         try {
             const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
-            const response = await fetch(`${API_URL}/auth/signup`, {
+            const endpoint = isLogin ? '/auth/login' : '/auth/signup';
+
+            const payload = isLogin
+                ? { email: formData.email, password: formData.password }
+                : { username: formData.username, email: formData.email, password: formData.password };
+
+            const response = await fetch(`${API_URL}${endpoint}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({
-                    username: formData.username,
-                    email: formData.email,
-                    password: formData.password
-                })
+                body: JSON.stringify(payload)
             });
 
             const data = await response.json();
 
             if (response.ok) {
-                setSuccess('Account created successfully!');
+                setSuccess(isLogin ? 'Login successful!' : 'Account created successfully!');
                 setTimeout(() => {
                     onClose();
                     setSuccess('');
                     setFormData({ username: '', email: '', password: '', confirmPassword: '' });
                 }, 2000);
             } else {
-                setError(data.message || 'Signup failed');
+                setError(data.message || (isLogin ? 'Login failed' : 'Signup failed'));
             }
         } catch (err) {
-            console.error('Signup Error:', err);
+            console.error('Auth Error:', err);
             setError('Failed to connect to server');
         }
     };
@@ -66,8 +89,10 @@ const SignUpModal = ({ isOpen, onClose }) => {
         <div className="modal-overlay" onClick={onClose}>
             <div className="modal-content" onClick={e => e.stopPropagation()}>
                 <button className="close-btn" onClick={onClose}>&times;</button>
-                <h2>Create Account</h2>
-                <p className="modal-subtitle">Start your journey to a better you</p>
+                <h2>{isLogin ? 'Welcome Back' : 'Create Account'}</h2>
+                <p className="modal-subtitle">
+                    {isLogin ? 'Enter your details to access your account' : 'Start your journey to a better you'}
+                </p>
 
                 {error && (
                     <div className="error-message">
@@ -81,20 +106,22 @@ const SignUpModal = ({ isOpen, onClose }) => {
                 )}
 
                 <form onSubmit={handleSubmit}>
-                    <div className="form-group">
-                        <label>Username</label>
-                        <div className="input-wrapper">
-                            <span className="input-icon">👤</span>
-                            <input
-                                type="text"
-                                name="username"
-                                placeholder="e.g. johndoe"
-                                value={formData.username}
-                                onChange={handleChange}
-                                required
-                            />
+                    {!isLogin && (
+                        <div className="form-group">
+                            <label>Username</label>
+                            <div className="input-wrapper">
+                                <span className="input-icon">👤</span>
+                                <input
+                                    type="text"
+                                    name="username"
+                                    placeholder="e.g. johndoe"
+                                    value={formData.username}
+                                    onChange={handleChange}
+                                    required={!isLogin}
+                                />
+                            </div>
                         </div>
-                    </div>
+                    )}
 
                     <div className="form-group">
                         <label>Email Address</label>
@@ -126,25 +153,33 @@ const SignUpModal = ({ isOpen, onClose }) => {
                         </div>
                     </div>
 
-                    <div className="form-group">
-                        <label>Confirm Password</label>
-                        <div className="input-wrapper">
-                            <span className="input-icon">🔒</span>
-                            <input
-                                type="password"
-                                name="confirmPassword"
-                                placeholder="••••••••"
-                                value={formData.confirmPassword}
-                                onChange={handleChange}
-                                required
-                            />
+                    {!isLogin && (
+                        <div className="form-group">
+                            <label>Confirm Password</label>
+                            <div className="input-wrapper">
+                                <span className="input-icon">🔒</span>
+                                <input
+                                    type="password"
+                                    name="confirmPassword"
+                                    placeholder="••••••••"
+                                    value={formData.confirmPassword}
+                                    onChange={handleChange}
+                                    required={!isLogin}
+                                />
+                            </div>
                         </div>
-                    </div>
+                    )}
 
-                    <button type="submit" className="submit-btn">Create Account</button>
+                    <button type="submit" className="submit-btn">{isLogin ? 'Log In' : 'Create Account'}</button>
 
                     <div style={{ textAlign: 'center', marginTop: '1rem', color: '#64748b', fontSize: '0.9rem' }}>
-                        Already have an account? <span style={{ color: '#6366f1', cursor: 'pointer', fontWeight: '500' }}>Log in</span>
+                        {isLogin ? "Don't have an account? " : "Already have an account? "}
+                        <span
+                            style={{ color: '#6366f1', cursor: 'pointer', fontWeight: '500' }}
+                            onClick={toggleMode}
+                        >
+                            {isLogin ? 'Sign up' : 'Log in'}
+                        </span>
                     </div>
                 </form>
             </div>
