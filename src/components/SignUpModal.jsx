@@ -105,7 +105,6 @@ const SignUpModal = ({ isOpen, onClose, initiallyLogin = false }) => {
                 <form onSubmit={handleSubmit}>
                     {!isLogin && (
                         <div className="form-group">
-                            <label>Username</label>
                             <div className="input-wrapper">
                                 <input
                                     type="text"
@@ -120,7 +119,6 @@ const SignUpModal = ({ isOpen, onClose, initiallyLogin = false }) => {
                     )}
 
                     <div className="form-group">
-                        <label>Email</label>
                         <div className="input-wrapper">
                             <input
                                 type="email"
@@ -134,7 +132,6 @@ const SignUpModal = ({ isOpen, onClose, initiallyLogin = false }) => {
                     </div>
 
                     <div className="form-group">
-                        <label>Password</label>
                         <div className="input-wrapper">
                             <input
                                 type="password"
@@ -149,7 +146,6 @@ const SignUpModal = ({ isOpen, onClose, initiallyLogin = false }) => {
 
                     {!isLogin && (
                         <div className="form-group">
-                            <label>Confirm Password</label>
                             <div className="input-wrapper">
                                 <input
                                     type="password"
