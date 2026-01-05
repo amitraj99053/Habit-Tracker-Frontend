@@ -89,10 +89,7 @@ const SignUpModal = ({ isOpen, onClose, initiallyLogin = false }) => {
         <div className="modal-overlay" onClick={onClose}>
             <div className="modal-content" onClick={e => e.stopPropagation()}>
                 <button className="close-btn" onClick={onClose}>&times;</button>
-                <h2>{isLogin ? 'Welcome Back' : 'Create Account'}</h2>
-                <p className="modal-subtitle">
-                    {isLogin ? 'Enter your details to access your account' : 'Start your journey to a better you'}
-                </p>
+                <h2>{isLogin ? 'Log In' : 'Sign Up'}</h2>
 
                 {error && (
                     <div className="error-message">
@@ -110,11 +107,10 @@ const SignUpModal = ({ isOpen, onClose, initiallyLogin = false }) => {
                         <div className="form-group">
                             <label>Username</label>
                             <div className="input-wrapper">
-                                <span className="input-icon">👤</span>
                                 <input
                                     type="text"
                                     name="username"
-                                    placeholder="e.g. johndoe"
+                                    placeholder="Username"
                                     value={formData.username}
                                     onChange={handleChange}
                                     required={!isLogin}
@@ -124,13 +120,12 @@ const SignUpModal = ({ isOpen, onClose, initiallyLogin = false }) => {
                     )}
 
                     <div className="form-group">
-                        <label>Email Address</label>
+                        <label>Email</label>
                         <div className="input-wrapper">
-                            <span className="input-icon">✉️</span>
                             <input
                                 type="email"
                                 name="email"
-                                placeholder="john@example.com"
+                                placeholder="Email address"
                                 value={formData.email}
                                 onChange={handleChange}
                                 required
@@ -141,11 +136,10 @@ const SignUpModal = ({ isOpen, onClose, initiallyLogin = false }) => {
                     <div className="form-group">
                         <label>Password</label>
                         <div className="input-wrapper">
-                            <span className="input-icon">🔒</span>
                             <input
                                 type="password"
                                 name="password"
-                                placeholder="••••••••"
+                                placeholder="Password"
                                 value={formData.password}
                                 onChange={handleChange}
                                 required
@@ -157,11 +151,10 @@ const SignUpModal = ({ isOpen, onClose, initiallyLogin = false }) => {
                         <div className="form-group">
                             <label>Confirm Password</label>
                             <div className="input-wrapper">
-                                <span className="input-icon">🔒</span>
                                 <input
                                     type="password"
                                     name="confirmPassword"
-                                    placeholder="••••••••"
+                                    placeholder="Confirm password"
                                     value={formData.confirmPassword}
                                     onChange={handleChange}
                                     required={!isLogin}
@@ -170,10 +163,10 @@ const SignUpModal = ({ isOpen, onClose, initiallyLogin = false }) => {
                         </div>
                     )}
 
-                    <button type="submit" className="submit-btn">{isLogin ? 'Log In' : 'Create Account'}</button>
+                    <button type="submit" className="submit-btn">{isLogin ? 'Log In' : 'Sign Up'}</button>
 
                     <div className="toggle-text" style={{ textAlign: 'center', marginTop: '1rem', fontSize: '0.9rem' }}>
-                        {isLogin ? "Don't have an account? " : "Already have an account? "}
+                        {isLogin ? "New here? " : "Have an account? "}
                         <span
                             className="toggle-link"
                             onClick={toggleMode}
