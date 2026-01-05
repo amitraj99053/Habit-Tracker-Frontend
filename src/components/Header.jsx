@@ -20,7 +20,7 @@ const Header = () => {
                 </div>
                 <nav>
                     <button className="nav-btn">Features</button>
-                    <button className="nav-btn" onClick={() => openModal(true)}>Log In</button>
+                    <button className="nav-btn secondary-btn" onClick={() => openModal(true)}>Log In</button>
                     <button className="nav-btn primary" onClick={() => openModal(false)}>Sign Up</button>
                 </nav>
             </header>
