@@ -172,10 +172,10 @@ const SignUpModal = ({ isOpen, onClose, initiallyLogin = false }) => {
 
                     <button type="submit" className="submit-btn">{isLogin ? 'Log In' : 'Create Account'}</button>
 
-                    <div style={{ textAlign: 'center', marginTop: '1rem', color: '#64748b', fontSize: '0.9rem' }}>
+                    <div className="toggle-text" style={{ textAlign: 'center', marginTop: '1rem', fontSize: '0.9rem' }}>
                         {isLogin ? "Don't have an account? " : "Already have an account? "}
                         <span
-                            style={{ color: '#6366f1', cursor: 'pointer', fontWeight: '500' }}
+                            className="toggle-link"
                             onClick={toggleMode}
                         >
                             {isLogin ? 'Sign up' : 'Log in'}
