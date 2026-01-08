@@ -66,10 +66,31 @@ const Dashboard = () => {
         setHabits(habits.filter(h => h._id !== deletedId));
     };
 
+    const nextMonth = () => {
+        setCurrentMonth(prev => {
+            const next = new Date(prev);
+            next.setMonth(next.getMonth() + 1);
+            return next;
+        });
+    };
+
+    const prevMonth = () => {
+        setCurrentMonth(prev => {
+            const previous = new Date(prev);
+            previous.setMonth(previous.getMonth() - 1);
+            return previous;
+        });
+    };
+
     return (
         <div className="dashboard-container">
             {/* 1. Summary Header */}
-            <SummaryHeader habits={habits} currentMonth={currentMonth} />
+            <SummaryHeader
+                habits={habits}
+                currentMonth={currentMonth}
+                onNextMonth={nextMonth}
+                onPrevMonth={prevMonth}
+            />
 
             <div className="dashboard-main-content">
                 <div className="left-panel">

@@ -1,7 +1,8 @@
 import React from 'react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 import './SummaryHeader.css';
 
-const SummaryHeader = ({ habits, currentMonth }) => {
+const SummaryHeader = ({ habits, currentMonth, onNextMonth, onPrevMonth }) => {
     const totalHabits = habits.length;
 
     // Calculate total updates/completions for the current month vs goal
@@ -26,7 +27,11 @@ const SummaryHeader = ({ habits, currentMonth }) => {
         <div className="summary-header">
             <div className="header-left">
                 <div className="greeting">Your Dashboard</div>
-                <h2 className="month-title">{monthName} {year}</h2>
+                <div className="month-nav-container">
+                    <button className="nav-btn" onClick={onPrevMonth}><ChevronLeft size={20} /></button>
+                    <h2 className="month-title">{monthName} {year}</h2>
+                    <button className="nav-btn" onClick={onNextMonth}><ChevronRight size={20} /></button>
+                </div>
             </div>
 
             <div className="header-stats">
