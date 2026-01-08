@@ -89,7 +89,7 @@ const SignUpModal = ({ isOpen, onClose, initiallyLogin = false }) => {
         <div className="modal-overlay" onClick={onClose}>
             <div className="modal-content" onClick={e => e.stopPropagation()}>
                 <button className="close-btn" onClick={onClose}>&times;</button>
-                <h2>{isLogin ? 'Log In' : 'Sign Up'}</h2>
+                {/* Header replaced by Tabs */}
 
                 {error && (
                     <div className="error-message">
@@ -101,6 +101,21 @@ const SignUpModal = ({ isOpen, onClose, initiallyLogin = false }) => {
                         <span>✅</span> {success}
                     </div>
                 )}
+
+                <div className="auth-tabs">
+                    <button
+                        className={`auth-tab ${isLogin ? 'active' : ''}`}
+                        onClick={() => { setIsLogin(true); setError(''); setSuccess(''); }}
+                    >
+                        Log In
+                    </button>
+                    <button
+                        className={`auth-tab ${!isLogin ? 'active' : ''}`}
+                        onClick={() => { setIsLogin(false); setError(''); setSuccess(''); }}
+                    >
+                        Sign Up
+                    </button>
+                </div>
 
                 <form onSubmit={handleSubmit}>
                     {!isLogin && (
@@ -160,16 +175,6 @@ const SignUpModal = ({ isOpen, onClose, initiallyLogin = false }) => {
                     )}
 
                     <button type="submit" className="submit-btn">{isLogin ? 'Log In' : 'Sign Up'}</button>
-
-                    <div className="toggle-text" style={{ textAlign: 'center', marginTop: '1rem', fontSize: '0.9rem' }}>
-                        {isLogin ? "New here? " : "Have an account? "}
-                        <span
-                            className="toggle-link"
-                            onClick={toggleMode}
-                        >
-                            {isLogin ? 'Sign up' : 'Log in'}
-                        </span>
-                    </div>
                 </form>
             </div>
         </div>

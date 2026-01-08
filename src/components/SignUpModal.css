@@ -45,13 +45,41 @@
 }
 
 .modal-content h2 {
+    display: none;
+    /* Hide original header */
+}
+
+.auth-tabs {
+    display: flex;
     margin-bottom: 2rem;
-    text-align: center;
-    color: #fff;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.auth-tab {
+    flex: 1;
+    background: none;
+    border: none;
+    padding: 1rem;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-bottom: 2px solid transparent;
     font-family: 'Inter', sans-serif;
-    font-weight: 800;
-    font-size: 1.8rem;
-    letter-spacing: -0.02em;
+}
+
+.auth-tab:hover {
+    color: rgba(255, 255, 255, 0.8);
+    background: rgba(255, 255, 255, 0.05);
+    /* Slight hover bg */
+}
+
+.auth-tab.active {
+    color: #D7FF00;
+    /* Neon Green */
+    border-bottom: 2px solid #D7FF00;
+    background: linear-gradient(to bottom, transparent, rgba(215, 255, 0, 0.05));
 }
 
 /* Subtitle removed */
@@ -146,24 +174,7 @@
     border: 1px solid rgba(22, 163, 74, 0.2);
 }
 
-/* Toggle Link Styling */
-.toggle-text {
-    color: rgba(255, 255, 255, 0.6);
-}
-
-.toggle-link {
-    color: #D7FF00 !important;
-    cursor: pointer;
-    font-weight: 600;
-    margin-left: 0.3rem;
-    text-decoration: none;
-    transition: opacity 0.2s;
-}
-
-.toggle-link:hover {
-    text-decoration: underline;
-    opacity: 0.8;
-}
+/* Toggle Link Removed */
 
 @keyframes fadeIn {
     from {
