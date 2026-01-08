@@ -157,6 +157,13 @@ const SignUpModal = ({ isOpen, onClose, initiallyLogin = false }) => {
                                 required
                             />
                         </div>
+                        {isLogin && (
+                            <div className="forgot-password">
+                                <span onClick={() => alert("Password reset feature coming soon!")}>
+                                    Forgot Password?
+                                </span>
+                            </div>
+                        )}
                     </div>
 
                     {!isLogin && (

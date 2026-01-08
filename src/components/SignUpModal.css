@@ -176,6 +176,23 @@
 
 /* Toggle Link Removed */
 
+.forgot-password {
+    text-align: right;
+    margin-top: 0.5rem;
+}
+
+.forgot-password span {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.forgot-password span:hover {
+    color: #D7FF00;
+    text-decoration: underline;
+}
+
 @keyframes fadeIn {
     from {
         opacity: 0;
