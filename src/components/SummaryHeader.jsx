@@ -1,8 +1,8 @@
 import React from 'react';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Download } from 'lucide-react';
 import './SummaryHeader.css';
 
-const SummaryHeader = ({ habits, currentMonth, onNextMonth, onPrevMonth }) => {
+const SummaryHeader = ({ habits, currentMonth, onNextMonth, onPrevMonth, onExport }) => {
     const totalHabits = habits.length;
 
     // Calculate total updates/completions for the current month vs goal
@@ -53,6 +53,10 @@ const SummaryHeader = ({ habits, currentMonth, onNextMonth, onPrevMonth }) => {
                     </div>
                 </div>
             </div>
+
+            <button className="export-btn" onClick={onExport} title="Download Excel/CSV">
+                <Download size={20} />
+            </button>
         </div>
     );
 };

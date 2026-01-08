@@ -123,12 +123,45 @@
     font-weight: 800;
 }
 
+
+.export-btn {
+    position: absolute;
+    bottom: 25px;
+    right: 30px;
+    background: transparent;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    padding: 8px;
+    cursor: pointer;
+    color: var(--text-secondary);
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.export-btn:hover {
+    background: var(--card-bg);
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
 @media (max-width: 768px) {
     .summary-header {
         flex-direction: column;
         align-items: flex-start;
         gap: 2rem;
         padding: 1.5rem;
+    }
+
+    .export-btn {
+        position: relative;
+        bottom: auto;
+        right: auto;
+        width: 100%;
+        margin-top: 1rem;
     }
 
     .header-stats {

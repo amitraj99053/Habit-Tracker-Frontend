@@ -82,6 +82,35 @@ const Dashboard = () => {
         });
     };
 
+    const handleExport = () => {
+        const headers = ["Habit Name", "Category", "Frequency", "Goal", "Total Completed", "Completed Dates"];
+        const rows = habits.map(h => [
+            `"${h.name}"`, // Quote strings to handle commas
+            h.category,
+            h.frequency,
+            h.goal,
+            h.completedDates.length,
+            `"${h.completedDates.join(', ')}"`
+        ]);
+
+        const csvContent = [
+            headers.join(','),
+            ...rows.map(r => r.join(','))
+        ].join('\n');
+
+        const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+        const link = document.createElement("a");
+        if (link.download !== undefined) {
+            const url = URL.createObjectURL(blob);
+            link.setAttribute("href", url);
+            link.setAttribute("download", "habits_export.csv");
+            link.style.visibility = 'hidden';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+    };
+
     return (
         <div className="dashboard-container">
             {/* 1. Summary Header */}
@@ -90,6 +119,7 @@ const Dashboard = () => {
                 currentMonth={currentMonth}
                 onNextMonth={nextMonth}
                 onPrevMonth={prevMonth}
+                onExport={handleExport}
             />
 
             <div className="dashboard-main-content">

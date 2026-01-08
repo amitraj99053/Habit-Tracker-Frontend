@@ -53,6 +53,10 @@ export const habitService = {
             method: 'DELETE',
         });
         if (!response.ok) throw new Error('Failed to delete habit');
+        // Handle 204 No Content which throws on .json()
+        if (response.status === 204) {
+            return { success: true };
+        }
         return response.json();
     }
 };
