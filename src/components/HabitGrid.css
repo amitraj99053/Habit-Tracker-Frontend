@@ -200,13 +200,15 @@
 
 .icon-picker-popover {
     position: absolute;
-    top: 110%;
-    left: 0;
-    z-index: 1000;
+    top: 50%;
+    left: 100%;
+    margin-left: 10px;
+    transform: translateY(-50%);
+    z-index: 99999;
     background: rgba(18, 18, 18, 0.95);
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
     border-radius: 12px;
     padding: 12px;
     width: 280px;
