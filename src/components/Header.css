@@ -47,16 +47,18 @@ nav {
 }
 
 .nav-btn {
-    background: transparent;
-    border: none;
     color: var(--text-secondary, #aaa);
     font-size: 0.95rem;
     font-weight: 500;
     cursor: pointer;
-    transition: all 0.2s ease;
+    background: transparent;
+    border-width: initial;
+    border-style: none;
+    border-color: initial;
+    border-image: initial;
+    transition: 0.2s;
     padding: 0.6rem 1.2rem;
-    border-radius: 0;
-    /* Rectangular shape */
+    border-radius: 10px;
 }
 
 .nav-btn:hover {
