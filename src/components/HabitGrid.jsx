@@ -1,8 +1,9 @@
 import React, { useMemo } from 'react';
 import { habitService } from '../api/habitService';
+import { Trash2 } from 'lucide-react';
 import './HabitGrid.css';
 
-const HabitGrid = ({ habits, currentMonth, onHabitUpdated, onHabitAdded }) => {
+const HabitGrid = ({ habits, currentMonth, onHabitUpdated, onHabitAdded, onHabitDeleted }) => {
     const [editingId, setEditingId] = React.useState(null);
     const [tempName, setTempName] = React.useState('');
     const [pickerOpen, setPickerOpen] = React.useState(null); // stores habit ID
@@ -93,7 +94,6 @@ const HabitGrid = ({ habits, currentMonth, onHabitUpdated, onHabitAdded }) => {
             setPickerOpen(null);
         } else {
             const rect = e.currentTarget.getBoundingClientRect();
-            // Position to the right of the icon, vertically centered
             setPickerCoords({
                 top: rect.top + (rect.height / 2),
                 left: rect.right + 10
@@ -117,7 +117,6 @@ const HabitGrid = ({ habits, currentMonth, onHabitUpdated, onHabitAdded }) => {
         const handleClickOutside = () => setPickerOpen(null);
         if (pickerOpen) {
             window.addEventListener('click', handleClickOutside);
-            // Also close on scroll to avoid floating picker
             window.addEventListener('scroll', handleClickOutside, true);
         }
         return () => {
@@ -125,6 +124,19 @@ const HabitGrid = ({ habits, currentMonth, onHabitUpdated, onHabitAdded }) => {
             window.removeEventListener('scroll', handleClickOutside, true);
         };
     }, [pickerOpen]);
+
+    // Delete Habit Logic
+    const handleDelete = async (e, habit) => {
+        e.stopPropagation(); // Prevent drag/other clicks
+        if (window.confirm(`Are you sure you want to delete "${habit.name}"?`)) {
+            try {
+                await habitService.deleteHabit(habit._id);
+                onHabitDeleted(habit._id);
+            } catch (err) {
+                console.error("Failed to delete habit", err);
+            }
+        }
+    };
 
     // Add Button Logic
     const handleAddClick = async () => {
@@ -140,7 +152,6 @@ const HabitGrid = ({ habits, currentMonth, onHabitUpdated, onHabitAdded }) => {
             };
             const created = await habitService.createHabit(newHabit);
             onHabitAdded(created);
-            // Auto-start editing the new habit
             startEditing(created);
         } catch (err) {
             console.error("Failed to create habit", err);
@@ -151,7 +162,6 @@ const HabitGrid = ({ habits, currentMonth, onHabitUpdated, onHabitAdded }) => {
         <div className="habit-grid-container">
             <table className="habit-grid">
                 <thead>
-                    {/* Week Header Row */}
                     <tr>
                         <th className="habit-col-header" rowSpan="2">My Habits</th>
                         {weeks.map((week, index) => (
@@ -160,7 +170,6 @@ const HabitGrid = ({ habits, currentMonth, onHabitUpdated, onHabitAdded }) => {
                             </th>
                         ))}
                     </tr>
-                    {/* Day Number Row */}
                     <tr>
                         {weeks.flat().map(day => (
                             <th key={day} className="day-header">
@@ -195,13 +204,23 @@ const HabitGrid = ({ habits, currentMonth, onHabitUpdated, onHabitAdded }) => {
                                             onFocus={(e) => e.target.select()}
                                         />
                                     ) : (
-                                        <span
-                                            className="habit-name editable"
-                                            onClick={() => startEditing(habit)}
-                                            title="Click to rename"
-                                        >
-                                            {habit.name}
-                                        </span>
+                                        <>
+                                            <span
+                                                className="habit-name editable"
+                                                onClick={() => startEditing(habit)}
+                                                title="Click to rename"
+                                            >
+                                                {habit.name}
+                                            </span>
+                                            {/* Delete Button - Visible on Hover */}
+                                            <button
+                                                className="delete-habit-btn"
+                                                onClick={(e) => handleDelete(e, habit)}
+                                                title="Delete habit"
+                                            >
+                                                <Trash2 size={16} />
+                                            </button>
+                                        </>
                                     )}
                                 </div>
                             </td>
@@ -221,9 +240,6 @@ const HabitGrid = ({ habits, currentMonth, onHabitUpdated, onHabitAdded }) => {
                         </tr>
                     ))}
 
-                    {/* Popover Rendered Outside the Loop (conceptually, but still inside component)
-                        using Fixed Positioning to escape sticky context 
-                    */}
                     {pickerOpen && (
                         <div
                             className="icon-picker-popover"
@@ -231,7 +247,7 @@ const HabitGrid = ({ habits, currentMonth, onHabitUpdated, onHabitAdded }) => {
                                 position: 'fixed',
                                 top: pickerCoords.top,
                                 left: pickerCoords.left,
-                                transform: 'translateY(-50%)' // Center vertically relative to icon
+                                transform: 'translateY(-50%)'
                             }}
                             onClick={(e) => e.stopPropagation()}
                         >
@@ -249,7 +265,6 @@ const HabitGrid = ({ habits, currentMonth, onHabitUpdated, onHabitAdded }) => {
                         </div>
                     )}
 
-                    {/* Add Button Row */}
                     <tr className="quick-add-row">
                         <td className="habit-name-cell quick-add-cell" onClick={handleAddClick} style={{ cursor: 'pointer' }}>
                             <div className="habit-info add-btn-content">
@@ -257,7 +272,6 @@ const HabitGrid = ({ habits, currentMonth, onHabitUpdated, onHabitAdded }) => {
                                 <span className="add-text">Add New Habit</span>
                             </div>
                         </td>
-                        {/* Empty cells for the rest of the row */}
                         <td colSpan={daysInMonth} className="empty-row-space" onClick={handleAddClick} style={{ cursor: 'pointer' }}></td>
                     </tr>
                 </tbody>

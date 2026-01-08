@@ -62,6 +62,10 @@ const Dashboard = () => {
         setEditingHabit(null); // Close edit form if open
     };
 
+    const handleHabitDeleted = (deletedId) => {
+        setHabits(habits.filter(h => h._id !== deletedId));
+    };
+
     return (
         <div className="dashboard-container">
             {/* 1. Summary Header */}
@@ -77,7 +81,8 @@ const Dashboard = () => {
                             habits={habits}
                             currentMonth={currentMonth}
                             onHabitUpdated={handleHabitUpdated}
-                            onHabitAdded={handleHabitAdded} /* Pass the add handler to Grid for inline add */
+                            onHabitAdded={handleHabitAdded}
+                            onHabitDeleted={handleHabitDeleted}
                         />
                     )}
 

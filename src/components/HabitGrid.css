@@ -247,10 +247,31 @@
     }
 }
 
-.empty-row-space {
-    background: #fdfdfd;
-    border-bottom: none;
-    border-right: none;
+/* Delete Button Styling */
+.delete-habit-btn {
+    background: none;
+    border: none;
+    color: #ef4444;
+    /* Red-500 */
+    cursor: pointer;
+    opacity: 0;
+    transition: all 0.2s ease;
+    padding: 4px;
+    border-radius: 4px;
+    margin-left: auto;
+    /* Push to right */
+    display: flex;
+    align-items: center;
+}
+
+.habit-info:hover .delete-habit-btn {
+    opacity: 0.6;
+}
+
+.delete-habit-btn:hover {
+    opacity: 1 !important;
+    background: rgba(239, 68, 68, 0.1);
+    transform: scale(1.1);
 }
 
 /* Ensure alternating row or week visual separation if needed? 
