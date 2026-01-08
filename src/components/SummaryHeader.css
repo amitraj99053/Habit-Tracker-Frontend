@@ -135,8 +135,8 @@
     backdrop-filter: blur(8px);
     border: 1px solid rgba(0, 0, 0, 0.05);
     /* very subtle */
-    border-radius: 2px;
-    /* Rectangle */
+    border-radius: 0;
+    /* Strict Rectangle */
     padding: 6px;
     /* Compact padding */
     cursor: pointer;
@@ -157,7 +157,7 @@
     background: #333;
     color: white;
     padding: 4px 8px;
-    border-radius: 4px;
+    border-radius: 0;
     font-size: 0.75rem;
     white-space: nowrap;
     opacity: 0;
