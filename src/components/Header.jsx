@@ -25,7 +25,7 @@ const Header = () => {
                     <button className="nav-btn" onClick={() => navigate('/services')}>Features</button>
                     <button className="nav-btn" onClick={() => navigate('/services')}>Contact</button>
                     <button className="nav-btn secondary-btn" onClick={() => openModal(true)}>Log In</button>
-                    <button className="nav-btn primary" onClick={() => openModal(false)}>Sign Up</button>
+                    {/* Sign Up removed as per request */}
                 </nav>
             </header>
             <SignUpModal
