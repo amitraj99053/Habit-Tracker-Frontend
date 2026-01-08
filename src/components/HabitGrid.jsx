@@ -6,6 +6,7 @@ const HabitGrid = ({ habits, currentMonth, onHabitUpdated, onHabitAdded }) => {
     const [editingId, setEditingId] = React.useState(null);
     const [tempName, setTempName] = React.useState('');
     const [pickerOpen, setPickerOpen] = React.useState(null); // stores habit ID
+    const [pickerCoords, setPickerCoords] = React.useState({ top: 0, left: 0 });
 
     // Emoji List for Picker
     const EMOJI_LIST = [
@@ -88,7 +89,17 @@ const HabitGrid = ({ habits, currentMonth, onHabitUpdated, onHabitAdded }) => {
     // Icon Picker Logic
     const togglePicker = (habitId, e) => {
         e.stopPropagation();
-        setPickerOpen(pickerOpen === habitId ? null : habitId);
+        if (pickerOpen === habitId) {
+            setPickerOpen(null);
+        } else {
+            const rect = e.currentTarget.getBoundingClientRect();
+            // Position to the right of the icon, vertically centered
+            setPickerCoords({
+                top: rect.top + (rect.height / 2),
+                left: rect.right + 10
+            });
+            setPickerOpen(habitId);
+        }
     };
 
     const selectIcon = async (habit, newIcon) => {
@@ -105,9 +116,14 @@ const HabitGrid = ({ habits, currentMonth, onHabitUpdated, onHabitAdded }) => {
     React.useEffect(() => {
         const handleClickOutside = () => setPickerOpen(null);
         if (pickerOpen) {
-            document.addEventListener('click', handleClickOutside);
+            window.addEventListener('click', handleClickOutside);
+            // Also close on scroll to avoid floating picker
+            window.addEventListener('scroll', handleClickOutside, true);
         }
-        return () => document.removeEventListener('click', handleClickOutside);
+        return () => {
+            window.removeEventListener('click', handleClickOutside);
+            window.removeEventListener('scroll', handleClickOutside, true);
+        };
     }, [pickerOpen]);
 
     // Add Button Logic
@@ -158,7 +174,7 @@ const HabitGrid = ({ habits, currentMonth, onHabitUpdated, onHabitAdded }) => {
                         <tr key={habit._id}>
                             <td className="habit-name-cell">
                                 <div className="habit-info">
-                                    <div className="habit-icon-wrapper" style={{ position: 'relative' }}>
+                                    <div className="habit-icon-wrapper">
                                         <div
                                             className="habit-icon clickable-icon"
                                             onClick={(e) => togglePicker(habit._id, e)}
@@ -166,22 +182,6 @@ const HabitGrid = ({ habits, currentMonth, onHabitUpdated, onHabitAdded }) => {
                                         >
                                             {habit.icon}
                                         </div>
-
-                                        {pickerOpen === habit._id && (
-                                            <div className="icon-picker-popover" onClick={(e) => e.stopPropagation()}>
-                                                <div className="picker-grid">
-                                                    {EMOJI_LIST.map(emoji => (
-                                                        <div
-                                                            key={emoji}
-                                                            className="emoji-option"
-                                                            onClick={() => selectIcon(habit, emoji)}
-                                                        >
-                                                            {emoji}
-                                                        </div>
-                                                    ))}
-                                                </div>
-                                            </div>
-                                        )}
                                     </div>
 
                                     {editingId === habit._id ? (
@@ -220,6 +220,34 @@ const HabitGrid = ({ habits, currentMonth, onHabitUpdated, onHabitAdded }) => {
                             })}
                         </tr>
                     ))}
+
+                    {/* Popover Rendered Outside the Loop (conceptually, but still inside component)
+                        using Fixed Positioning to escape sticky context 
+                    */}
+                    {pickerOpen && (
+                        <div
+                            className="icon-picker-popover"
+                            style={{
+                                position: 'fixed',
+                                top: pickerCoords.top,
+                                left: pickerCoords.left,
+                                transform: 'translateY(-50%)' // Center vertically relative to icon
+                            }}
+                            onClick={(e) => e.stopPropagation()}
+                        >
+                            <div className="picker-grid">
+                                {EMOJI_LIST.map(emoji => (
+                                    <div
+                                        key={emoji}
+                                        className="emoji-option"
+                                        onClick={() => selectIcon(habits.find(h => h._id === pickerOpen), emoji)}
+                                    >
+                                        {emoji}
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    )}
 
                     {/* Add Button Row */}
                     <tr className="quick-add-row">
