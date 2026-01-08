@@ -265,12 +265,14 @@
     opacity: 0;
     transition: all 0.2s ease;
     padding: 6px;
-    border-radius: 50%;
+    border-radius: 0;
+    /* Rectangle */
     display: flex;
     align-items: center;
     justify-content: center;
     pointer-events: auto;
-    z-index: 20;
+    z-index: 999;
+    /* Super high z-index to be sure */
 }
 
 .delete-habit-btn:hover {
