@@ -1,18 +1,17 @@
 .dashboard-container {
-    max-width: 1400px;
-    /* Wider for the grid */
+    max-width: 1600px; /* Increased width for better grid view */
     margin: 2rem auto;
-    background: white;
-    border-radius: 16px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
+    background: transparent; /* Changed to transparent for a more modern feel, panels will have bg */
+    border-radius: 0;
+    box-shadow: none;
     color: #333;
+    padding: 0 2rem;
 }
 
 .dashboard-main-content {
     display: flex;
-    gap: 0;
-    /* Gaps handled by borders/padding */
+    flex-direction: column; /* Orientation Fix: Stack vertically */
+    gap: 2rem;
 }
 
 .edit-icon-btn {
@@ -30,54 +29,61 @@
 }
 
 .cancel-edit {
-    background: #eee;
+    background: #f1f1f1;
     border: none;
     padding: 0.5rem 1rem;
-    border-radius: 4px;
+    border-radius: 6px;
     cursor: pointer;
     margin-bottom: 1rem;
-    font-size: 0.8rem;
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.cancel-edit:hover {
+    background: #e0e0e0;
 }
 
 .left-panel {
-    flex: 3;
-    padding: 0;
-    border-right: 1px solid #ddd;
+    width: 100%;
+    border-right: none;
+    background: white;
+    border-radius: 16px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05); /* Soft shadow */
+    border: 1px solid rgba(0,0,0,0.05);
 }
 
 .right-panel {
-    flex: 1;
-    background: #fafafa;
+    width: 100%;
+    background: white;
+    border-radius: 16px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(0,0,0,0.05);
+    margin-bottom: 2rem;
 }
 
 .add-habit-section {
     padding: 2rem;
-    border-top: 1px solid #eee;
+    border-top: 1px solid #f0f0f0;
+    margin-top: 1rem;
 }
 
 .add-habit-section h3 {
     margin-top: 0;
-    color: #444;
+    color: #333;
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
 }
 
-@media (max-width: 1024px) {
-    .dashboard-main-content {
-        flex-direction: column;
-    }
-
-    .left-panel {
-        border-right: none;
-        border-bottom: 1px solid #ddd;
-    }
-}
-
-@media (max-width: 600px) {
+@media (max-width: 768px) {
     .dashboard-container {
-        margin: 1rem;
-        border-radius: 12px;
+        padding: 0 1rem;
+        margin: 1rem auto;
     }
-
-    .add-habit-section {
-        padding: 1.5rem;
+    
+    .left-panel, .right-panel {
+        padding: 1rem;
     }
 }

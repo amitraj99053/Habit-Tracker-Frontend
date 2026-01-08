@@ -1,61 +1,63 @@
 .habit-stats-container {
-    background: var(--card-bg);
-    border: 1px solid rgba(0, 0, 0, 0.05);
-    padding: 2rem;
-    border-radius: var(--border-radius);
-    box-shadow: var(--card-shadow);
+    background: transparent;
+    padding: 0;
+    box-shadow: none;
+    width: 100%;
 }
 
 .habit-stats-container h3 {
     margin-top: 0;
-    margin-bottom: 2rem;
-    font-size: 1.5rem;
-    color: var(--text-primary);
-    font-weight: 800;
+    margin-bottom: 1.5rem;
+    font-size: 1.25rem;
+    color: #333;
+    font-weight: 700;
 }
 
 .stats-table {
     width: 100%;
     border-collapse: separate;
-    border-spacing: 0 0.8rem;
+    border-spacing: 0;
 }
 
 .stats-table th {
     text-align: left;
-    font-size: 0.85rem;
-    color: var(--text-secondary);
-    padding: 0 1rem 0.5rem 1rem;
+    font-size: 0.8rem;
+    color: #64748b;
+    padding: 1rem;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.05em;
+    border-bottom: 2px solid #f1f5f9;
 }
 
 .stats-table td {
-    padding: 1.2rem 1rem;
-    background: #FAFAFA;
+    padding: 1rem;
+    background: white;
     font-size: 0.95rem;
-    color: var(--text-primary);
+    color: #334155;
     font-weight: 500;
+    border-bottom: 1px solid #f1f5f9;
 }
 
+/* Remove weird border radius on cells since it's a full list now */
 .stats-table tr td:first-child {
-    border-top-left-radius: 12px;
-    border-bottom-left-radius: 12px;
+    border-radius: 0;
 }
 
 .stats-table tr td:last-child {
-    border-top-right-radius: 12px;
-    border-bottom-right-radius: 12px;
+    border-radius: 0;
 }
 
 .progress-cell {
-    width: 200px;
+    width: 30%;
+    /* Give it more space on wide screens */
+    min-width: 150px;
 }
 
 .stats-progress-bar {
     width: 100%;
-    height: 10px;
-    background: #e0e0e0;
+    height: 8px;
+    background: #f1f5f9;
     border-radius: 50px;
     overflow: hidden;
 }
@@ -63,13 +65,13 @@
 .stats-progress-fill {
     height: 100%;
     border-radius: 50px;
-    transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .habit-name-cell {
     display: flex;
     align-items: center;
-    gap: 0.8rem;
+    gap: 1rem;
 }
 
 .habit-icon-small {
@@ -78,8 +80,13 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #fff;
+    background: #f8fafc;
     border-radius: 8px;
     font-size: 1.1rem;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    color: #333;
+}
+
+/* Row hover effect for readability */
+.stats-table tbody tr:hover td {
+    background: #f8fafc;
 }

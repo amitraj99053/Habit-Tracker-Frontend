@@ -35,7 +35,7 @@ export const habitService = {
     },
 
     // Update habit details
-    updateHabitDetails: async (id, updates) => {
+    updateHabit: async (id, updates) => {
         const response = await fetch(`${API_URL}/habits/${id}`, {
             method: 'PATCH',
             headers: {

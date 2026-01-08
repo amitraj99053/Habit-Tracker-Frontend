@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import HabitForm from '../components/HabitForm';
+// HabitForm removed
 import SummaryHeader from '../components/SummaryHeader';
 import HabitGrid from '../components/HabitGrid';
 import HabitStats from '../components/HabitStats';
@@ -77,22 +77,11 @@ const Dashboard = () => {
                             habits={habits}
                             currentMonth={currentMonth}
                             onHabitUpdated={handleHabitUpdated}
-                            onEdit={(habit) => setEditingHabit(habit)}
+                            onHabitAdded={handleHabitAdded} /* Pass the add handler to Grid for inline add */
                         />
                     )}
 
-                    {/* Form could go below or in a modal. For now, keeping it here. */}
-                    <div className="add-habit-section">
-                        <h3>{editingHabit ? 'Edit Habit' : 'Add New Habit'}</h3>
-                        {editingHabit && <button className="cancel-edit" onClick={() => setEditingHabit(null)}>Cancel Edit</button>}
-                        <HabitForm
-                            onHabitAdded={handleHabitAdded}
-                            onHabitUpdated={handleHabitUpdated}
-                            className={editingHabit ? 'editing' : ''}
-                            existingHabit={editingHabit}
-                            key={editingHabit ? editingHabit._id : 'new'}
-                        />
-                    </div>
+                    {/* Form removed for inline editing professional look */}
                 </div>
 
                 {/* 3. Analysis Panel */}
