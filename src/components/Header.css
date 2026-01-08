@@ -55,7 +55,8 @@ nav {
     cursor: pointer;
     transition: all 0.2s ease;
     padding: 0.6rem 1.2rem;
-    border-radius: 10px;
+    border-radius: 4px;
+    /* Rectangular shape */
 }
 
 .nav-btn:hover {
@@ -63,35 +64,28 @@ nav {
     background: rgba(255, 255, 255, 0.05);
 }
 
-/* Secondary Button (Log In) */
+/* Secondary Button (Log In) - Now Highlighted as Primary */
 .nav-btn.secondary-btn {
-    color: #fff;
-    border: 1px solid rgba(255, 255, 255, 0.15);
-}
-
-.nav-btn.secondary-btn:hover {
-    border-color: #fff;
-    background: rgba(255, 255, 255, 0.1);
-}
-
-/* Primary Button (Sign Up) */
-.nav-btn.primary {
     background: #D7FF00;
     /* Neon Green */
     color: #000;
-    /* Black text for contrast */
-    padding: 0.6rem 1.5rem;
+    /* Black text */
     font-weight: 700;
-    box-shadow: 0 4px 15px rgba(215, 255, 0, 0.2);
     border: none;
+    box-shadow: 0 4px 15px rgba(215, 255, 0, 0.2);
 }
 
-.nav-btn.primary:hover {
+.nav-btn.secondary-btn:hover {
     transform: translateY(-2px);
     box-shadow: 0 6px 20px rgba(215, 255, 0, 0.3);
     background: #e2ff2b;
     color: #000;
 }
+
+/* Primary Button (Sign Up) - Removed but styling kept just in case or deleted? 
+   Since Sign Up is gone, we don't need .primary styling separately if Log In takes it.
+   I'll remove the old .primary block to clean up.
+*/
 
 /* Responsive Styles */
 @media (max-width: 768px) {
