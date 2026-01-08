@@ -5,6 +5,14 @@ import './HabitGrid.css';
 const HabitGrid = ({ habits, currentMonth, onHabitUpdated, onHabitAdded }) => {
     const [editingId, setEditingId] = React.useState(null);
     const [tempName, setTempName] = React.useState('');
+    const [pickerOpen, setPickerOpen] = React.useState(null); // stores habit ID
+
+    // Emoji List for Picker
+    const EMOJI_LIST = [
+        '📌', '💪', '📚', '🧘', '💧', '🚶', '🤸', '🥗', '🍎', '💤',
+        '💻', '📝', '🎨', '🎵', '🎸', '🌱', '☀️', '❤️', '💼', '💰',
+        '🧹', '🧴', '💊', '🚭', '📵', '🕰️', '📅', '✅', '🏆', '⭐'
+    ];
 
     const getDaysInMonth = (date) => {
         return new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
@@ -77,6 +85,31 @@ const HabitGrid = ({ habits, currentMonth, onHabitUpdated, onHabitAdded }) => {
         }
     };
 
+    // Icon Picker Logic
+    const togglePicker = (habitId, e) => {
+        e.stopPropagation();
+        setPickerOpen(pickerOpen === habitId ? null : habitId);
+    };
+
+    const selectIcon = async (habit, newIcon) => {
+        try {
+            const updated = await habitService.updateHabit(habit._id, { icon: newIcon });
+            onHabitUpdated(updated);
+            setPickerOpen(null);
+        } catch (err) {
+            console.error("Failed to update icon", err);
+        }
+    };
+
+    // Close picker when clicking outside
+    React.useEffect(() => {
+        const handleClickOutside = () => setPickerOpen(null);
+        if (pickerOpen) {
+            document.addEventListener('click', handleClickOutside);
+        }
+        return () => document.removeEventListener('click', handleClickOutside);
+    }, [pickerOpen]);
+
     // Add Button Logic
     const handleAddClick = async () => {
         try {
@@ -125,7 +158,31 @@ const HabitGrid = ({ habits, currentMonth, onHabitUpdated, onHabitAdded }) => {
                         <tr key={habit._id}>
                             <td className="habit-name-cell">
                                 <div className="habit-info">
-                                    <div className="habit-icon">{habit.icon}</div>
+                                    <div className="habit-icon-wrapper" style={{ position: 'relative' }}>
+                                        <div
+                                            className="habit-icon clickable-icon"
+                                            onClick={(e) => togglePicker(habit._id, e)}
+                                            title="Change icon"
+                                        >
+                                            {habit.icon}
+                                        </div>
+
+                                        {pickerOpen === habit._id && (
+                                            <div className="icon-picker-popover" onClick={(e) => e.stopPropagation()}>
+                                                <div className="picker-grid">
+                                                    {EMOJI_LIST.map(emoji => (
+                                                        <div
+                                                            key={emoji}
+                                                            className="emoji-option"
+                                                            onClick={() => selectIcon(habit, emoji)}
+                                                        >
+                                                            {emoji}
+                                                        </div>
+                                                    ))}
+                                                </div>
+                                            </div>
+                                        )}
+                                    </div>
 
                                     {editingId === habit._id ? (
                                         <input
