@@ -83,15 +83,47 @@ const Dashboard = () => {
     };
 
     const handleExport = () => {
-        const headers = ["Habit Name", "Category", "Frequency", "Goal", "Total Completed", "Completed Dates"];
-        const rows = habits.map(h => [
-            `"${h.name}"`, // Quote strings to handle commas
-            h.category,
-            h.frequency,
-            h.goal,
-            h.completedDates.length,
-            `"${h.completedDates.join(', ')}"`
-        ]);
+        const year = currentMonth.getFullYear();
+        const month = currentMonth.getMonth();
+        const daysInMonth = new Date(year, month + 1, 0).getDate();
+        const monthName = currentMonth.toLocaleString('default', { month: 'long' });
+
+        // Generate headers: Name, Category, Month, 1, 2, ..., 31, Total
+        const dayHeaders = Array.from({ length: daysInMonth }, (_, i) => i + 1);
+        const headers = ["Habit Name", "Category", "Month", ...dayHeaders, "Total Completed"];
+
+        const rows = habits.map(h => {
+            const rowData = [
+                `"${h.name}"`,
+                h.category,
+                `${monthName} ${year}`
+            ];
+
+            // Check completion for each day of the month
+            let monthlyTotal = 0;
+            for (let day = 1; day <= daysInMonth; day++) {
+                // Construct date string YYYY-MM-DD to match backend format
+                // Note: Month is 0-indexed in JS, but we need 1-indexed for string, adding '0' padding
+                const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+
+                // Check if this date exists in completedDates array
+                // Backend usually stores ISO strings or YYYY-MM-DD. 
+                // Assuming completedDates contains full ISO strings or compatible formats.
+                // We'll parse the completedDates to ensure match.
+                const isCompleted = h.completedDates.some(d => {
+                    const completedDate = new Date(d);
+                    return completedDate.getFullYear() === year &&
+                        completedDate.getMonth() === month &&
+                        completedDate.getDate() === day;
+                });
+
+                if (isCompleted) monthlyTotal++;
+                rowData.push(isCompleted ? "Completed" : "-");
+            }
+
+            rowData.push(monthlyTotal);
+            return rowData;
+        });
 
         const csvContent = [
             headers.join(','),
@@ -103,7 +135,7 @@ const Dashboard = () => {
         if (link.download !== undefined) {
             const url = URL.createObjectURL(blob);
             link.setAttribute("href", url);
-            link.setAttribute("download", "habits_export.csv");
+            link.setAttribute("download", `Habit_Tracker_${monthName}_${year}.csv`);
             link.style.visibility = 'hidden';
             document.body.appendChild(link);
             link.click();

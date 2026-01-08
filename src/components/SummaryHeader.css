@@ -124,28 +124,41 @@
 }
 
 
+
 .export-btn {
     position: absolute;
-    bottom: 25px;
-    right: 30px;
-    background: transparent;
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    padding: 8px;
+    bottom: 2rem;
+    right: 2rem;
+    background: rgba(255, 255, 255, 0.5);
+    /* translucent */
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    /* very subtle */
+    border-radius: 50px;
+    /* Pill shape */
+    padding: 10px 16px;
     cursor: pointer;
     color: var(--text-secondary);
-    transition: all 0.2s ease;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     display: flex;
     align-items: center;
-    justify-content: center;
+    gap: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.export-btn::after {
+    content: 'Export Data';
+    display: inline-block;
 }
 
 .export-btn:hover {
-    background: var(--card-bg);
-    border-color: var(--primary-color);
+    background: #fff;
     color: var(--primary-color);
+    border-color: var(--primary-color);
     transform: translateY(-2px);
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
 }
 
 @media (max-width: 768px) {
