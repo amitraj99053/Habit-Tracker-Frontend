@@ -55,7 +55,7 @@ nav {
     cursor: pointer;
     transition: all 0.2s ease;
     padding: 0.6rem 1.2rem;
-    border-radius: 4px;
+    border-radius: 0;
     /* Rectangular shape */
 }
 

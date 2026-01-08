@@ -135,7 +135,8 @@
     backdrop-filter: blur(8px);
     border: 1px solid rgba(0, 0, 0, 0.05);
     /* very subtle */
-    border-radius: 12px;
+    border-radius: 2px;
+    /* Rectangle */
     padding: 6px;
     /* Compact padding */
     cursor: pointer;
