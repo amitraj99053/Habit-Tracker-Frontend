@@ -248,6 +248,10 @@
 }
 
 /* Delete Button Styling */
+.habit-info:hover .delete-habit-btn {
+    opacity: 0.6;
+}
+
 .delete-habit-btn {
     background: none;
     border: none;
@@ -256,16 +260,22 @@
     cursor: pointer;
     opacity: 0;
     transition: all 0.2s ease;
-    padding: 4px;
+    padding: 6px;
     border-radius: 4px;
     margin-left: auto;
     /* Push to right */
     display: flex;
     align-items: center;
+    pointer-events: auto;
+    /* Ensure clickable even if opacity was transitioning */
+    z-index: 10;
+    position: relative;
 }
 
-.habit-info:hover .delete-habit-btn {
-    opacity: 0.6;
+.delete-habit-btn:hover {
+    opacity: 1 !important;
+    background: rgba(239, 68, 68, 0.1);
+    transform: scale(1.1);
 }
 
 .delete-habit-btn:hover {

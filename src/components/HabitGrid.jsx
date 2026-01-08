@@ -127,13 +127,17 @@ const HabitGrid = ({ habits, currentMonth, onHabitUpdated, onHabitAdded, onHabit
 
     // Delete Habit Logic
     const handleDelete = async (e, habit) => {
+        console.log("Delete clicked for:", habit);
         e.stopPropagation(); // Prevent drag/other clicks
         if (window.confirm(`Are you sure you want to delete "${habit.name}"?`)) {
             try {
+                console.log("Sending delete request for:", habit._id);
                 await habitService.deleteHabit(habit._id);
+                console.log("Delete success, updating UI");
                 onHabitDeleted(habit._id);
             } catch (err) {
                 console.error("Failed to delete habit", err);
+                alert("Failed to delete habit. See console for details.");
             }
         }
     };

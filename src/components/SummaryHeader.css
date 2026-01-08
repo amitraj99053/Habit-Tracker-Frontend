@@ -125,6 +125,7 @@
 
 
 
+
 .export-btn {
     position: absolute;
     bottom: 2rem;
@@ -134,23 +135,49 @@
     backdrop-filter: blur(8px);
     border: 1px solid rgba(0, 0, 0, 0.05);
     /* very subtle */
-    border-radius: 50px;
-    /* Pill shape */
-    padding: 10px 16px;
+    border-radius: 12px;
+    padding: 6px;
+    /* Compact padding */
     cursor: pointer;
     color: var(--text-secondary);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     display: flex;
     align-items: center;
-    gap: 8px;
+    justify-content: center;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
-    font-size: 0.9rem;
-    font-weight: 600;
+}
+
+/* Tooltip on hover instead of text */
+.export-btn:hover::after {
+    content: 'Export';
+    position: absolute;
+    right: 100%;
+    margin-right: 10px;
+    background: #333;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    white-space: nowrap;
+    opacity: 0;
+    animation: fadeIn 0.2s forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateX(5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }
 
 .export-btn::after {
-    content: 'Export Data';
-    display: inline-block;
+    content: none;
+    /* Remove inline text */
 }
 
 .export-btn:hover {
@@ -160,6 +187,7 @@
     transform: translateY(-2px);
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
 }
+
 
 @media (max-width: 768px) {
     .summary-header {
