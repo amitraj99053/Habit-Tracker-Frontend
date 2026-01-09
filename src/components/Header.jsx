@@ -23,9 +23,9 @@ const Header = () => {
                 <nav>
                     <button className="nav-btn" onClick={() => navigate('/')}>Home</button>
                     <button className="nav-btn" onClick={() => navigate('/services')}>Features</button>
-                    <button className="nav-btn" onClick={() => navigate('/services')}>Contact</button>
+                    <button className="nav-btn" onClick={() => navigate('/contact')}>Contact</button>
+                    <div style={{ width: '1px', height: '20px', background: 'rgba(255,255,255,0.1)', margin: '0 8px' }}></div>
                     <button className="nav-btn secondary-btn" onClick={() => openModal(true)}>Log In</button>
-                    {/* Sign Up removed as per request */}
                 </nav>
             </header>
             <SignUpModal

@@ -6,6 +6,7 @@ import LandingPage from './pages/LandingPage';
 import ServicesPage from './pages/ServicesPage';
 import Dashboard from './pages/Dashboard';
 import TaskListPage from './pages/TaskListPage';
+import ContactPage from './pages/ContactPage';
 import './App.css'
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
                     <Routes>
                         <Route path="/" element={<LandingPage />} />
                         <Route path="/services" element={<ServicesPage />} />
+                        <Route path="/contact" element={<ContactPage />} />
                         <Route path="/dashboard" element={<Dashboard />} />
                         <Route path="/tasks" element={<TaskListPage />} />
                     </Routes>
