@@ -121,10 +121,17 @@
     color: #000;
     font-weight: 700;
     margin-left: 0.5rem;
-    padding: 0.6rem 1.5rem;
+    padding: 0.6rem 2rem;
+    /* Increased padding */
     border-radius: 50px;
     box-shadow: 0 4px 12px rgba(215, 255, 0, 0.15);
     transition: all 0.3s ease;
+    white-space: nowrap;
+    /* Prevent wrapping */
+    display: inline-flex;
+    /* Ensure centered content */
+    align-items: center;
+    justify-content: center;
 }
 
 .nav-btn.secondary-btn:hover {
