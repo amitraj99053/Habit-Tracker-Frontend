@@ -25,13 +25,17 @@ const SummaryHeader = ({ habits, currentMonth, onNextMonth, onPrevMonth, onExpor
 
     return (
         <div className="summary-header">
-            <div className="header-left">
-                <div className="greeting">Your Dashboard</div>
+            <div className="header-top">
                 <div className="month-nav-container">
                     <button className="nav-btn" onClick={onPrevMonth}><ChevronLeft size={20} /></button>
                     <h2 className="month-title">{monthName} {year}</h2>
                     <button className="nav-btn" onClick={onNextMonth}><ChevronRight size={20} /></button>
                 </div>
+
+                <button className="export-btn" onClick={onExport}>
+                    <Download size={16} style={{ marginRight: '8px' }} />
+                    Export CSV
+                </button>
             </div>
 
             <div className="header-stats">
@@ -45,18 +49,15 @@ const SummaryHeader = ({ habits, currentMonth, onNextMonth, onPrevMonth, onExpor
                     <span className="stat-value">{totalCompletions}</span>
                 </div>
 
-                <div className="stat-box" style={{ alignItems: 'center' }}>
+                <div className="stat-box">
                     <div className="progress-container" style={{ '--progress': `${progressPercentage}%` }}>
                         <div className="progress-inner">
                             {progressPercentage}%
                         </div>
                     </div>
+                    <span className="stat-label" style={{ marginTop: '0.5rem' }}>Goal Progress</span>
                 </div>
             </div>
-
-            <button className="export-btn" onClick={onExport} title="Download Excel/CSV">
-                <Download size={20} />
-            </button>
         </div>
     );
 };

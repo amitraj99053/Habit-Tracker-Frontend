@@ -1,11 +1,11 @@
 .habit-grid-container {
     overflow-x: auto;
-    background: white;
+    background: transparent;
     border: none;
     margin-bottom: 0;
     /* Scrollbar styling */
     scrollbar-width: thin;
-    scrollbar-color: #cbd5e1 transparent;
+    scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
 }
 
 .habit-grid-container::-webkit-scrollbar {
@@ -17,7 +17,7 @@
 }
 
 .habit-grid-container::-webkit-scrollbar-thumb {
-    background-color: #cbd5e1;
+    background-color: rgba(255, 255, 255, 0.2);
     border-radius: 20px;
 }
 
@@ -26,17 +26,17 @@
     border-collapse: separate;
     border-spacing: 0;
     min-width: 1000px;
-    /* Ensure enough space for 30 days */
+    background: transparent;
 }
 
 /* Header Styles */
 .habit-grid th {
-    background: #f8fafc;
-    color: #64748b;
+    background: rgba(30, 30, 30, 0.95);
+    color: var(--text-secondary);
     font-size: 0.75rem;
     font-weight: 600;
-    border-bottom: 1px solid #e2e8f0;
-    border-right: 1px solid #e2e8f0;
+    border-bottom: 1px solid var(--border-glass);
+    border-right: 1px solid var(--border-glass);
     padding: 0.5rem;
     height: 48px;
 }
@@ -47,21 +47,22 @@
     position: sticky;
     left: 0;
     z-index: 20;
-    background: #f8fafc !important;
-    border-right: 1px solid #e2e8f0 !important;
+    background: #18181b !important;
+    /* Slightly distinct dark */
+    border-right: 1px solid var(--border-glass) !important;
     min-width: 280px;
     font-size: 0.9rem !important;
-    color: #334155 !important;
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.02);
+    color: #fff !important;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
 }
 
 .week-header {
     text-align: center;
-    background: #f8fafc !important;
+    background: rgba(30, 30, 30, 0.95) !important;
     text-transform: uppercase;
     letter-spacing: 0.05em;
     font-size: 0.7rem !important;
-    color: #94a3b8 !important;
+    color: #888 !important;
     height: 32px;
 }
 
@@ -71,27 +72,27 @@
     text-align: center;
     font-family: 'Inter', sans-serif;
     font-size: 0.85rem !important;
-    color: #475569 !important;
+    color: #aaa !important;
 }
 
 /* Body Styles */
 .habit-name-cell {
-    background: white;
+    background: #18181b;
     padding: 0.6rem 1.5rem;
     position: sticky;
     left: 0;
     z-index: 10;
-    border-bottom: 1px solid #e2e8f0;
-    border-right: 1px solid #e2e8f0;
+    border-bottom: 1px solid var(--border-glass);
+    border-right: 1px solid var(--border-glass);
     cursor: pointer;
     transition: background 0.1s;
     height: 56px;
-    color: #1e293b;
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.02);
+    color: #fff;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
 }
 
 .habit-name-cell:hover {
-    background: #f8fafc;
+    background: #27272a;
 }
 
 .habit-info {
@@ -109,9 +110,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #f1f5f9;
+    background: rgba(255, 255, 255, 0.1);
     border-radius: 8px;
-    color: #333;
+    color: #fff;
 }
 
 .habit-name {
@@ -127,9 +128,8 @@
 .inline-edit-input {
     background: transparent;
     border: none;
-    border-bottom: 2px solid #D7FF00;
-    /* Neon underline when editing */
-    color: #1e293b;
+    border-bottom: 2px solid var(--neon-green);
+    color: #fff;
     font-size: 0.9rem;
     font-weight: 500;
     width: 100%;
@@ -139,25 +139,22 @@
 }
 
 .habit-name.editable:hover {
-    color: #646cff;
-    text-decoration: underline;
-    text-decoration-color: #e2e8f0;
-    text-decoration-thickness: 2px;
+    color: var(--neon-green);
+    text-decoration: none;
 }
 
 /* Quick Add Row */
 .quick-add-row {
-    background: #fdfdfd;
+    background: transparent;
 }
 
 .quick-add-cell {
-    background: #fdfdfd !important;
-    /* Slightly distinct bg */
+    background: rgba(255, 255, 255, 0.02) !important;
     border-bottom: none !important;
 }
 
 .add-icon {
-    background: #D7FF00 !important;
+    background: var(--neon-green) !important;
     color: #000 !important;
     font-weight: 700;
     font-size: 1.4rem !important;
@@ -167,14 +164,14 @@
 .quick-add-input {
     background: transparent;
     border: none;
-    color: #333;
+    color: #fff;
     font-size: 0.9rem;
     width: 100%;
     outline: none;
 }
 
 .quick-add-input::placeholder {
-    color: #94a3b8;
+    color: #666;
     font-style: italic;
 }
 
@@ -258,34 +255,38 @@
     right: 0;
     top: 50%;
     transform: translateY(-50%);
-    background: rgba(255, 255, 255, 0.9);
+    background: rgba(239, 68, 68, 0.1);
     border: none;
     color: #ef4444;
     cursor: pointer;
     opacity: 0;
     transition: all 0.2s ease;
     padding: 6px;
-    border-radius: 0;
-    /* Rectangle */
+    border-radius: 4px;
     display: flex;
     align-items: center;
     justify-content: center;
     pointer-events: auto;
     z-index: 999;
-    /* Super high z-index to be sure */
-}
-
-.delete-habit-btn:hover {
-    background: #fee2e2;
-    transform: translateY(-50%) scale(1.1);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .delete-habit-btn:hover {
     opacity: 1 !important;
-    background: rgba(239, 68, 68, 0.1);
-    transform: scale(1.1);
+    background: rgba(239, 68, 68, 0.2);
+    transform: translateY(-50%) scale(1.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
-/* Ensure alternating row or week visual separation if needed? 
-   No, clean look is better. */
+/* Grid Cells (Checkboxes) */
+/* Assuming the cell logic uses inline styles or generic td, 
+   we need to ensure they look okay. Since HabitGrid.jsx iterates:
+   <td ... style={{ background: isCompleted ? habit.color : '#fff', ... }}>
+   We might need to override the default white background for unchecked cells.
+   Actually HabitGrid.jsx likely does inline styles for td background.
+   Let's check if we can override via CSS or if we need to edit JSX later.
+   For now, setting table to transparent helps.
+*/
+.habit-grid td {
+    border-bottom: 1px solid var(--border-glass);
+    border-right: 1px solid var(--border-glass);
+}
