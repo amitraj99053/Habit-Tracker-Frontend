@@ -5,7 +5,6 @@
     align-items: center;
     padding: 0.8rem 2rem;
     position: fixed;
-    /* Fixed to stay on top */
     top: 20px;
     left: 50%;
     transform: translateX(-50%);
@@ -36,6 +35,8 @@
     cursor: pointer;
     text-decoration: none;
     transition: opacity 0.2s;
+    z-index: 1001;
+    /* Ensure logo stays above mobile menu */
 }
 
 .logo:hover {
@@ -54,15 +55,11 @@
     font-family: 'Inter', sans-serif;
 }
 
-/* Navigation Links */
-nav {
+/* Navigation Links Container */
+.nav-menu {
     display: flex;
     align-items: center;
     gap: 1.5rem;
-    /* Removed border and background for cleaner look */
-    background: transparent;
-    border: none;
-    padding: 0;
 }
 
 .nav-btn {
@@ -80,8 +77,6 @@ nav {
 
 .nav-btn:hover {
     color: #fff;
-    background: transparent;
-    /* No background on hover */
 }
 
 /* Animated Underline for Links */
@@ -101,23 +96,27 @@ nav {
     width: 100%;
 }
 
-/* Exclude underline from the Log In button */
 .nav-btn.secondary-btn::after {
     display: none;
 }
 
-/* Auth Section (Right side if separated, currently merged) */
+/* Divider */
+.divider {
+    width: 1px;
+    height: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    margin: 0 8px;
+}
 
-/* Log In Button (Primary Action) - Pill Shape */
+/* Log In Button */
 .nav-btn.secondary-btn {
     background: #D7FF00;
     color: #000;
     font-weight: 700;
-    margin-left: 1rem;
+    margin-left: 0.5rem;
+    /* Adjusted for tighter spacing */
     padding: 0.6rem 1.5rem;
-    /* Bigger padding */
     border-radius: 50px;
-    /* Full Pill Shape */
     box-shadow: 0 4px 12px rgba(215, 255, 0, 0.15);
     transition: all 0.3s ease;
 }
@@ -133,7 +132,26 @@ nav {
     transform: translateY(0);
 }
 
-/* Responsive */
+/* Hamburger Menu */
+.hamburger {
+    display: none;
+    cursor: pointer;
+    width: 25px;
+    height: 20px;
+    flex-direction: column;
+    justify-content: space-between;
+    z-index: 1001;
+}
+
+.bar {
+    width: 100%;
+    height: 3px;
+    background-color: #fff;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+/* Responsive Styles */
 @media (max-width: 768px) {
     .header {
         width: 95%;
@@ -141,30 +159,59 @@ nav {
         top: 10px;
     }
 
-    .logo-text {
-        font-size: 1rem;
+    .hamburger {
+        display: flex;
+        /* Show hamburger on mobile */
     }
 
-    nav {
-        gap: 2px;
+    .nav-menu {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(10, 10, 10, 0.98);
+        backdrop-filter: blur(20px);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 2rem;
+        transform: translateY(-100%);
+        transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        z-index: 1000;
+        /* Behind hamburger/logo container if nested, but here separate */
+    }
+
+    .nav-menu.active {
+        transform: translateY(0);
     }
 
     .nav-btn {
-        padding: 0.5rem 0.8rem;
-        font-size: 0.8rem;
-    }
-}
-
-@media (max-width: 480px) {
-    .header {
-        flex-direction: column;
-        gap: 1rem;
-        padding: 1rem;
+        font-size: 1.5rem;
+        color: #fff;
     }
 
-    nav {
-        width: 100%;
-        justify-content: center;
-        flex-wrap: wrap;
+    .divider {
+        display: none;
+    }
+
+    .nav-btn.secondary-btn {
+        margin-left: 0;
+        margin-top: 1rem;
+        padding: 1rem 2.5rem;
+        font-size: 1.2rem;
+    }
+
+    /* Hamburger Animation to 'X' */
+    .bar.active:nth-child(1) {
+        transform: translateY(8.5px) rotate(45deg);
+    }
+
+    .bar.active:nth-child(2) {
+        opacity: 0;
+    }
+
+    .bar.active:nth-child(3) {
+        transform: translateY(-8.5px) rotate(-45deg);
     }
 }

@@ -7,24 +7,42 @@ const Header = () => {
     const navigate = useNavigate();
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [initiallyLogin, setInitiallyLogin] = useState(false);
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
     const openModal = (isLogin) => {
         setInitiallyLogin(isLogin);
         setIsModalOpen(true);
+        setIsMobileMenuOpen(false); // Close menu when modal opens
+    };
+
+    const toggleMenu = () => {
+        setIsMobileMenuOpen(!isMobileMenuOpen);
+    };
+
+    const handleNavClick = (path) => {
+        navigate(path);
+        setIsMobileMenuOpen(false);
     };
 
     return (
         <>
             <header className="header">
-                <div className="logo" onClick={() => navigate('/')}>
+                <div className="logo" onClick={() => handleNavClick('/')}>
                     <span className="logo-icon">✨</span>
                     <span className="logo-text">HabitFlow</span>
                 </div>
-                <nav>
-                    <button className="nav-btn" onClick={() => navigate('/')}>Home</button>
-                    <button className="nav-btn" onClick={() => navigate('/services')}>Features</button>
-                    <button className="nav-btn" onClick={() => navigate('/contact')}>Contact</button>
-                    <div style={{ width: '1px', height: '20px', background: 'rgba(255,255,255,0.1)', margin: '0 8px' }}></div>
+
+                <div className="hamburger" onClick={toggleMenu}>
+                    <span className={`bar ${isMobileMenuOpen ? 'active' : ''}`}></span>
+                    <span className={`bar ${isMobileMenuOpen ? 'active' : ''}`}></span>
+                    <span className={`bar ${isMobileMenuOpen ? 'active' : ''}`}></span>
+                </div>
+
+                <nav className={`nav-menu ${isMobileMenuOpen ? 'active' : ''}`}>
+                    <button className="nav-btn" onClick={() => handleNavClick('/')}>Home</button>
+                    <button className="nav-btn" onClick={() => handleNavClick('/services')}>Features</button>
+                    <button className="nav-btn" onClick={() => handleNavClick('/contact')}>Contact</button>
+                    <div className="divider"></div>
                     <button className="nav-btn secondary-btn" onClick={() => openModal(true)}>Log In</button>
                 </nav>
             </header>
