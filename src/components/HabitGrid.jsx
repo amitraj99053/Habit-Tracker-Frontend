@@ -55,6 +55,7 @@ const HabitGrid = ({ habits, currentMonth, onHabitUpdated, onHabitAdded, onHabit
             onHabitUpdated(updatedHabit);
         } catch (error) {
             console.error('Error toggling date:', error);
+            alert("Failed to toggle date: " + error.message);
         }
     };
 
@@ -75,6 +76,7 @@ const HabitGrid = ({ habits, currentMonth, onHabitUpdated, onHabitAdded, onHabit
             setEditingId(null);
         } catch (err) {
             console.error("Failed to update name", err);
+            alert("Failed to update name: " + err.message);
         }
     };
 
@@ -109,6 +111,7 @@ const HabitGrid = ({ habits, currentMonth, onHabitUpdated, onHabitAdded, onHabit
             setPickerOpen(null);
         } catch (err) {
             console.error("Failed to update icon", err);
+            alert("Failed to update icon: " + err.message);
         }
     };
 
@@ -137,7 +140,7 @@ const HabitGrid = ({ habits, currentMonth, onHabitUpdated, onHabitAdded, onHabit
                 onHabitDeleted(habit._id);
             } catch (err) {
                 console.error("Failed to delete habit", err);
-                alert("Failed to delete habit. See console for details.");
+                alert("Failed to delete habit: " + err.message);
             }
         }
     };
@@ -159,6 +162,7 @@ const HabitGrid = ({ habits, currentMonth, onHabitUpdated, onHabitAdded, onHabit
             startEditing(created);
         } catch (err) {
             console.error("Failed to create habit", err);
+            alert("Failed to create habit: " + err.message);
         }
     };
 

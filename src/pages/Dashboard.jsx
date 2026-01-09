@@ -156,6 +156,11 @@ const Dashboard = () => {
 
             <div className="dashboard-main-content">
                 <div className="left-panel">
+                    {error && (
+                        <div className="error-message" style={{ color: 'red', padding: '1rem', background: '#fee2e2', marginBottom: '1rem', borderRadius: '8px' }}>
+                            Error loading habits: {error}. Is the backend running?
+                        </div>
+                    )}
                     {/* 2. Grid View */}
                     {loading ? (
                         <div className="loading">Loading tracking data...</div>

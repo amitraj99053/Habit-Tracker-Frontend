@@ -19,6 +19,7 @@ const HabitList = ({ habits, onHabitUpdated, onHabitDeleted }) => {
             onHabitUpdated(updatedHabit);
         } catch (error) {
             console.error('Error updating habit:', error);
+            alert("Failed to update habit: " + error.message);
         }
     };
 
@@ -29,6 +30,7 @@ const HabitList = ({ habits, onHabitUpdated, onHabitDeleted }) => {
             onHabitDeleted(id);
         } catch (error) {
             console.error('Error deleting habit:', error);
+            alert("Failed to delete habit: " + error.message);
         }
     };
 
