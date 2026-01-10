@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 import SignUpModal from './SignUpModal';
 import './Header.css';
 
 const Header = () => {
     const navigate = useNavigate();
+    const { user, logout } = useAuth();
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [initiallyLogin, setInitiallyLogin] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -22,6 +24,12 @@ const Header = () => {
     const handleNavClick = (path) => {
         navigate(path);
         setIsMobileMenuOpen(false);
+    };
+
+    const handleLogout = () => {
+        logout();
+        setIsMobileMenuOpen(false);
+        navigate('/');
     };
 
     return (
@@ -43,7 +51,14 @@ const Header = () => {
                     <button className="nav-btn" onClick={() => handleNavClick('/services')}>Features</button>
                     <button className="nav-btn" onClick={() => handleNavClick('/contact')}>Contact</button>
                     <div className="divider"></div>
-                    <button className="nav-btn secondary-btn" onClick={() => openModal(true)}>Log In</button>
+                    {user ? (
+                        <>
+                            <span className="nav-btn" style={{ cursor: 'default', color: '#fff' }}>Hi, {user.username}</span>
+                            <button className="nav-btn secondary-btn" onClick={handleLogout} style={{ background: '#ff4d4d', color: '#fff' }}>Logout</button>
+                        </>
+                    ) : (
+                        <button className="nav-btn secondary-btn" onClick={() => openModal(true)}>Log In</button>
+                    )}
                 </nav>
             </header>
             <SignUpModal

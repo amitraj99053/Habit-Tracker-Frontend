@@ -9,23 +9,27 @@ import TaskListPage from './pages/TaskListPage';
 import ContactPage from './pages/ContactPage';
 import './App.css'
 
+import { AuthProvider } from './context/AuthContext';
+
 function App() {
     return (
-        <Router>
-            <div className="app-container">
-                <Header />
-                <main>
-                    <Routes>
-                        <Route path="/" element={<LandingPage />} />
-                        <Route path="/services" element={<ServicesPage />} />
-                        <Route path="/contact" element={<ContactPage />} />
-                        <Route path="/dashboard" element={<Dashboard />} />
-                        <Route path="/tasks" element={<TaskListPage />} />
-                    </Routes>
-                </main>
-                <Footer />
-            </div>
-        </Router>
+        <AuthProvider>
+            <Router>
+                <div className="app-container">
+                    <Header />
+                    <main>
+                        <Routes>
+                            <Route path="/" element={<LandingPage />} />
+                            <Route path="/services" element={<ServicesPage />} />
+                            <Route path="/contact" element={<ContactPage />} />
+                            <Route path="/dashboard" element={<Dashboard />} />
+                            <Route path="/tasks" element={<TaskListPage />} />
+                        </Routes>
+                    </main>
+                    <Footer />
+                </div>
+            </Router>
+        </AuthProvider>
     )
 }
 

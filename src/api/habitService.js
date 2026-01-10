@@ -1,9 +1,19 @@
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 
+const getAuthHeaders = () => {
+    const token = localStorage.getItem('token');
+    return {
+        'Content-Type': 'application/json',
+        'x-auth-token': token || ''
+    };
+};
+
 export const habitService = {
     // Get all habits
     getAllHabits: async () => {
-        const response = await fetch(`${API_URL}/habits`);
+        const response = await fetch(`${API_URL}/habits`, {
+            headers: getAuthHeaders()
+        });
         if (!response.ok) throw new Error('Failed to fetch habits');
         return response.json();
     },
@@ -12,9 +22,7 @@ export const habitService = {
     createHabit: async (habitData) => {
         const response = await fetch(`${API_URL}/habits`, {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
+            headers: getAuthHeaders(),
             body: JSON.stringify(habitData),
         });
         if (!response.ok) throw new Error('Failed to create habit');
@@ -25,9 +33,7 @@ export const habitService = {
     toggleHabitDate: async (id, date) => {
         const response = await fetch(`${API_URL}/habits/${id}/toggle-date`, {
             method: 'PATCH',
-            headers: {
-                'Content-Type': 'application/json',
-            },
+            headers: getAuthHeaders(),
             body: JSON.stringify({ date }),
         });
         if (!response.ok) throw new Error('Failed to update habit');
@@ -38,9 +44,7 @@ export const habitService = {
     updateHabit: async (id, updates) => {
         const response = await fetch(`${API_URL}/habits/${id}`, {
             method: 'PATCH',
-            headers: {
-                'Content-Type': 'application/json',
-            },
+            headers: getAuthHeaders(),
             body: JSON.stringify(updates),
         });
         if (!response.ok) throw new Error('Failed to update habit');
@@ -51,12 +55,11 @@ export const habitService = {
     deleteHabit: async (id) => {
         const response = await fetch(`${API_URL}/habits/${id}`, {
             method: 'DELETE',
+            headers: getAuthHeaders()
         });
         if (!response.ok) throw new Error('Failed to delete habit');
-        // Handle 204 No Content which throws on .json()
-        if (response.status === 204) {
-            return { success: true };
-        }
+        // Handle 204 No Content if applicable, though backend returns message
+        if (response.status === 204) return { success: true };
         return response.json();
     }
 };

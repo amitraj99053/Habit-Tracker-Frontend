@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import { useAuth } from '../context/AuthContext';
 import './SignUpModal.css';
 
 const SignUpModal = ({ isOpen, onClose, initiallyLogin = false }) => {
+    const { login } = useAuth();
     const [formData, setFormData] = useState({
         username: '',
         email: '',
@@ -71,6 +73,10 @@ const SignUpModal = ({ isOpen, onClose, initiallyLogin = false }) => {
 
             if (response.ok) {
                 setSuccess(isLogin ? 'Login successful!' : 'Account created successfully!');
+
+                // Update global auth state
+                login(data);
+
                 setTimeout(() => {
                     onClose();
                     setSuccess('');
