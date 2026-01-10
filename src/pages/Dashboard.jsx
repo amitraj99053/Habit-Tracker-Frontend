@@ -157,8 +157,8 @@ const Dashboard = () => {
             <div className="dashboard-main-content">
                 <div className="left-panel">
                     {error && (
-                        <div className="error-message" style={{ color: 'red', padding: '1rem', background: '#fee2e2', marginBottom: '1rem', borderRadius: '8px' }}>
-                            Error loading habits: {error}. Is the backend running?
+                        <div className="error-message" style={{ color: '#b91c1c', padding: '1rem', background: '#fee2e2', marginBottom: '1rem', borderRadius: '8px', border: '1px solid #f87171' }}>
+                            <strong>Connection Error:</strong> {error}. Please check your internet connection or try again later.
                         </div>
                     )}
                     {/* 2. Grid View */}
