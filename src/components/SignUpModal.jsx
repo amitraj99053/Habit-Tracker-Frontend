@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
+import { authService } from '../api/authService';
 import './SignUpModal.css';
 
 const SignUpModal = ({ isOpen, onClose, initiallyLogin = false }) => {
@@ -54,40 +55,32 @@ const SignUpModal = ({ isOpen, onClose, initiallyLogin = false }) => {
         }
 
         try {
-            const API_URL = import.meta.env.VITE_API_URL || '/api';
-            const endpoint = isLogin ? '/auth/login' : '/auth/signup';
-
-            const payload = isLogin
-                ? { email: formData.email, password: formData.password }
-                : { username: formData.username, email: formData.email, password: formData.password };
-
-            const response = await fetch(`${API_URL}${endpoint}`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(payload)
-            });
-
-            const data = await response.json();
-
-            if (response.ok) {
-                setSuccess(isLogin ? 'Login successful!' : 'Account created successfully!');
-
-                // Update global auth state
-                login(data);
-
-                setTimeout(() => {
-                    onClose();
-                    setSuccess('');
-                    setFormData({ username: '', email: '', password: '', confirmPassword: '' });
-                }, 2000);
+            let data;
+            if (isLogin) {
+                data = await authService.login(formData.email, formData.password);
+                setSuccess('Login successful!');
             } else {
-                setError(data.message || (isLogin ? 'Login failed' : 'Signup failed'));
+                data = await authService.signup(formData.username, formData.email, formData.password);
+                setSuccess('Account created successfully!');
             }
+
+            // Update global auth state
+            login(data);
+
+            setTimeout(() => {
+                onClose();
+                setSuccess('');
+                setFormData({ username: '', email: '', password: '', confirmPassword: '' });
+            }, 2000);
+
         } catch (err) {
             console.error('Auth Error:', err);
-            setError('Failed to connect to server');
+            // Handle timeout or network errors specifically
+            if (err.message.includes('timed out') || err.message.includes('Failed to fetch')) {
+                setError('Unable to connect to server. Please check your internet or try again later.');
+            } else {
+                setError(err.message || 'Authentication failed');
+            }
         }
     };
 
