@@ -1,17 +1,9 @@
-const API_URL = import.meta.env.VITE_API_URL || '/api';
-
-const getAuthHeaders = () => {
-    const token = localStorage.getItem('token');
-    return {
-        'Content-Type': 'application/json',
-        'x-auth-token': token || ''
-    };
-};
+import { fetchWithTimeout, getAuthHeaders } from './apiUtils';
 
 export const habitService = {
     // Get all habits
     getAllHabits: async () => {
-        const response = await fetch(`${API_URL}/habits`, {
+        const response = await fetchWithTimeout('/habits', {
             headers: getAuthHeaders()
         });
         if (!response.ok) throw new Error('Failed to fetch habits');
@@ -20,7 +12,7 @@ export const habitService = {
 
     // Create a new habit
     createHabit: async (habitData) => {
-        const response = await fetch(`${API_URL}/habits`, {
+        const response = await fetchWithTimeout('/habits', {
             method: 'POST',
             headers: getAuthHeaders(),
             body: JSON.stringify(habitData),
@@ -31,7 +23,7 @@ export const habitService = {
 
     // Toggle completion for a specific date
     toggleHabitDate: async (id, date) => {
-        const response = await fetch(`${API_URL}/habits/${id}/toggle-date`, {
+        const response = await fetchWithTimeout(`/habits/${id}/toggle-date`, {
             method: 'PATCH',
             headers: getAuthHeaders(),
             body: JSON.stringify({ date }),
@@ -42,7 +34,7 @@ export const habitService = {
 
     // Update habit details
     updateHabit: async (id, updates) => {
-        const response = await fetch(`${API_URL}/habits/${id}`, {
+        const response = await fetchWithTimeout(`/habits/${id}`, {
             method: 'PATCH',
             headers: getAuthHeaders(),
             body: JSON.stringify(updates),
@@ -53,12 +45,11 @@ export const habitService = {
 
     // Delete a habit
     deleteHabit: async (id) => {
-        const response = await fetch(`${API_URL}/habits/${id}`, {
+        const response = await fetchWithTimeout(`/habits/${id}`, {
             method: 'DELETE',
             headers: getAuthHeaders()
         });
         if (!response.ok) throw new Error('Failed to delete habit');
-        // Handle 204 No Content if applicable, though backend returns message
         if (response.status === 204) return { success: true };
         return response.json();
     }
