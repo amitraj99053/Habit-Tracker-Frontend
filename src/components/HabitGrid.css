@@ -1,292 +1,247 @@
+/* Existing styles... */
+
 .habit-grid-container {
     overflow-x: auto;
-    background: transparent;
-    border: none;
-    margin-bottom: 0;
-    /* Scrollbar styling */
-    scrollbar-width: thin;
-    scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
-}
-
-.habit-grid-container::-webkit-scrollbar {
-    height: 8px;
-}
-
-.habit-grid-container::-webkit-scrollbar-track {
-    background: transparent;
-}
-
-.habit-grid-container::-webkit-scrollbar-thumb {
-    background-color: rgba(255, 255, 255, 0.2);
-    border-radius: 20px;
+    background: #1a1a1a;
+    border-radius: 12px;
+    padding: 1rem;
+    border: 1px solid #333;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
 }
 
 .habit-grid {
     width: 100%;
     border-collapse: separate;
     border-spacing: 0;
-    min-width: 1000px;
-    background: transparent;
-}
-
-/* Header Styles */
-.habit-grid th {
-    background: rgba(30, 30, 30, 0.95);
-    color: var(--text-secondary);
-    font-size: 0.75rem;
-    font-weight: 600;
-    border-bottom: 1px solid var(--border-glass);
-    border-right: 1px solid var(--border-glass);
-    padding: 0.5rem;
-    height: 48px;
+    min-width: 800px;
 }
 
 .habit-col-header {
     text-align: left;
-    padding-left: 1.5rem !important;
+    padding: 1rem;
+    color: #888;
+    font-weight: 500;
+    border-bottom: 1px solid #333;
+    width: 200px;
     position: sticky;
     left: 0;
-    z-index: 20;
-    background: #18181b !important;
-    /* Slightly distinct dark */
-    border-right: 1px solid var(--border-glass) !important;
-    min-width: 280px;
-    font-size: 0.9rem !important;
-    color: #fff !important;
-    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
+    background: #1a1a1a;
+    z-index: 10;
 }
 
 .week-header {
     text-align: center;
-    background: rgba(30, 30, 30, 0.95) !important;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    font-size: 0.7rem !important;
-    color: #888 !important;
-    height: 32px;
+    padding: 0.5rem;
+    color: #666;
+    font-size: 0.8rem;
+    border-bottom: 1px solid #333;
+    border-left: 1px solid #333;
 }
 
 .day-header {
-    min-width: 36px;
-    width: 36px;
     text-align: center;
-    font-family: 'Inter', sans-serif;
-    font-size: 0.85rem !important;
-    color: #aaa !important;
+    padding: 0.5rem;
+    color: #888;
+    font-size: 0.9rem;
+    width: 32px;
+    border-bottom: 1px solid #333;
 }
 
-/* Body Styles */
 .habit-name-cell {
-    background: #18181b;
-    padding: 0.6rem 1.5rem;
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid #333;
     position: sticky;
     left: 0;
+    background: #1a1a1a;
     z-index: 10;
-    border-bottom: 1px solid var(--border-glass);
-    border-right: 1px solid var(--border-glass);
-    cursor: pointer;
-    transition: background 0.1s;
-    height: 56px;
-    color: #fff;
-    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
-}
-
-.habit-name-cell:hover {
-    background: #27272a;
 }
 
 .habit-info {
     display: flex;
     align-items: center;
-    gap: 0.8rem;
-    position: relative;
-    padding-right: 36px;
+    gap: 0.75rem;
 }
 
-.habit-icon {
-    font-size: 1.25rem;
-    width: 36px;
-    height: 36px;
+.habit-icon-wrapper {
+    width: 32px;
+    height: 32px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(255, 255, 255, 0.1);
+    background: #252525;
     border-radius: 8px;
-    color: #fff;
+    cursor: pointer;
 }
 
 .habit-name {
-    font-weight: 500;
-    font-size: 0.9rem;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: 180px;
-}
-
-/* Inline Edit Input */
-.inline-edit-input {
-    background: transparent;
-    border: none;
-    border-bottom: 2px solid var(--neon-green);
     color: #fff;
-    font-size: 0.9rem;
     font-weight: 500;
-    width: 100%;
-    outline: none;
-    padding: 0;
-    font-family: inherit;
 }
 
 .habit-name.editable:hover {
-    color: var(--neon-green);
-    text-decoration: none;
-}
-
-/* Quick Add Row */
-.quick-add-row {
-    background: transparent;
-}
-
-.quick-add-cell {
-    background: rgba(255, 255, 255, 0.02) !important;
-    border-bottom: none !important;
-}
-
-.add-icon {
-    background: var(--neon-green) !important;
-    color: #000 !important;
-    font-weight: 700;
-    font-size: 1.4rem !important;
+    color: #D7FF00;
     cursor: pointer;
 }
 
-.quick-add-input {
-    background: transparent;
-    border: none;
+.inline-edit-input {
+    background: #252525;
+    border: 1px solid #444;
     color: #fff;
-    font-size: 0.9rem;
-    width: 100%;
-    outline: none;
+    padding: 2px 6px;
+    border-radius: 4px;
+    width: 120px;
 }
 
-.quick-add-input::placeholder {
+.delete-habit-btn {
+    opacity: 0;
+    background: none;
+    border: none;
     color: #666;
-    font-style: italic;
-}
-
-
-/* Icon Picker Styling */
-.habit-icon-wrapper {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.clickable-icon {
     cursor: pointer;
-    transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    border-radius: 6px;
-    padding: 2px;
+    padding: 4px;
+    margin-left: auto;
+    transition: all 0.2s;
 }
 
-.clickable-icon:hover {
-    transform: scale(1.2);
-    background: rgba(255, 255, 255, 0.1);
-}
-
-.icon-picker-popover {
-    position: absolute;
-    top: 50%;
-    left: 100%;
-    margin-left: 10px;
-    transform: translateY(-50%);
-    z-index: 99999;
-    background: rgba(18, 18, 18, 0.95);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
-    border-radius: 12px;
-    padding: 12px;
-    width: 280px;
-    animation: fadeIn 0.15s ease-out;
-}
-
-.picker-grid {
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    gap: 8px;
-}
-
-.emoji-option {
-    font-size: 1.2rem;
-    cursor: pointer;
-    text-align: center;
-    padding: 6px;
-    border-radius: 6px;
-    transition: background 0.1s;
-}
-
-.emoji-option:hover {
-    background: rgba(255, 255, 255, 0.15);
-    transform: scale(1.1);
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(-5px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* Delete Button Styling */
 .habit-info:hover .delete-habit-btn {
     opacity: 1;
 }
 
-.delete-habit-btn {
-    position: absolute;
-    right: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    background: rgba(239, 68, 68, 0.1);
-    border: none;
+.delete-habit-btn:hover {
     color: #ef4444;
+}
+
+.checkbox-cell {
+    text-align: center;
+    border-bottom: 1px solid #333;
     cursor: pointer;
-    opacity: 0;
-    transition: all 0.2s ease;
-    padding: 6px;
-    border-radius: 4px;
+    padding: 0;
+}
+
+.grid-checkbox {
+    width: 100%;
+    height: 48px;
     display: flex;
     align-items: center;
     justify-content: center;
-    pointer-events: auto;
-    z-index: 999;
+    color: transparent;
+    transition: all 0.2s;
 }
 
-.delete-habit-btn:hover {
-    opacity: 1 !important;
-    background: rgba(239, 68, 68, 0.2);
-    transform: translateY(-50%) scale(1.1);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+.grid-checkbox:hover {
+    background: rgba(255, 255, 255, 0.05);
 }
 
-/* Grid Cells (Checkboxes) */
-/* Assuming the cell logic uses inline styles or generic td, 
-   we need to ensure they look okay. Since HabitGrid.jsx iterates:
-   <td ... style={{ background: isCompleted ? habit.color : '#fff', ... }}>
-   We might need to override the default white background for unchecked cells.
-   Actually HabitGrid.jsx likely does inline styles for td background.
-   Let's check if we can override via CSS or if we need to edit JSX later.
-   For now, setting table to transparent helps.
-*/
-.habit-grid td {
-    border-bottom: 1px solid var(--border-glass);
-    border-right: 1px solid var(--border-glass);
+.grid-checkbox.checked {
+    font-weight: bold;
+}
+
+/* Quick Add Row */
+.quick-add-cell {
+    border-bottom: none;
+}
+
+.add-btn-content {
+    opacity: 0.7;
+    transition: opacity 0.2s;
+}
+
+.add-btn-content:hover {
+    opacity: 1;
+}
+
+.add-icon {
+    border: 1px dashed #666;
+    color: #666;
+}
+
+.add-text {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+/* Icon Picker */
+.icon-picker-popover {
+    background: #252525;
+    padding: 1rem;
+    border-radius: 12px;
+    border: 1px solid #444;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+    z-index: 100;
+    width: 250px;
+}
+
+.picker-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0.5rem;
+}
+
+.emoji-option {
+    font-size: 1.2rem;
+    padding: 0.5rem;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: background 0.2s;
+}
+
+.emoji-option:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* Suggested Habits Styles */
+.suggested-habits-container {
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid #333;
+}
+
+.suggestions-title {
+    color: #888;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.suggestions-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+
+.suggestion-pill {
+    background: #252525;
+    border: 1px solid #333;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    color: #fff;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.2s ease;
+}
+
+.suggestion-pill:hover {
+    background: #333;
+    border-color: #D7FF00;
+    transform: translateY(-2px);
+}
+
+.suggestion-icon {
+    font-size: 1.1rem;
+}
+
+.suggestion-name {
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.suggestion-add {
+    color: #D7FF00;
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin-left: 0.25rem;
 }
