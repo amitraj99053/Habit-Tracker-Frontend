@@ -6,7 +6,10 @@ export const habitService = {
         const response = await fetchWithTimeout('/habits', {
             headers: getAuthHeaders()
         });
-        if (!response.ok) throw new Error('Failed to fetch habits');
+        if (!response.ok) {
+            const errorData = await response.json().catch(() => ({}));
+            throw new Error(errorData.message || `Failed to fetch habits (${response.status})`);
+        }
         return response.json();
     },
 
@@ -17,7 +20,10 @@ export const habitService = {
             headers: getAuthHeaders(),
             body: JSON.stringify(habitData),
         });
-        if (!response.ok) throw new Error('Failed to create habit');
+        if (!response.ok) {
+            const errorData = await response.json().catch(() => ({}));
+            throw new Error(errorData.message || `Failed to create habit (${response.status})`);
+        }
         return response.json();
     },
 
@@ -28,7 +34,10 @@ export const habitService = {
             headers: getAuthHeaders(),
             body: JSON.stringify({ date }),
         });
-        if (!response.ok) throw new Error('Failed to update habit');
+        if (!response.ok) {
+            const errorData = await response.json().catch(() => ({}));
+            throw new Error(errorData.message || `Failed to update habit (${response.status})`);
+        }
         return response.json();
     },
 
@@ -39,7 +48,10 @@ export const habitService = {
             headers: getAuthHeaders(),
             body: JSON.stringify(updates),
         });
-        if (!response.ok) throw new Error('Failed to update habit');
+        if (!response.ok) {
+            const errorData = await response.json().catch(() => ({}));
+            throw new Error(errorData.message || `Failed to update habit (${response.status})`);
+        }
         return response.json();
     },
 
@@ -49,7 +61,10 @@ export const habitService = {
             method: 'DELETE',
             headers: getAuthHeaders()
         });
-        if (!response.ok) throw new Error('Failed to delete habit');
+        if (!response.ok) {
+            const errorData = await response.json().catch(() => ({}));
+            throw new Error(errorData.message || `Failed to delete habit (${response.status})`);
+        }
         if (response.status === 204) return { success: true };
         return response.json();
     }
