@@ -1,4 +1,15 @@
-const API_URL = import.meta.env.VITE_API_URL || '/api';
+const getBaseUrl = () => {
+    let url = import.meta.env.VITE_API_URL || '';
+    if (url.endsWith('/')) {
+        url = url.slice(0, -1);
+    }
+    if (url.endsWith('/api')) {
+        return url;
+    }
+    return url ? `${url}/api` : '/api';
+};
+
+const API_URL = getBaseUrl();
 
 export const getAuthHeaders = () => {
     const token = localStorage.getItem('token');
