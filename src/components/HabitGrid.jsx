@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react';
 import { habitService } from '../api/habitService';
+import { suggestedHabits } from '../data/suggestedHabits';
 
 import { Trash2 } from 'lucide-react';
 import './HabitGrid.css';
@@ -169,9 +170,28 @@ const HabitGrid = ({ habits, currentMonth, onHabitUpdated, onHabitAdded, onHabit
 
 
 
+
+
+    // Add Suggested Habit Logic
+    const handleAddSuggested = async (e, suggested) => {
+        e.stopPropagation(); // Prevent triggering the row click
+        try {
+            const newHabit = {
+                ...suggested,
+                color: '#D7FF00', // Default neon
+            };
+            const created = await habitService.createHabit(newHabit);
+            onHabitAdded(created);
+        } catch (err) {
+            console.error("Failed to add suggested habit", err);
+            alert("Failed to add habit: " + err.message);
+        }
+    };
+
     return (
         <div className="habit-grid-container">
             <table className="habit-grid">
+                {/* ... existing headers ... */}
                 <thead>
                     <tr>
                         <th className="habit-col-header" rowSpan="2">My Habits</th>
@@ -283,7 +303,21 @@ const HabitGrid = ({ habits, currentMonth, onHabitUpdated, onHabitAdded, onHabit
                                 <span className="add-text">Add New Habit</span>
                             </div>
                         </td>
-                        <td colSpan={daysInMonth} className="empty-row-space" onClick={handleAddClick} style={{ cursor: 'pointer' }}></td>
+                        <td colSpan={daysInMonth} className="suggestions-cell">
+                            <div className="inline-suggestions">
+                                <span className="suggestions-label">Try:</span>
+                                {suggestedHabits.map((habit, index) => (
+                                    <button
+                                        key={index}
+                                        className="inline-suggestion-pill"
+                                        onClick={(e) => handleAddSuggested(e, habit)}
+                                        title={`Add ${habit.name}`}
+                                    >
+                                        {habit.icon} {habit.name}
+                                    </button>
+                                ))}
+                            </div>
+                        </td>
                     </tr>
                 </tbody>
             </table>

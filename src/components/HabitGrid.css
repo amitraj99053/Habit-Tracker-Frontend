@@ -189,3 +189,48 @@
 .emoji-option:hover {
     background: rgba(255, 255, 255, 0.1);
 }
+
+/* Inline Suggestions */
+.inline-suggestions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding-left: 1rem;
+    height: 100%;
+}
+
+.suggestions-label {
+    color: #666;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    font-weight: 500;
+}
+
+.inline-suggestion-pill {
+    background: transparent;
+    border: 1px solid #444;
+    color: #888;
+    padding: 0.25rem 0.75rem;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.inline-suggestion-pill:hover {
+    background: #333;
+    border-color: #D7FF00;
+    color: #fff;
+    transform: translateY(-1px);
+}
+
+.suggestions-cell {
+    border-bottom: none;
+    padding: 0;
+    background: #1a1a1a;
+    /* Match sticky header/col for consistency */
+}
