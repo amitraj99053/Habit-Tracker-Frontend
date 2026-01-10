@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import { habitService } from '../api/habitService';
-import { suggestedHabits } from '../data/suggestedHabits';
+
 import { Trash2 } from 'lucide-react';
 import './HabitGrid.css';
 
@@ -167,21 +167,7 @@ const HabitGrid = ({ habits, currentMonth, onHabitUpdated, onHabitAdded, onHabit
         }
     };
 
-    // Add Suggested Habit Logic
-    const handleAddSuggested = async (suggested) => {
-        try {
-            const newHabit = {
-                ...suggested,
-                color: '#D7FF00', // Default neon
-            };
-            const created = await habitService.createHabit(newHabit);
-            onHabitAdded(created);
-            // Optional: Scroll to new habit or show success toast
-        } catch (err) {
-            console.error("Failed to add suggested habit", err);
-            alert("Failed to add habit: " + err.message);
-        }
-    };
+
 
     return (
         <div className="habit-grid-container">
@@ -301,25 +287,7 @@ const HabitGrid = ({ habits, currentMonth, onHabitUpdated, onHabitAdded, onHabit
                     </tr>
                 </tbody>
             </table>
-
-            {/* Suggested Habits Section */}
-            <div className="suggested-habits-container">
-                <h4 className="suggestions-title">✨ Ideas to get you started</h4>
-                <div className="suggestions-list">
-                    {suggestedHabits.map((habit, index) => (
-                        <button
-                            key={index}
-                            className="suggestion-pill"
-                            onClick={() => handleAddSuggested(habit)}
-                        >
-                            <span className="suggestion-icon">{habit.icon}</span>
-                            <span className="suggestion-name">{habit.name}</span>
-                            <span className="suggestion-add">+</span>
-                        </button>
-                    ))}
-                </div>
-            </div>
-        </div >
+        </div>
     );
 };
 
