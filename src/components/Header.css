@@ -80,12 +80,12 @@
     -webkit-text-fill-color: transparent;
 }
 
-/* Navigation Links - Professional Boxed Style */
+/* Navigation Links - Balanced & Professional */
 .nav-menu {
     display: flex;
     align-items: center;
-    gap: 0.8rem;
-    /* Tight, consistent spacing */
+    gap: 0.5rem;
+    /* Precise spacing */
     flex-wrap: nowrap;
     /* Keep on one line */
     overflow-x: auto;
@@ -102,70 +102,76 @@
 }
 
 .nav-btn {
+    display: inline-flex;
+    /* Ensure container hits hug text */
+    align-items: center;
+    justify-content: center;
     font-family: 'Inter', sans-serif;
-    font-size: 0.85rem;
+    font-size: 0.9rem;
     font-weight: 500;
+    /* Medium weight matches shape better */
     color: #a1a1aa;
-    background: rgba(255, 255, 255, 0.03);
-    /* Subtle Box */
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    /* Subtle Border */
+    background: transparent;
+    border: 1px solid transparent;
+    /* Reserve space key for smooth hover */
     border-radius: 6px;
-    padding: 0.5rem 1rem;
-    /* Define the Box */
+    padding: 0.5rem 0.8rem;
+    /* Balanced padding */
     cursor: pointer;
-    position: relative;
-    transition: all 0.2s ease;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     white-space: nowrap;
+    height: 36px;
+    /* Fixed height for uniformity */
+    line-height: 1;
     flex-shrink: 0;
     /* Prevent crushing */
 }
 
+/* Hover State - Matched Shape */
 .nav-btn:hover {
     color: #fff;
     background: rgba(255, 255, 255, 0.08);
-    border-color: rgba(255, 255, 255, 0.15);
 }
 
-/* Active State - High Contrast */
+/* Active State - Solid Definition */
 .nav-btn.active {
-    color: #000;
-    background: #fff;
-    /* Active is distinct white box */
-    border-color: #fff;
+    color: #fff;
+    background: rgba(255, 255, 255, 0.1);
     font-weight: 600;
 }
 
-/* Primary Action Button (Log In) */
+/* Primary Action Button - Distinct */
 .nav-btn.secondary-btn {
     background: #D7FF00;
-    /* Neon Green Pop */
-    color: #000;
-    border: 1px solid #D7FF00;
+    color: #050505;
     font-weight: 600;
     margin-left: 0.5rem;
-    box-shadow: 0 0 10px rgba(215, 255, 0, 0.1);
+    padding: 0 1.25rem;
+    /* Wider horizontal padding */
+    height: 36px;
+    /* Match other nav items height */
+    box-shadow: 0 2px 10px rgba(215, 255, 0, 0.15);
 }
 
 .nav-btn.secondary-btn:hover {
     background: #e2ff5c;
-    border-color: #e2ff5c;
     transform: translateY(-1px);
-    box-shadow: 0 4px 15px rgba(215, 255, 0, 0.2);
+    box-shadow: 0 4px 15px rgba(215, 255, 0, 0.25);
 }
 
 .nav-btn.secondary-btn:active {
     transform: translateY(0);
 }
 
-/* User Greeting - Clean Label */
+/* User Greeting - Aligned */
 .nav-btn.user-greeting {
-    max-width: 160px;
     background: transparent;
-    border-color: transparent;
     color: #fff;
-    padding-left: 0;
     cursor: default;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    max-width: 150px;
+    justify-content: flex-start;
 }
 
 /* Divider */
