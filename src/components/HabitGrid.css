@@ -141,40 +141,91 @@
     border-bottom: none;
 }
 
+/* Quick Add Button - Professional & Compact */
 .add-btn-content {
-    opacity: 0.7;
-    transition: opacity 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.4rem 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    width: auto;
+    /* Allow it to shrink */
 }
 
 .add-btn-content:hover {
-    opacity: 1;
+    background: rgba(215, 255, 0, 0.1);
+    border-color: #D7FF00;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.add-btn-content:active {
+    transform: translateY(0);
 }
 
 .add-icon {
-    border: 1px dashed #666;
-    color: #666;
+    width: 18px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #D7FF00;
+    color: #000;
+    font-size: 1rem;
+    font-weight: bold;
+    line-height: 1;
 }
 
 .add-text {
-    color: #666;
-    font-size: 0.9rem;
+    color: #ddd;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+}
+
+.add-btn-content:hover .add-text {
+    color: #fff;
 }
 
 /* Icon Picker */
 .icon-picker-popover {
-    background: #252525;
-    padding: 1rem;
+    background: #1e1e1e;
+    padding: 0.8rem;
     border-radius: 12px;
     border: 1px solid #444;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
-    z-index: 100;
-    width: 250px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+    z-index: 1000;
+    /* Ensure high z-index over other elements */
+    width: 280px;
+    max-height: 240px;
+    /* Small popup height */
+    overflow-y: auto;
+    /* Enable vertical scrolling */
+
+    /* Custom Scrollbar for the popup */
+    scrollbar-width: thin;
+    scrollbar-color: #555 #1e1e1e;
+}
+
+.icon-picker-popover::-webkit-scrollbar {
+    width: 6px;
+}
+
+.icon-picker-popover::-webkit-scrollbar-thumb {
+    background-color: #555;
+    border-radius: 3px;
 }
 
 .picker-grid {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 0.5rem;
+    grid-template-columns: repeat(6, 1fr);
+    /* More columns for compactness */
+    gap: 0.4rem;
 }
 
 .emoji-option {
