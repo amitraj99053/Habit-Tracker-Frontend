@@ -77,70 +77,75 @@
     margin-left: auto;
 }
 
-/* Base Rounded Button (Matches 'Choose Tracker' CTA Exactly) */
+/* Base Rounded Button (Matches 'Current Streak' Glass Style) */
 .nav-btn {
     font-family: 'Inter', sans-serif;
-    font-size: 1.1rem;
-    /* Exact match */
-    font-weight: 700;
-    color: #111111;
-    background: #D7FF00;
-    border: none;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #fff;
+    /* White text for glass */
+    background: rgba(255, 255, 255, 0.05);
+    /* Glass Background */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    /* Subtle Border */
     cursor: pointer;
-    padding: 1rem 2.5rem;
-    /* Exact match to .cta-btn */
-    border-radius: 12px;
+    padding: 1rem 1.5rem;
+    border-radius: 16px;
+    /* User requested 16px */
     transition: all 0.3s ease;
     white-space: nowrap;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
+    text-transform: capitalize;
+    /* Cleaner look */
+    letter-spacing: 0.02em;
     position: relative;
-    box-shadow: 0 10px 20px rgba(215, 255, 0, 0.4);
+    box-shadow: none;
     min-width: unset;
     text-align: center;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
 }
 
-/* Hover - Lift & Stronger Shadow */
+/* Hover - Light up Glass effect */
 .nav-btn:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 12px 24px rgba(215, 255, 0, 0.5);
-    color: #000;
-    background: #D7FF00;
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    color: #fff;
 }
 
 /* Active State */
 .nav-btn.active {
-    background: #fff;
-    color: #000;
-    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
+    background: rgba(215, 255, 0, 0.15);
+    border-color: #D7FF00;
+    color: #D7FF00;
 }
 
 .nav-btn.active::after {
     display: none;
 }
 
+/* Primary Action Button (Register) - Distinct but Matching Shape */
 .nav-btn.secondary-btn {
     background: #fff;
     color: #000;
-    padding: 0.8rem 2.5rem;
-    /* Distinctly wider for prompt */
-    min-width: 140px;
-    letter-spacing: 0.1em;
-    border-radius: 12px;
-    /* Consistent Radius */
+    font-weight: 700;
+    padding: 1rem 2.5rem;
+    border-radius: 16px;
+    /* Match Shape */
+    border: none;
+    text-transform: uppercase;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .nav-btn.secondary-btn:hover {
     background: #D7FF00;
     color: #000;
+    border-color: transparent;
     transform: translateY(-3px);
-    box-shadow: 0 12px 24px rgba(215, 255, 0, 0.4);
-}
-
-.nav-btn.secondary-btn:active {
-    transform: translateY(0);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 10px 20px rgba(215, 255, 0, 0.4);
 }
 
 /* User Greeting */
