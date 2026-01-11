@@ -77,29 +77,26 @@
     margin-left: auto;
 }
 
-/* Base Rounded Button (Professional Design) */
+/* Base Rounded Button (Matches 'Choose Tracker' CTA Exactly) */
 .nav-btn {
     font-family: 'Inter', sans-serif;
-    font-size: 0.9rem;
+    font-size: 1.1rem;
+    /* Exact match */
     font-weight: 700;
     color: #111111;
     background: #D7FF00;
-    /* Neon Base */
     border: none;
     cursor: pointer;
-    padding: 0.7rem 1.6rem;
-    /* Professionally balanced padding */
+    padding: 1rem 2.5rem;
+    /* Exact match to .cta-btn */
     border-radius: 12px;
-    /* Standard Fixed Radius (Professional) */
-    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    transition: all 0.3s ease;
     white-space: nowrap;
     text-transform: uppercase;
     letter-spacing: 0.05em;
     position: relative;
-    box-shadow: 0 4px 12px rgba(215, 255, 0, 0.3);
-    /* Subtle Shadow */
+    box-shadow: 0 10px 20px rgba(215, 255, 0, 0.4);
     min-width: unset;
-    /* Allow natural width */
     text-align: center;
 }
 
