@@ -80,78 +80,100 @@
     -webkit-text-fill-color: transparent;
 }
 
-/* Navigation Links - Simple & Professional */
+/* Navigation Links - Professional Boxed Style */
 .nav-menu {
     display: flex;
     align-items: center;
-    gap: 2rem;
-    /* Clean spacing */
+    gap: 0.8rem;
+    /* Tight, consistent spacing */
+    flex-wrap: nowrap;
+    /* Keep on one line */
+    overflow-x: auto;
+    /* Allow scroll on very small screens instead of overlap */
+    -ms-overflow-style: none;
+    /* Hide scrollbar IE */
+    scrollbar-width: none;
+    /* Hide scrollbar Firefox */
+}
+
+.nav-menu::-webkit-scrollbar {
+    display: none;
+    /* Hide scrollbar Chrome */
 }
 
 .nav-btn {
     font-family: 'Inter', sans-serif;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     font-weight: 500;
     color: #a1a1aa;
-    /* Zinc-400 for neutral look */
-    background: transparent;
-    border: none;
+    background: rgba(255, 255, 255, 0.03);
+    /* Subtle Box */
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    /* Subtle Border */
+    border-radius: 6px;
+    padding: 0.5rem 1rem;
+    /* Define the Box */
     cursor: pointer;
-    padding: 0;
-    /* Remove block padding */
     position: relative;
-    transition: color 0.2s ease;
+    transition: all 0.2s ease;
     white-space: nowrap;
+    flex-shrink: 0;
+    /* Prevent crushing */
 }
 
 .nav-btn:hover {
     color: #fff;
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.15);
 }
 
-/* Active State - Subtle */
+/* Active State - High Contrast */
 .nav-btn.active {
-    color: #fff;
-    font-weight: 500;
+    color: #000;
+    background: #fff;
+    /* Active is distinct white box */
+    border-color: #fff;
+    font-weight: 600;
 }
 
-/* Primary Action Button (Log In) - Solid & Clean */
+/* Primary Action Button (Log In) */
 .nav-btn.secondary-btn {
-    background: #fff;
+    background: #D7FF00;
+    /* Neon Green Pop */
     color: #000;
-    padding: 0.5rem 1.2rem;
-    border-radius: 6px;
+    border: 1px solid #D7FF00;
     font-weight: 600;
-    transition: all 0.2s;
     margin-left: 0.5rem;
+    box-shadow: 0 0 10px rgba(215, 255, 0, 0.1);
 }
 
 .nav-btn.secondary-btn:hover {
-    background: #e4e4e7;
-    /* Zinc-200 */
+    background: #e2ff5c;
+    border-color: #e2ff5c;
     transform: translateY(-1px);
+    box-shadow: 0 4px 15px rgba(215, 255, 0, 0.2);
 }
 
 .nav-btn.secondary-btn:active {
     transform: translateY(0);
 }
 
-/* User Greeting - Truncated & Subtle */
+/* User Greeting - Clean Label */
 .nav-btn.user-greeting {
-    max-width: 150px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: inline-block;
-    vertical-align: middle;
+    max-width: 160px;
+    background: transparent;
+    border-color: transparent;
     color: #fff;
+    padding-left: 0;
     cursor: default;
 }
 
-/* Divider - Minimal */
+/* Divider */
 .divider {
     width: 1px;
-    height: 20px;
+    height: 24px;
     background: rgba(255, 255, 255, 0.1);
-    margin: 0 0.5rem;
+    margin: 0 0.2rem;
 }
 
 /* Hamburger Menu Logic */
