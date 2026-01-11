@@ -80,111 +80,78 @@
     -webkit-text-fill-color: transparent;
 }
 
-/* Navigation Links */
+/* Navigation Links - Simple & Professional */
 .nav-menu {
     display: flex;
     align-items: center;
-    gap: 1rem;
-    /* Consistent gap */
-    flex-wrap: nowrap;
+    gap: 2rem;
+    /* Clean spacing */
 }
 
 .nav-btn {
-    color: #9ca3af;
+    font-family: 'Inter', sans-serif;
     font-size: 0.9rem;
     font-weight: 500;
-    cursor: pointer;
+    color: #a1a1aa;
+    /* Zinc-400 for neutral look */
     background: transparent;
     border: none;
-    padding: 0.6rem 1rem;
-    /* Added padding for background hover */
-    font-family: 'Inter', sans-serif;
+    cursor: pointer;
+    padding: 0;
+    /* Remove block padding */
     position: relative;
-    transition: all 0.2s ease;
+    transition: color 0.2s ease;
     white-space: nowrap;
-    flex-shrink: 0;
-    border-radius: 4px;
-    /* Rectangular shape with slight softening */
 }
 
-/* User greeting specifically */
+.nav-btn:hover {
+    color: #fff;
+}
+
+/* Active State - Subtle */
+.nav-btn.active {
+    color: #fff;
+    font-weight: 500;
+}
+
+/* Primary Action Button (Log In) - Solid & Clean */
+.nav-btn.secondary-btn {
+    background: #fff;
+    color: #000;
+    padding: 0.5rem 1.2rem;
+    border-radius: 6px;
+    font-weight: 600;
+    transition: all 0.2s;
+    margin-left: 0.5rem;
+}
+
+.nav-btn.secondary-btn:hover {
+    background: #e4e4e7;
+    /* Zinc-200 */
+    transform: translateY(-1px);
+}
+
+.nav-btn.secondary-btn:active {
+    transform: translateY(0);
+}
+
+/* User Greeting - Truncated & Subtle */
 .nav-btn.user-greeting {
     max-width: 150px;
     overflow: hidden;
     text-overflow: ellipsis;
     display: inline-block;
     vertical-align: middle;
-}
-
-/* Rectangular Hover Effect */
-.nav-btn:hover {
     color: #fff;
-    background: rgba(255, 255, 255, 0.05);
-    /* Rectangular hover block */
+    cursor: default;
 }
 
-/* Active State - Rectangular Bottom Border */
-.nav-btn.active {
-    color: #fff;
-    font-weight: 600;
-    background: rgba(255, 255, 255, 0.05);
-}
-
-.nav-btn::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background: #D7FF00;
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.nav-btn.active::after {
-    transform: scaleX(1);
-}
-
-.nav-btn:hover::after {
-    transform: scaleX(1);
-}
-
-/* Divider */
+/* Divider - Minimal */
 .divider {
     width: 1px;
-    height: 24px;
-    background: rgba(255, 255, 255, 0.15);
+    height: 20px;
+    background: rgba(255, 255, 255, 0.1);
     margin: 0 0.5rem;
-}
-
-/* Primary Action Button (Log In / Sign Up) - Rectangular */
-.nav-btn.secondary-btn {
-    background: #D7FF00;
-    color: #000;
-    font-weight: 600;
-    padding: 0.6rem 1.5rem;
-    border-radius: 4px;
-    /* Strictly Rectangular */
-    margin-left: 0;
-    box-shadow: none;
-    transition: all 0.2s ease;
-}
-
-/* Remove internal underline for buttons */
-.nav-btn.secondary-btn::after {
-    display: none;
-}
-
-.nav-btn.secondary-btn:hover {
-    background: #e2ff5c;
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(215, 255, 0, 0.2);
-}
-
-.nav-btn.secondary-btn:active {
-    transform: translateY(0);
 }
 
 /* Hamburger Menu Logic */
