@@ -89,7 +89,8 @@
     border: none;
     cursor: pointer;
     padding: 0.8rem 1.5rem;
-    border-radius: 12px;
+    border-radius: 10%;
+    /* User requested 10% */
     transition: all 0.3s ease;
     white-space: nowrap;
     text-transform: uppercase;
