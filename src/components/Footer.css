@@ -1,38 +1,178 @@
+/* Professional SaaS Footer */
 .footer {
-    padding: 2rem;
-    background: rgba(0, 0, 0, 0.2);
+    background: #000;
+    /* Deep black grounding */
+    border-top: 1px solid #1a1a1a;
+    padding: 4rem 2rem 2rem;
+    color: #888;
+    font-family: 'Inter', sans-serif;
     margin-top: auto;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .footer-content {
     max-width: 1280px;
     margin: 0 auto;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1.5fr;
+    /* Brand | Product | Resources | Newsletter */
+    gap: 3rem;
+    margin-bottom: 4rem;
+}
+
+/* Brand Column */
+.footer-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    color: #fff;
+    font-weight: 700;
+    font-size: 1.25rem;
+}
+
+.footer-tagline {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    max-width: 300px;
+}
+
+/* Social Icons */
+.social-links {
+    display: flex;
+    gap: 1rem;
+}
+
+.social-icon {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #111;
+    border-radius: 50%;
+    color: #fff;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: all 0.2s;
+    border: 1px solid #222;
+}
+
+.social-icon:hover {
+    background: #D7FF00;
+    /* Neon Green */
+    color: #000;
+    border-color: #D7FF00;
+    transform: translateY(-2px);
+}
+
+/* Column Headers & Links */
+.footer-col h4 {
+    color: #fff;
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.footer-links-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-links-list li {
+    margin-bottom: 0.8rem;
+}
+
+.footer-links-list a {
+    color: #888;
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: color 0.2s;
+}
+
+.footer-links-list a:hover {
+    color: #D7FF00;
+}
+
+/* Newsletter Form */
+.newsletter-form {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.newsletter-form input {
+    flex: 1;
+    background: #111;
+    border: 1px solid #333;
+    padding: 0.6rem 1rem;
+    border-radius: 6px;
+    color: #fff;
+    font-size: 0.9rem;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.newsletter-form input:focus {
+    border-color: #D7FF00;
+}
+
+.newsletter-form button {
+    background: #D7FF00;
+    color: #000;
+    border: none;
+    width: 40px;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.newsletter-form button:hover {
+    background: #e2ff5c;
+}
+
+/* Bottom Copyright Bar */
+.footer-bottom {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding-top: 2rem;
+    border-top: 1px solid #1a1a1a;
     display: flex;
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
     gap: 1rem;
+    font-size: 0.85rem;
 }
 
-.footer p {
-    margin: 0;
-    color: #888;
-    font-size: 0.9rem;
-}
-
-.footer-links {
+.legal-links {
     display: flex;
-    gap: 1.5rem;
+    gap: 2rem;
 }
 
-.footer-links a {
-    color: #888;
+.legal-links a {
+    color: #666;
     text-decoration: none;
-    font-size: 0.9rem;
-    transition: color 0.3s ease;
+    transition: color 0.2s;
 }
 
-.footer-links a:hover {
+.legal-links a:hover {
     color: #fff;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+        text-align: center;
+    }
 }

@@ -339,7 +339,7 @@ const HabitGrid = ({ habits, currentMonth, onHabitUpdated, onHabitAdded, onHabit
                         <td className="habit-name-cell quick-add-cell" onClick={handleAddClick} style={{ cursor: 'pointer' }}>
                             <div className="habit-info add-btn-content">
                                 <div className="habit-icon add-icon">+</div>
-                                <span className="add-text">Create New Habit</span>
+                                <span className="add-text">New Habit</span>
                             </div>
                         </td>
                         {/* Empty cells for the rest of the row */}

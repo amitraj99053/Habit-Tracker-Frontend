@@ -11,7 +11,14 @@
     width: 90%;
     max-width: 1280px;
     z-index: 1000;
-    transition: all 0.3s ease;
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+.header.hidden {
+    transform: translate(-50%, -150%);
+    /* Move up and keep centered X */
+    opacity: 0;
+    pointer-events: none;
 }
 
 /* Premium Glass Effect Layer */

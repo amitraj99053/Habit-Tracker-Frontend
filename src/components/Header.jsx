@@ -11,8 +11,29 @@ const Header = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [initiallyLogin, setInitiallyLogin] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const [showNavbar, setShowNavbar] = useState(true);
+    const [lastScrollY, setLastScrollY] = useState(0);
 
     const isActive = (path) => location.pathname === path;
+
+    // Handle Scroll
+    React.useEffect(() => {
+        const controlNavbar = () => {
+            if (typeof window !== 'undefined') {
+                if (window.scrollY > lastScrollY && window.scrollY > 100) {
+                    // Scrolling DOWN and past 100px
+                    setShowNavbar(false);
+                } else {
+                    // Scrolling UP or at top
+                    setShowNavbar(true);
+                }
+                setLastScrollY(window.scrollY);
+            }
+        };
+
+        window.addEventListener('scroll', controlNavbar);
+        return () => window.removeEventListener('scroll', controlNavbar);
+    }, [lastScrollY]);
 
     const openModal = (isLogin) => {
         setInitiallyLogin(isLogin);
@@ -37,7 +58,7 @@ const Header = () => {
 
     return (
         <>
-            <header className="header">
+            <header className={`header ${!showNavbar ? 'hidden' : ''}`}>
                 <div className="logo" onClick={() => handleNavClick('/')}>
                     <span className="logo-icon">✨</span>
                     <span className="logo-text">HabitFlow</span>
