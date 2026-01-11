@@ -1,22 +1,23 @@
-/* Professional Glassmorphism Header */
+/* Professional Glassmorphism Header - Spatial Redesign */
 .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem 2.5rem;
+    padding: 1rem 2rem;
+    /* reduced side padding slightly */
     position: fixed;
-    top: 24px;
+    top: 20px;
     left: 50%;
     transform: translateX(-50%);
-    width: 90%;
-    max-width: 1280px;
+    width: 95%;
+    /* Wider container */
+    max-width: 1400px;
     z-index: 1000;
     transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
 }
 
 .header.hidden {
     transform: translate(-50%, -150%);
-    /* Move up and keep centered X */
     opacity: 0;
     pointer-events: none;
 }
@@ -27,37 +28,27 @@
     position: absolute;
     inset: 0;
     z-index: -1;
-    border-radius: 20px;
-    background: rgba(10, 10, 10, 0.75);
-    /* Darker, richer background */
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    border-radius: 16px;
+    background: rgba(8, 8, 8, 0.85);
+    /* Darker opacity */
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
     border: 1px solid rgba(255, 255, 255, 0.08);
-    box-shadow:
-        0 4px 6px -1px rgba(0, 0, 0, 0.1),
-        0 2px 4px -1px rgba(0, 0, 0, 0.06),
-        0 0 0 1px rgba(255, 255, 255, 0.05);
-    /* Subtle inner border */
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.header:hover::before {
-    background: rgba(10, 10, 10, 0.85);
-    border-color: rgba(255, 255, 255, 0.12);
-    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.4), 0 10px 10px -5px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
 }
 
 /* Logo Styling */
 .logo {
     display: flex;
     align-items: center;
-    gap: 0.8rem;
+    gap: 0.6rem;
     cursor: pointer;
     text-decoration: none;
     z-index: 1001;
-    padding: 0.5rem;
-    border-radius: 8px;
-    transition: transform 0.2s ease;
+    min-width: max-content;
+    /* Ensure logo never wraps */
+    margin-right: 2rem;
+    /* Push nav away */
 }
 
 .logo:active {
@@ -65,124 +56,108 @@
 }
 
 .logo-icon {
-    font-size: 1.6rem;
+    font-size: 1.5rem;
     filter: drop-shadow(0 0 10px rgba(215, 255, 0, 0.3));
 }
 
 .logo-text {
     color: #fff;
-    font-size: 1.25rem;
+    font-size: 1.2rem;
     font-weight: 700;
-    letter-spacing: -0.03em;
     font-family: 'Inter', sans-serif;
-    background: linear-gradient(to right, #fff, #e0e0e0);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    letter-spacing: -0.02em;
 }
 
-/* Navigation Links - Balanced & Professional */
+/* Navigation Menu - Clean & Spaced */
 .nav-menu {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-    /* Precise spacing */
-    flex-wrap: nowrap;
-    /* Keep on one line */
-    overflow-x: auto;
-    /* Allow scroll on very small screens instead of overlap */
-    -ms-overflow-style: none;
-    /* Hide scrollbar IE */
-    scrollbar-width: none;
-    /* Hide scrollbar Firefox */
+    gap: 1.5rem;
+    /* Large clear gaps */
+    margin-left: auto;
+    /* Push to right */
 }
 
-.nav-menu::-webkit-scrollbar {
-    display: none;
-    /* Hide scrollbar Chrome */
-}
-
+/* Standard Nav Link */
 .nav-btn {
-    display: inline-flex;
-    /* Ensure container hits hug text */
-    align-items: center;
-    justify-content: center;
     font-family: 'Inter', sans-serif;
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     font-weight: 500;
-    /* Medium weight matches shape better */
-    color: #a1a1aa;
+    color: #a0a0a0;
     background: transparent;
-    border: 1px solid transparent;
-    /* Reserve space key for smooth hover */
-    border-radius: 6px;
-    padding: 0.5rem 0.8rem;
-    /* Balanced padding */
+    border: none;
     cursor: pointer;
-    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    padding: 0.5rem;
+    position: relative;
+    transition: color 0.2s ease;
     white-space: nowrap;
-    height: 36px;
-    /* Fixed height for uniformity */
-    line-height: 1;
-    flex-shrink: 0;
-    /* Prevent crushing */
 }
 
-/* Hover State - Matched Shape */
 .nav-btn:hover {
     color: #fff;
-    background: rgba(255, 255, 255, 0.08);
 }
 
-/* Active State - Solid Definition */
 .nav-btn.active {
     color: #fff;
-    background: rgba(255, 255, 255, 0.1);
     font-weight: 600;
 }
 
-/* Primary Action Button - Distinct */
-.nav-btn.secondary-btn {
+/* Visual Active Indicator (Dot) */
+.nav-btn.active::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    height: 4px;
     background: #D7FF00;
-    color: #050505;
+    border-radius: 50%;
+    box-shadow: 0 0 8px #D7FF00;
+}
+
+/* Primary Action Button (Login) */
+.nav-btn.secondary-btn {
+    background: #fff;
+    color: #000;
+    padding: 0.6rem 1.4rem;
+    border-radius: 50px;
+    /* Pill shape is safer against visual corners */
     font-weight: 600;
-    margin-left: 0.5rem;
-    padding: 0 1.25rem;
-    /* Wider horizontal padding */
-    height: 36px;
-    /* Match other nav items height */
-    box-shadow: 0 2px 10px rgba(215, 255, 0, 0.15);
+    font-size: 0.9rem;
+    margin-left: 1rem;
+    transition: all 0.2s;
 }
 
 .nav-btn.secondary-btn:hover {
-    background: #e2ff5c;
-    transform: translateY(-1px);
-    box-shadow: 0 4px 15px rgba(215, 255, 0, 0.25);
+    background: #D7FF00;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(215, 255, 0, 0.3);
 }
 
-.nav-btn.secondary-btn:active {
-    transform: translateY(0);
+.nav-btn.secondary-btn::after {
+    display: none;
 }
 
-/* User Greeting - Aligned */
+/* User Greeting */
 .nav-btn.user-greeting {
-    background: transparent;
     color: #fff;
+    max-width: 140px;
+    overflow: hidden;
+    text-overflow: ellipsis;
     cursor: default;
-    padding-left: 0.5rem;
-    padding-right: 0.5rem;
-    max-width: 150px;
-    justify-content: flex-start;
+    margin-right: 0.5rem;
 }
 
 /* Divider */
 .divider {
     width: 1px;
     height: 24px;
-    background: rgba(255, 255, 255, 0.1);
-    margin: 0 0.2rem;
+    background: rgba(255, 255, 255, 0.15);
+    margin: 0 0.5rem;
 }
 
-/* Hamburger Menu Logic */
+/* Hamburger */
 .hamburger {
     display: none;
     cursor: pointer;
@@ -200,43 +175,43 @@
     height: 2px;
     background-color: #fff;
     border-radius: 4px;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.3s;
 }
 
 .bar:nth-child(1) {
     transform: translateY(-8px);
 }
 
-.bar:nth-child(2) {}
-
 .bar:nth-child(3) {
     transform: translateY(8px);
 }
 
-/* Mobile Styles */
-@media (max-width: 1024px) {
+/* MOBILE BREAKPOINT - INCREASED TO 1150px FOR SAFETY */
+@media (max-width: 1150px) {
     .header {
-        width: 92%;
-        padding: 0.8rem 1.25rem;
-        top: 16px;
+        width: 94%;
+        padding: 0.8rem 1.2rem;
+        top: 10px;
     }
 
     .hamburger {
         display: flex;
+        margin-left: auto;
     }
 
     .nav-menu {
         position: fixed;
         inset: 0;
-        background: rgba(5, 5, 5, 0.98);
+        background: #000;
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        gap: 2.5rem;
+        gap: 3rem;
         transform: translateY(-100%);
-        transition: transform 0.4s cubic-bezier(0.32, 0.72, 0, 1);
-        padding-top: 4rem;
+        transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        padding-top: 2rem;
         z-index: 1000;
+        margin-left: 0;
     }
 
     .nav-menu.active {
@@ -248,27 +223,27 @@
     }
 
     .nav-btn {
-        font-size: 1.5rem;
-        color: #e5e5e5;
-        font-weight: 600;
+        font-size: 1.6rem;
+        color: #888;
     }
 
     .nav-btn.active {
-        color: #D7FF00;
+        color: #fff;
     }
 
-    .nav-btn::after {
+    .nav-btn.active::after {
         display: none;
-        /* No underline on mobile, just color */
+        /* No dot on mobile */
     }
 
     .nav-btn.secondary-btn {
-        margin-top: 1rem;
-        width: 80%;
-        max-width: 300px;
-        padding: 1rem;
-        font-size: 1.1rem;
+        margin: 1rem 0 0 0;
+        background: #D7FF00;
+        width: 200px;
+        text-align: center;
         justify-content: center;
+        display: flex;
+        font-size: 1.1rem;
     }
 
     /* Hamburger Animation */
@@ -278,7 +253,6 @@
 
     .hamburger .bar.active:nth-child(2) {
         opacity: 0;
-        transform: translateX(10px);
     }
 
     .hamburger .bar.active:nth-child(3) {
