@@ -77,82 +77,73 @@
     margin-left: auto;
 }
 
-/* Base Rectangular Button */
+/* Base Rounded Button (Matches 'Choose Tracker') */
 .nav-btn {
     font-family: 'Inter', sans-serif;
     font-size: 0.9rem;
-    font-weight: 500;
-    color: #a0a0a0;
-    background: transparent;
+    font-weight: 700;
+    color: #111111;
+    background: #D7FF00;
+    /* Neon Green base like Choose Tracker */
     border: none;
     cursor: pointer;
-    padding: 0.6rem 1.5rem;
-    /* Wider internal spacing for text breathability */
-    border-radius: 0;
-    /* Strict Rectangle */
-    transition: all 0.2s ease;
+    padding: 0.8rem 1.5rem;
+    border-radius: 12px;
+    /* Matching border-radius */
+    transition: all 0.3s ease;
     white-space: nowrap;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
-    /* More spacing between letters */
+    letter-spacing: 0.05em;
     position: relative;
-    box-shadow: none;
-    /* Clean flat look */
+    box-shadow: 0 10px 20px rgba(215, 255, 0, 0.4);
+    /* Matching Shadow */
     min-width: 100px;
-    /* Ensure minimum width for consistency */
     text-align: center;
 }
 
-/* Rectangular Hover Block */
+/* Hover - Lift & Stronger Shadow */
 .nav-btn:hover {
-    color: #fff;
-    background: rgba(255, 255, 255, 0.08);
-    /* Sharp rectangular highlight */
-    transform: none;
-    /* No movement, solid feel */
-    box-shadow: none;
-}
-
-/* Active State - Solid Rectangle */
-.nav-btn.active {
+    transform: translateY(-5px);
+    /* Matches Choose Tracker lift */
+    box-shadow: 0 15px 30px rgba(215, 255, 0, 0.6);
     color: #000;
     background: #D7FF00;
-    /* Neon Green Rectangle */
-    font-weight: 700;
+}
+
+/* Active State */
+.nav-btn.active {
+    background: #fff;
+    color: #000;
+    box-shadow: 0 10px 20px rgba(255, 255, 255, 0.3);
 }
 
 .nav-btn.active::after {
     display: none;
 }
 
-/* Primary Action Button (Register) - Premium Rectangular */
+/* Primary Action Button (Register) - Consistent Style */
 .nav-btn.secondary-btn {
     background: #fff;
     color: #000;
     font-weight: 700;
     margin-left: 0;
     padding: 0.8rem 2.5rem;
-    /* Wide, impactful padding for 'Register' */
-    border-radius: 0;
-    /* Strict Shape */
+    border-radius: 12px;
+    /* Consistent Radius */
     font-size: 0.95rem;
     letter-spacing: 0.1em;
-    /* Spaced out caps */
     text-transform: uppercase;
-    border: 2px solid transparent;
-    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
     min-width: 140px;
-    /* Benchmark width for consistency */
-    text-align: center;
 }
 
 .nav-btn.secondary-btn:hover {
     background: #D7FF00;
     color: #000;
-    border-color: #D7FF00;
-    transform: translateY(-2px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(215, 255, 0, 0.5);
 }
 
 .nav-btn.secondary-btn:active {
