@@ -1,15 +1,18 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import SignUpModal from './SignUpModal';
 import './Header.css';
 
 const Header = () => {
     const navigate = useNavigate();
+    const location = useLocation();
     const { user, logout } = useAuth();
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [initiallyLogin, setInitiallyLogin] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+    const isActive = (path) => location.pathname === path;
 
     const openModal = (isLogin) => {
         setInitiallyLogin(isLogin);
@@ -47,9 +50,24 @@ const Header = () => {
                 </div>
 
                 <nav className={`nav-menu ${isMobileMenuOpen ? 'active' : ''}`}>
-                    <button className="nav-btn" onClick={() => handleNavClick('/')}>Home</button>
-                    <button className="nav-btn" onClick={() => handleNavClick('/services')}>Features</button>
-                    <button className="nav-btn" onClick={() => handleNavClick('/contact')}>Contact</button>
+                    <button
+                        className={`nav-btn ${isActive('/') ? 'active' : ''}`}
+                        onClick={() => handleNavClick('/')}
+                    >
+                        Home
+                    </button>
+                    <button
+                        className={`nav-btn ${isActive('/services') ? 'active' : ''}`}
+                        onClick={() => handleNavClick('/services')}
+                    >
+                        Features
+                    </button>
+                    <button
+                        className={`nav-btn ${isActive('/contact') ? 'active' : ''}`}
+                        onClick={() => handleNavClick('/contact')}
+                    >
+                        Contact
+                    </button>
                     <div className="divider"></div>
                     {user ? (
                         <>

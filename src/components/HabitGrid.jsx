@@ -297,27 +297,34 @@ const HabitGrid = ({ habits, currentMonth, onHabitUpdated, onHabitAdded, onHabit
                     )}
 
                     <tr className="quick-add-row">
-                        <td className="habit-name-cell quick-add-cell" onClick={handleAddClick} style={{ cursor: 'pointer' }}>
-                            <div className="habit-info add-btn-content">
-                                <div className="habit-icon add-icon">+</div>
-                                <span className="add-text">Add New Habit</span>
+                        <td className="habit-name-cell quick-add-cell" style={{ cursor: 'pointer', verticalAlign: 'top' }}>
+                            <div className="add-habit-wrapper" onClick={handleAddClick}>
+                                <div className="habit-info add-btn-content">
+                                    <div className="habit-icon add-icon">+</div>
+                                    <span className="add-text">Add New Habit</span>
+                                </div>
+                            </div>
+
+                            <div className="default-habits-section">
+                                <span className="suggestions-label">Or start with:</span>
+                                <div className="detail-suggestions-list">
+                                    {suggestedHabits.map((habit, index) => (
+                                        <div
+                                            key={index}
+                                            className="suggestion-item"
+                                            onClick={(e) => handleAddSuggested(e, habit)}
+                                            title={`Add ${habit.name}`}
+                                        >
+                                            <span className="suggestion-icon">{habit.icon}</span>
+                                            <span className="suggestion-name">{habit.name}</span>
+                                            <span className="add-mini-icon">+</span>
+                                        </div>
+                                    ))}
+                                </div>
                             </div>
                         </td>
-                        <td colSpan={daysInMonth} className="suggestions-cell">
-                            <div className="inline-suggestions">
-                                <span className="suggestions-label">Try:</span>
-                                {suggestedHabits.map((habit, index) => (
-                                    <button
-                                        key={index}
-                                        className="inline-suggestion-pill"
-                                        onClick={(e) => handleAddSuggested(e, habit)}
-                                        title={`Add ${habit.name}`}
-                                    >
-                                        {habit.icon} {habit.name}
-                                    </button>
-                                ))}
-                            </div>
-                        </td>
+                        {/* Spanning the rest of the grid with empty space or maintaining grid structure */}
+                        <td colSpan={weeks.flat().length} className="empty-grid-space"></td>
                     </tr>
                 </tbody>
             </table>
