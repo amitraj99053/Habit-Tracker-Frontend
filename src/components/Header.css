@@ -88,18 +88,15 @@
     /* Neon Base vs White Register */
     border: none;
     cursor: pointer;
-    padding: 0.8rem 2.5rem;
-    /* Matched Wide Padding */
+    padding: 0.8rem 1.5rem;
     border-radius: 12px;
     transition: all 0.3s ease;
     white-space: nowrap;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
-    /* Matched Spacing */
+    letter-spacing: 0.05em;
     position: relative;
     box-shadow: 0 10px 20px rgba(215, 255, 0, 0.4);
-    min-width: 140px;
-    /* Matched Width */
+    min-width: 100px;
     text-align: center;
 }
 
@@ -122,11 +119,13 @@
     display: none;
 }
 
-/* Primary Action Button (Register) - Inherits Base Geometry */
 .nav-btn.secondary-btn {
     background: #fff;
     color: #000;
-    /* Geometry properties identical to .nav-btn now */
+    padding: 0.8rem 2.5rem;
+    /* Explicitly Wide for Register */
+    min-width: 140px;
+    letter-spacing: 0.1em;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
 
