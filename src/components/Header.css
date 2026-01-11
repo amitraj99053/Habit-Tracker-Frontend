@@ -78,7 +78,7 @@
     /* Push to right */
 }
 
-/* Standard Nav Link */
+/* Standard Nav Link - Auto Width Shape */
 .nav-btn {
     font-family: 'Inter', sans-serif;
     font-size: 0.95rem;
@@ -87,33 +87,31 @@
     background: transparent;
     border: none;
     cursor: pointer;
-    padding: 0.5rem;
-    position: relative;
-    transition: color 0.2s ease;
+    padding: 0.6rem 1rem;
+    /* Padding defines the shape size relative to text */
+    border-radius: 8px;
+    /* Smooth corners */
+    transition: all 0.2s ease;
     white-space: nowrap;
+    /* Auto width by default behaviour of buttons/inline-block */
 }
 
 .nav-btn:hover {
     color: #fff;
+    background: rgba(255, 255, 255, 0.08);
+    /* Visible shape on hover */
 }
 
 .nav-btn.active {
     color: #fff;
     font-weight: 600;
+    background: rgba(255, 255, 255, 0.12);
+    /* Active shape */
 }
 
-/* Visual Active Indicator (Dot) */
+/* Visual Active Indicator (Dot) - Removed as shape is now the indicator */
 .nav-btn.active::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 4px;
-    height: 4px;
-    background: #D7FF00;
-    border-radius: 50%;
-    box-shadow: 0 0 8px #D7FF00;
+    display: none;
 }
 
 /* Primary Action Button (Login) */
