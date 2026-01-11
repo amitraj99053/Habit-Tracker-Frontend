@@ -77,34 +77,36 @@
     margin-left: auto;
 }
 
-/* Base Rounded Button (Uniform Geometry - Matches Register) */
+/* Base Rounded Button (Professional Design) */
 .nav-btn {
     font-family: 'Inter', sans-serif;
-    font-size: 0.95rem;
-    /* Matched to Register */
+    font-size: 0.9rem;
     font-weight: 700;
     color: #111111;
     background: #D7FF00;
-    /* Neon Base vs White Register */
+    /* Neon Base */
     border: none;
     cursor: pointer;
-    padding: 0.8rem 1.5rem;
-    border-radius: 10%;
-    /* User requested 10% */
-    transition: all 0.3s ease;
+    padding: 0.7rem 1.6rem;
+    /* Professionally balanced padding */
+    border-radius: 12px;
+    /* Standard Fixed Radius (Professional) */
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
     white-space: nowrap;
     text-transform: uppercase;
     letter-spacing: 0.05em;
     position: relative;
-    box-shadow: 0 10px 20px rgba(215, 255, 0, 0.4);
-    min-width: 100px;
+    box-shadow: 0 4px 12px rgba(215, 255, 0, 0.3);
+    /* Subtle Shadow */
+    min-width: unset;
+    /* Allow natural width */
     text-align: center;
 }
 
-/* Hover - Consistent Lift */
+/* Hover - Lift & Stronger Shadow */
 .nav-btn:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 30px rgba(215, 255, 0, 0.6);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 24px rgba(215, 255, 0, 0.5);
     color: #000;
     background: #D7FF00;
 }
@@ -113,7 +115,7 @@
 .nav-btn.active {
     background: #fff;
     color: #000;
-    box-shadow: 0 10px 20px rgba(255, 255, 255, 0.3);
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
 }
 
 .nav-btn.active::after {
@@ -124,17 +126,19 @@
     background: #fff;
     color: #000;
     padding: 0.8rem 2.5rem;
-    /* Explicitly Wide for Register */
+    /* Distinctly wider for prompt */
     min-width: 140px;
     letter-spacing: 0.1em;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    /* Consistent Radius */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .nav-btn.secondary-btn:hover {
     background: #D7FF00;
     color: #000;
-    transform: translateY(-5px);
-    box-shadow: 0 15px 30px rgba(215, 255, 0, 0.5);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 24px rgba(215, 255, 0, 0.4);
 }
 
 .nav-btn.secondary-btn:active {
