@@ -71,32 +71,10 @@ const Header = () => {
                 </div>
 
                 <nav className={`nav-menu ${isMobileMenuOpen ? 'active' : ''}`}>
-                    <button
-                        className={`nav-btn ${isActive('/') ? 'active' : ''}`}
-                        onClick={() => handleNavClick('/')}
-                    >
-                        Home
-                    </button>
-                    <button
-                        className={`nav-btn ${isActive('/services') ? 'active' : ''}`}
-                        onClick={() => handleNavClick('/services')}
-                    >
-                        Features
-                    </button>
-                    <button
-                        className={`nav-btn ${isActive('/contact') ? 'active' : ''}`}
-                        onClick={() => handleNavClick('/contact')}
-                    >
-                        Contact
-                    </button>
-                    <div className="divider"></div>
                     {user ? (
-                        <>
-                            <span className="nav-btn user-greeting" style={{ cursor: 'default', color: '#fff' }}>Hi, {user.username}</span>
-                            <button className="nav-btn secondary-btn" onClick={handleLogout} style={{ background: '#ff4d4d', color: '#fff' }}>Logout</button>
-                        </>
+                        <button className="nav-btn secondary-btn" onClick={handleLogout} style={{ background: '#ff4d4d', color: '#fff', border: 'none' }}>Logout</button>
                     ) : (
-                        <button className="nav-btn secondary-btn" onClick={() => openModal(true)}>Log In</button>
+                        <button className="nav-btn secondary-btn" onClick={() => openModal(true)}>Log In / Sign Up</button>
                     )}
                 </nav>
             </header>

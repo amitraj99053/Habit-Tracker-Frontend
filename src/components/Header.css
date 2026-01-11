@@ -121,25 +121,37 @@
     display: none;
 }
 
-/* Primary Action Button (Login) - Also Rectangular */
+/* Primary Action Button (Login/Signup) - Premium Rectangular */
 .nav-btn.secondary-btn {
     background: #fff;
     color: #000;
-    border: 1px solid #fff;
     font-weight: 700;
-    margin-left: 1rem;
-    padding: 0.8rem 1.5rem;
+    margin-left: 0;
+    /* No margin needed as it's the only item */
+    padding: 1rem 2rem;
+    /* Distinctly larger 'Hero' button */
     border-radius: 0;
-    /* Rectangular */
-    box-shadow: none;
+    /* Strict Shape */
+    font-size: 0.95rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    border: 2px solid transparent;
+    /* Prepare for border effect */
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .nav-btn.secondary-btn:hover {
     background: #D7FF00;
-    border-color: #D7FF00;
     color: #000;
-    transform: none;
-    box-shadow: none;
+    border-color: #D7FF00;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.nav-btn.secondary-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 /* User Greeting */
