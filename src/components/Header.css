@@ -77,34 +77,35 @@
     margin-left: auto;
 }
 
-/* Base Rounded Button (Matches 'Choose Tracker') */
+/* Base Rounded Button (Uniform Geometry - Matches Register) */
 .nav-btn {
     font-family: 'Inter', sans-serif;
-    font-size: 0.9rem;
+    font-size: 0.95rem;
+    /* Matched to Register */
     font-weight: 700;
     color: #111111;
     background: #D7FF00;
-    /* Neon Green base like Choose Tracker */
+    /* Neon Base vs White Register */
     border: none;
     cursor: pointer;
-    padding: 0.8rem 1.5rem;
+    padding: 0.8rem 2.5rem;
+    /* Matched Wide Padding */
     border-radius: 12px;
-    /* Matching border-radius */
     transition: all 0.3s ease;
     white-space: nowrap;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.1em;
+    /* Matched Spacing */
     position: relative;
     box-shadow: 0 10px 20px rgba(215, 255, 0, 0.4);
-    /* Matching Shadow */
-    min-width: 100px;
+    min-width: 140px;
+    /* Matched Width */
     text-align: center;
 }
 
-/* Hover - Lift & Stronger Shadow */
+/* Hover - Consistent Lift */
 .nav-btn:hover {
     transform: translateY(-5px);
-    /* Matches Choose Tracker lift */
     box-shadow: 0 15px 30px rgba(215, 255, 0, 0.6);
     color: #000;
     background: #D7FF00;
@@ -121,22 +122,12 @@
     display: none;
 }
 
-/* Primary Action Button (Register) - Consistent Style */
+/* Primary Action Button (Register) - Inherits Base Geometry */
 .nav-btn.secondary-btn {
     background: #fff;
     color: #000;
-    font-weight: 700;
-    margin-left: 0;
-    padding: 0.8rem 2.5rem;
-    border-radius: 12px;
-    /* Consistent Radius */
-    font-size: 0.95rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    border: none;
-    transition: all 0.3s ease;
+    /* Geometry properties identical to .nav-btn now */
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-    min-width: 140px;
 }
 
 .nav-btn.secondary-btn:hover {
