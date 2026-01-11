@@ -72,8 +72,8 @@
 .nav-menu {
     display: flex;
     align-items: center;
-    gap: 0.2rem;
-    /* Tighter gap for rectangular blocks */
+    gap: 3rem;
+    /* Very generous spacing between options */
     margin-left: auto;
 }
 
@@ -86,17 +86,21 @@
     background: transparent;
     border: none;
     cursor: pointer;
-    padding: 0.8rem 1.2rem;
-    /* Rectangular padding */
+    padding: 0.6rem 1.5rem;
+    /* Wider internal spacing for text breathability */
     border-radius: 0;
     /* Strict Rectangle */
     transition: all 0.2s ease;
     white-space: nowrap;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.1em;
+    /* More spacing between letters */
     position: relative;
     box-shadow: none;
     /* Clean flat look */
+    min-width: 100px;
+    /* Ensure minimum width for consistency */
+    text-align: center;
 }
 
 /* Rectangular Hover Block */
@@ -121,24 +125,26 @@
     display: none;
 }
 
-/* Primary Action Button (Login/Signup) - Premium Rectangular */
+/* Primary Action Button (Register) - Premium Rectangular */
 .nav-btn.secondary-btn {
     background: #fff;
     color: #000;
     font-weight: 700;
     margin-left: 0;
-    /* No margin needed as it's the only item */
-    padding: 1rem 2rem;
-    /* Distinctly larger 'Hero' button */
+    padding: 0.8rem 2.5rem;
+    /* Wide, impactful padding for 'Register' */
     border-radius: 0;
     /* Strict Shape */
     font-size: 0.95rem;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.1em;
+    /* Spaced out caps */
     text-transform: uppercase;
     border: 2px solid transparent;
-    /* Prepare for border effect */
     transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    min-width: 140px;
+    /* Benchmark width for consistency */
+    text-align: center;
 }
 
 .nav-btn.secondary-btn:hover {
