@@ -190,89 +190,74 @@
     background: rgba(255, 255, 255, 0.1);
 }
 
-/* Integrated Default Habits Section */
+/* Quick Add Row - Simplified */
 .quick-add-cell {
     border-bottom: none;
-    padding-bottom: 2rem;
+    padding: 1rem;
 }
 
-.add-habit-wrapper {
-    margin-bottom: 1.5rem;
-    padding: 0.5rem;
-    border-radius: 8px;
-    transition: background 0.2s;
+.empty-grid-space {
+    border-bottom: none;
+    background: transparent;
 }
 
-.add-habit-wrapper:hover {
-    background: rgba(255, 255, 255, 0.05);
+/* Suggestion Ghost Rows */
+.suggestion-row {
+    opacity: 0.6;
+    transition: all 0.2s ease;
+    cursor: pointer;
 }
 
-.default-habits-section {
-    padding-left: 0.5rem;
-    border-top: 1px solid #333;
-    padding-top: 1rem;
-    margin-top: 0.5rem;
+.suggestion-row:hover {
+    opacity: 1;
+    background: rgba(255, 255, 255, 0.03);
 }
 
-.suggestions-label {
-    display: block;
-    color: #555;
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    font-weight: 600;
-    margin-bottom: 0.8rem;
-    letter-spacing: 0.05em;
+.suggestion-name-cell {
+    background: transparent !important;
+    /* Override sticky background to blend */
 }
 
-.detail-suggestions-list {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-}
-
-.suggestion-item {
+.suggestion-content {
     display: flex;
     align-items: center;
     gap: 0.8rem;
-    padding: 0.6rem 0.8rem;
-    background: #222;
-    border: 1px solid #333;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.2s ease;
+}
+
+.suggestion-icon-wrapper {
+    background: #1e1e1e !important;
+    border: 1px dashed #555;
+    color: #888;
+}
+
+.suggestion-text {
     color: #aaa;
-}
-
-.suggestion-item:hover {
-    background: #2a2a2a;
-    border-color: #555;
-    color: #fff;
-    transform: translateX(4px);
-}
-
-.suggestion-icon {
-    font-size: 1.1rem;
-}
-
-.suggestion-name {
+    font-style: italic;
     flex: 1;
-    font-size: 0.9rem;
-    font-weight: 500;
 }
 
-.add-mini-icon {
-    font-size: 1rem;
+.add-suggestion-badge {
+    background: #333;
     color: #D7FF00;
+    font-size: 0.75rem;
+    padding: 2px 8px;
+    border-radius: 10px;
     opacity: 0;
-    transition: opacity 0.2s;
+    transform: translateX(-10px);
+    transition: all 0.2s;
 }
 
-.suggestion-item:hover .add-mini-icon {
+.suggestion-row:hover .add-suggestion-badge {
     opacity: 1;
+    transform: translateX(0);
 }
 
-/* Empty grid space to match colspan */
-.empty-grid-space {
-    background: transparent;
-    border-bottom: none;
+.suggestion-grid-cell {
+    cursor: default;
+    background:
+        repeating-linear-gradient(45deg,
+            rgba(255, 255, 255, 0.03),
+            rgba(255, 255, 255, 0.03) 10px,
+            rgba(255, 255, 255, 0.01) 10px,
+            rgba(255, 255, 255, 0.01) 20px);
 }

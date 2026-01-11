@@ -296,35 +296,40 @@ const HabitGrid = ({ habits, currentMonth, onHabitUpdated, onHabitAdded, onHabit
                         </div>
                     )}
 
-                    <tr className="quick-add-row">
-                        <td className="habit-name-cell quick-add-cell" style={{ cursor: 'pointer', verticalAlign: 'top' }}>
-                            <div className="add-habit-wrapper" onClick={handleAddClick}>
-                                <div className="habit-info add-btn-content">
-                                    <div className="habit-icon add-icon">+</div>
-                                    <span className="add-text">Add New Habit</span>
+                    {/* Suggested Habits Ghost Rows */}
+                    {suggestedHabits.filter(s => !habits.some(h => h.name === s.name)).map((habit, index) => (
+                        <tr
+                            key={`suggestion-${index}`}
+                            className="suggestion-row"
+                            onClick={(e) => handleAddSuggested(e, habit)}
+                        >
+                            <td className="habit-name-cell suggestion-name-cell">
+                                <div className="habit-info suggestion-content">
+                                    <div className="habit-icon-wrapper suggestion-icon-wrapper">
+                                        <span className="habit-icon">{habit.icon}</span>
+                                    </div>
+                                    <span className="habit-name suggestion-text">{habit.name}</span>
+                                    <span className="add-suggestion-badge">Add +</span>
                                 </div>
-                            </div>
+                            </td>
+                            {/* Render empty cells for dates to maintain grid structure */}
+                            {weeks.flat().map((day) => (
+                                <td key={`sugg-${day}`} className="checkbox-cell suggestion-grid-cell"></td>
+                            ))}
+                        </tr>
+                    ))}
 
-                            <div className="default-habits-section">
-                                <span className="suggestions-label">Or start with:</span>
-                                <div className="detail-suggestions-list">
-                                    {suggestedHabits.map((habit, index) => (
-                                        <div
-                                            key={index}
-                                            className="suggestion-item"
-                                            onClick={(e) => handleAddSuggested(e, habit)}
-                                            title={`Add ${habit.name}`}
-                                        >
-                                            <span className="suggestion-icon">{habit.icon}</span>
-                                            <span className="suggestion-name">{habit.name}</span>
-                                            <span className="add-mini-icon">+</span>
-                                        </div>
-                                    ))}
-                                </div>
+                    <tr className="quick-add-row">
+                        <td className="habit-name-cell quick-add-cell" onClick={handleAddClick} style={{ cursor: 'pointer' }}>
+                            <div className="habit-info add-btn-content">
+                                <div className="habit-icon add-icon">+</div>
+                                <span className="add-text">Create New Habit</span>
                             </div>
                         </td>
-                        {/* Spanning the rest of the grid with empty space or maintaining grid structure */}
-                        <td colSpan={weeks.flat().length} className="empty-grid-space"></td>
+                        {/* Empty cells for the rest of the row */}
+                        {weeks.flat().map((day) => (
+                            <td key={`empty-${day}`} className="empty-grid-space"></td>
+                        ))}
                     </tr>
                 </tbody>
             </table>

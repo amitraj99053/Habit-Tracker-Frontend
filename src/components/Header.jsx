@@ -71,7 +71,7 @@ const Header = () => {
                     <div className="divider"></div>
                     {user ? (
                         <>
-                            <span className="nav-btn" style={{ cursor: 'default', color: '#fff' }}>Hi, {user.username}</span>
+                            <span className="nav-btn user-greeting" style={{ cursor: 'default', color: '#fff' }}>Hi, {user.username}</span>
                             <button className="nav-btn secondary-btn" onClick={handleLogout} style={{ background: '#ff4d4d', color: '#fff' }}>Logout</button>
                         </>
                     ) : (

@@ -21,14 +21,16 @@
     inset: 0;
     z-index: -1;
     border-radius: 20px;
-    background: rgba(10, 10, 10, 0.75); /* Darker, richer background */
+    background: rgba(10, 10, 10, 0.75);
+    /* Darker, richer background */
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border: 1px solid rgba(255, 255, 255, 0.08);
-    box-shadow: 
-        0 4px 6px -1px rgba(0, 0, 0, 0.1), 
+    box-shadow:
+        0 4px 6px -1px rgba(0, 0, 0, 0.1),
         0 2px 4px -1px rgba(0, 0, 0, 0.06),
-        0 0 0 1px rgba(255, 255, 255, 0.05); /* Subtle inner border */
+        0 0 0 1px rgba(255, 255, 255, 0.05);
+    /* Subtle inner border */
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -75,11 +77,15 @@
 .nav-menu {
     display: flex;
     align-items: center;
-    gap: 2rem;
+    gap: 1.25rem;
+    /* Reduced from 2rem to prevent crowding */
+    flex-wrap: nowrap;
+    /* Force single line */
 }
 
 .nav-btn {
-    color: #9ca3af; /* Muted gray for inactive */
+    color: #9ca3af;
+    /* Muted gray for inactive */
     font-size: 0.95rem;
     font-weight: 500;
     cursor: pointer;
@@ -89,10 +95,19 @@
     font-family: 'Inter', sans-serif;
     position: relative;
     transition: color 0.3s ease;
+    white-space: nowrap;
+    /* Prevent text wrapping */
+    flex-shrink: 0;
+    /* Prevent button squishing */
 }
 
-.nav-btn:hover {
-    color: #fff;
+/* User greeting specifically */
+.nav-btn.user-greeting {
+    max-width: 150px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-block;
+    vertical-align: middle;
 }
 
 /* Active State - Professional Glow */
@@ -107,7 +122,8 @@
     bottom: -4px;
     left: 50%;
     transform: translateX(-50%) scaleX(0);
-    width: 20px; /* Small dot or line */
+    width: 20px;
+    /* Small dot or line */
     height: 3px;
     background: #D7FF00;
     border-radius: 2px;
@@ -119,13 +135,15 @@
 .nav-btn.active::after {
     transform: translateX(-50%) scaleX(1);
     opacity: 1;
-    width: 100%; /* Expand to full width */
+    width: 100%;
+    /* Expand to full width */
 }
 
 .nav-btn:hover::after {
     transform: translateX(-50%) scaleX(1);
     opacity: 0.5;
-    width: 50%; /* Hover shows partial underline */
+    width: 50%;
+    /* Hover shows partial underline */
 }
 
 /* Divider */
@@ -142,7 +160,8 @@
     color: #000;
     font-weight: 600;
     padding: 0.6rem 1.8rem;
-    border-radius: 12px; /* iOS style curve */
+    border-radius: 12px;
+    /* iOS style curve */
     margin-left: 0;
     box-shadow: 0 2px 8px rgba(215, 255, 0, 0.15);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -156,9 +175,10 @@
 .nav-btn.secondary-btn:hover {
     background: #e2ff5c;
     transform: translateY(-2px);
-    box-shadow: 
+    box-shadow:
         0 4px 12px rgba(215, 255, 0, 0.25),
-        0 0 0 2px rgba(215, 255, 0, 0.1); /* Glow ring */
+        0 0 0 2px rgba(215, 255, 0, 0.1);
+    /* Glow ring */
 }
 
 .nav-btn.secondary-btn:active {
@@ -186,9 +206,15 @@
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.bar:nth-child(1) { transform: translateY(-8px); }
-.bar:nth-child(2) { }
-.bar:nth-child(3) { transform: translateY(8px); }
+.bar:nth-child(1) {
+    transform: translateY(-8px);
+}
+
+.bar:nth-child(2) {}
+
+.bar:nth-child(3) {
+    transform: translateY(8px);
+}
 
 /* Mobile Styles */
 @media (max-width: 1024px) {
@@ -235,7 +261,8 @@
     }
 
     .nav-btn::after {
-        display: none; /* No underline on mobile, just color */
+        display: none;
+        /* No underline on mobile, just color */
     }
 
     .nav-btn.secondary-btn {
@@ -251,10 +278,12 @@
     .hamburger .bar.active:nth-child(1) {
         transform: rotate(45deg);
     }
+
     .hamburger .bar.active:nth-child(2) {
         opacity: 0;
         transform: translateX(10px);
     }
+
     .hamburger .bar.active:nth-child(3) {
         transform: rotate(-45deg);
     }
