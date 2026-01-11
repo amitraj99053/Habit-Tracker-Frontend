@@ -72,44 +72,50 @@
 .nav-menu {
     display: flex;
     align-items: center;
-    gap: 1.5rem;
-    /* Large clear gaps */
+    gap: 1rem;
+    /* Spacing for buttons */
     margin-left: auto;
-    /* Push to right */
 }
 
-/* Standard Nav Link - Auto Width Shape */
+/* Nav Button mimicking .cta-btn.primary */
 .nav-btn {
     font-family: 'Inter', sans-serif;
-    font-size: 0.95rem;
-    font-weight: 500;
-    color: #a0a0a0;
-    background: transparent;
+    font-size: 0.85rem;
+    /* Slightly smaller than hero cta for header fit */
+    font-weight: 700;
+    color: #111111;
+    /* Dark text */
+    background: #D7FF00;
+    /* Neon Green */
     border: none;
     cursor: pointer;
-    padding: 0.6rem 1rem;
-    /* Padding defines the shape size relative to text */
-    border-radius: 8px;
-    /* Smooth corners */
-    transition: all 0.2s ease;
+    padding: 0.7rem 1.5rem;
+    /* Substantial button padding */
+    border-radius: 12px;
+    transition: all 0.3s ease;
     white-space: nowrap;
-    /* Auto width by default behaviour of buttons/inline-block */
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    box-shadow: 0 5px 15px rgba(215, 255, 0, 0.3);
+    /* Neon Glow */
 }
 
+/* Hover - Lift & Glow */
 .nav-btn:hover {
-    color: #fff;
-    background: rgba(255, 255, 255, 0.08);
-    /* Visible shape on hover */
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(215, 255, 0, 0.5);
+    color: #000;
+    background: #D7FF00;
 }
 
+/* Active State */
 .nav-btn.active {
-    color: #fff;
-    font-weight: 600;
-    background: rgba(255, 255, 255, 0.12);
-    /* Active shape */
+    background: #fff;
+    color: #000;
+    box-shadow: 0 5px 15px rgba(255, 255, 255, 0.3);
 }
 
-/* Visual Active Indicator (Dot) - Removed as shape is now the indicator */
+/* Remove dot indicator since buttons are solid shapes */
 .nav-btn.active::after {
     display: none;
 }
