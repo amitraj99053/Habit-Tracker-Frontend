@@ -72,80 +72,77 @@
 .nav-menu {
     display: flex;
     align-items: center;
-    gap: 3rem;
-    /* Very generous spacing between options */
+    gap: 1.5rem;
+    /* Reduced from 3rem to prevent overlap */
     margin-left: auto;
+    flex-wrap: nowrap;
+    /* Prevent wrapping */
 }
 
-/* Base Rounded Button (Matches 'Current Streak' Glass Style) */
+/* Base Rounded Button (Professional Minimalist) */
 .nav-btn {
     font-family: 'Inter', sans-serif;
-    font-size: 1rem;
+    font-size: 0.95rem;
     font-weight: 500;
-    color: #fff;
-    /* White text for glass */
-    background: rgba(255, 255, 255, 0.05);
-    /* Glass Background */
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    /* Subtle Border */
+    color: rgba(255, 255, 255, 0.7);
+    /* Softer white for unselected */
+    background: transparent;
+    /* Clean look by default */
+    /* Clean look by default */
+    border: 1px solid transparent;
     cursor: pointer;
-    padding: 1rem 1.5rem;
-    border-radius: 16px;
-    /* User requested 16px */
-    transition: all 0.3s ease;
+    padding: 0.8rem 2.5rem;
+    /* Match Register button padding exactly */
+    border-radius: 30px;
+    /* Flexible Pill Shape */
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     white-space: nowrap;
-    text-transform: capitalize;
-    /* Cleaner look */
-    letter-spacing: 0.02em;
+    letter-spacing: 0.01em;
     position: relative;
-    box-shadow: none;
-    min-width: unset;
     text-align: center;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 0.5rem;
+    min-width: 100px;
+    /* Ensure minimum width but allow growth */
 }
 
-/* Hover - Light up Glass effect */
+/* Hover - Subtle Glow */
 .nav-btn:hover {
-    background: rgba(255, 255, 255, 0.1);
-    border-color: rgba(255, 255, 255, 0.3);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     color: #fff;
+    background: rgba(255, 255, 255, 0.05);
 }
 
-/* Active State */
+/* Active State - Illuminated */
 .nav-btn.active {
-    background: rgba(215, 255, 0, 0.15);
-    border-color: #D7FF00;
-    color: #D7FF00;
+    color: #fff;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.05);
 }
 
 .nav-btn.active::after {
     display: none;
 }
 
-/* Primary Action Button (Register) - Distinct but Matching Shape */
+/* Primary Action Button (Register) - Solid & Premium */
 .nav-btn.secondary-btn {
-    background: #fff;
+    /* Neon Green */
     color: #000;
-    font-weight: 700;
-    padding: 1rem 2.5rem;
-    border-radius: 16px;
-    /* Match Shape */
+    font-weight: 600;
+    padding: 0.8rem 2.5rem;
+    /* Larger padding for primary action */
+    border-radius: 30px;
+    /* Match Pill Shape */
     border: none;
-    text-transform: uppercase;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 15px rgba(215, 255, 0, 0.2);
+    margin-left: 1rem;
 }
 
 .nav-btn.secondary-btn:hover {
-    background: #D7FF00;
-    color: #000;
-    border-color: transparent;
-    transform: translateY(-3px);
-    box-shadow: 0 10px 20px rgba(215, 255, 0, 0.4);
+    background: #e2ff4d;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(215, 255, 0, 0.35);
 }
 
 /* User Greeting */
@@ -195,8 +192,8 @@
     transform: translateY(8px);
 }
 
-/* MOBILE BREAKPOINT - INCREASED TO 1150px FOR SAFETY */
-@media (max-width: 1150px) {
+/* MOBILE BREAKPOINT - INCREASED TO 1280px FOR SAFETY */
+@media (max-width: 1280px) {
     .header {
         width: 94%;
         padding: 0.8rem 1.2rem;
@@ -217,7 +214,9 @@
         align-items: center;
         gap: 3rem;
         transform: translateY(-100%);
-        transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        opacity: 0;
+        visibility: hidden;
+        transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease, visibility 0.3s;
         padding-top: 2rem;
         z-index: 1000;
         margin-left: 0;
@@ -225,6 +224,8 @@
 
     .nav-menu.active {
         transform: translateY(0);
+        opacity: 1;
+        visibility: visible;
     }
 
     .divider {
