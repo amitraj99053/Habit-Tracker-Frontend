@@ -5,7 +5,7 @@ import { Trophy, TrendingUp, Activity } from 'lucide-react';
 const HabitStats = ({ habits, currentMonth }) => {
 
     const statsData = useMemo(() => {
-        if (!habits.length) return { overallAvg: 0, bestHabit: null, allStats: [] };
+        if (!habits.length) return { overallAvg: 0, topPerformers: [], allStats: [] };
 
         const daysInMonth = new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1, 0).getDate();
 
@@ -15,7 +15,7 @@ const HabitStats = ({ habits, currentMonth }) => {
         const daysPassed = isCurrentMonth ? today.getDate() : daysInMonth;
 
         let totalProgress = 0;
-        let bestHabit = null;
+        let topPerformers = []; // Initialize array
         let maxProgress = -1;
 
         const allStats = habits.map(habit => {
@@ -93,7 +93,7 @@ const HabitStats = ({ habits, currentMonth }) => {
                         <Activity size={20} />
                     </div>
                     <div>
-                        <span className="widget-label">Avg. Consistency</span>
+                        <span className="widget-label">Goal Progress</span>
                         <div className="widget-value">{overallAvg}%</div>
                     </div>
                 </div>

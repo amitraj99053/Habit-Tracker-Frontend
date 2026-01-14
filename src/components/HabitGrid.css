@@ -230,10 +230,12 @@
     /* Small popup height */
     overflow-y: auto;
     /* Enable vertical scrolling */
+    overscroll-behavior: contain;
+    /* Prevent body scroll */
 
     /* Custom Scrollbar for the popup */
     scrollbar-width: thin;
-    scrollbar-color: #555 #1e1e1e;
+    scrollbar-color: #888 #1e1e1e;
 }
 
 .icon-picker-popover::-webkit-scrollbar {
@@ -241,8 +243,12 @@
 }
 
 .icon-picker-popover::-webkit-scrollbar-thumb {
-    background-color: #555;
+    background-color: #888;
     border-radius: 3px;
+}
+
+.icon-picker-popover::-webkit-scrollbar-thumb:hover {
+    background-color: #aaa;
 }
 
 .picker-grid {

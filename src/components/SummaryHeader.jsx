@@ -27,9 +27,9 @@ const SummaryHeader = ({ habits, currentMonth, onNextMonth, onPrevMonth, onExpor
         <div className="summary-header">
             <div className="header-top">
                 <div className="month-nav-container">
-                    <button className="nav-btn" onClick={onPrevMonth}><ChevronLeft size={20} /></button>
+                    <button className="nav-btn" onClick={onPrevMonth}><ChevronLeft size={18} /></button>
                     <h2 className="month-title">{monthName} {year}</h2>
-                    <button className="nav-btn" onClick={onNextMonth}><ChevronRight size={20} /></button>
+                    <button className="nav-btn" onClick={onNextMonth}><ChevronRight size={18} /></button>
                 </div>
 
                 <button className="export-btn" onClick={onExport}>

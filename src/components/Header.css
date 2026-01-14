@@ -74,7 +74,7 @@
 .nav-menu {
     display: flex;
     align-items: center;
-    gap: 1.5rem;
+    gap: 3rem;
     margin-left: auto;
     flex-wrap: nowrap;
 }
@@ -88,9 +88,9 @@
     /* Slightly brighter text */
 
     /* Persistent Glass Style */
-    background: rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.15);
     /* Slightly more visible bg */
-    border: 1px solid rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.3);
     /* More visible border */
     cursor: pointer;
     padding: 0.8rem 2.5rem;

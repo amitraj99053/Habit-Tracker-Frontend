@@ -1,5 +1,6 @@
-import { useState } from 'react'
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route, useLocation, useNavigate } from 'react-router-dom';
+import { useAuth } from './context/AuthContext';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import LandingPage from './pages/LandingPage';
@@ -14,13 +15,32 @@ import { AuthProvider } from './context/AuthContext';
 
 function AppContent() {
     const location = useLocation();
+    const navigate = useNavigate();
+    const { user } = useAuth();
     const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
     const [initiallyLogin, setInitiallyLogin] = useState(false);
+    const [pendingRedirect, setPendingRedirect] = useState(null);
 
-    const openAuthModal = (loginMode = false) => {
+    const openAuthModal = (loginMode = false, redirect = null) => {
         setInitiallyLogin(loginMode);
+        if (redirect) setPendingRedirect(redirect);
         setIsAuthModalOpen(true);
     };
+
+    // Execute pending redirect after successful login
+    useEffect(() => {
+        if (user) {
+            if (pendingRedirect) {
+                navigate(pendingRedirect.path, { state: pendingRedirect.state });
+                setPendingRedirect(null);
+            } else if (isAuthModalOpen) {
+                // Default redirect to dashboard if no specific redirect is pending
+                navigate('/dashboard');
+            }
+            // Allow the modal to close itself via its internal timeout to show success message
+            // setIsAuthModalOpen(false); 
+        }
+    }, [user, pendingRedirect, navigate, isAuthModalOpen]);
 
     return (
         <div className="app-container">

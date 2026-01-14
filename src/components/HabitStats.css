@@ -80,10 +80,7 @@
 
 .widget-value.small {
     font-size: 1.1rem;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: 100px;
+    line-height: 1.2;
 }
 
 /* List Style */

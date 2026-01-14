@@ -136,13 +136,22 @@ const HabitGrid = ({ habits, currentMonth, onHabitUpdated, onHabitAdded, onHabit
     // Close picker when clicking outside
     React.useEffect(() => {
         const handleClickOutside = () => setPickerOpen(null);
+
+        const handleScroll = (e) => {
+            // If scrolling happens inside the picker, don't close it
+            if (e.target.classList && e.target.classList.contains('icon-picker-popover')) {
+                return;
+            }
+            setPickerOpen(null);
+        };
+
         if (pickerOpen) {
             window.addEventListener('click', handleClickOutside);
-            window.addEventListener('scroll', handleClickOutside, true);
+            window.addEventListener('scroll', handleScroll, true); // Capture phase to catch scroll on any element
         }
         return () => {
             window.removeEventListener('click', handleClickOutside);
-            window.removeEventListener('scroll', handleClickOutside, true);
+            window.removeEventListener('scroll', handleScroll, true);
         };
     }, [pickerOpen]);
 

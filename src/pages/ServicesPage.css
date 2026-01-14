@@ -32,10 +32,9 @@
 
 .services-subtitle {
     color: var(--text-secondary);
-    margin-bottom: 4rem;
+    margin: 0 auto 4rem auto;
     font-size: 1.2rem;
     max-width: 600px;
-    margin-right: auto;
 }
 
 @media (max-width: 768px) {
@@ -89,18 +88,23 @@
     overflow: hidden;
 }
 
-/* Mock interface patterns for previews */
-.card-preview::before {
-    content: '';
-    position: absolute;
-    width: 80%;
-    height: 60%;
-    background: #fff;
-    border-radius: 12px;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+/* Creative Icon Glow Effect */
+.icon-glow-container {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 70%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 2;
+    filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.1));
+    transition: transform 0.4s ease;
+}
+
+.service-card:hover .icon-glow-container {
+    transform: scale(1.1) rotate(5deg);
 }
 
 .service-content {
