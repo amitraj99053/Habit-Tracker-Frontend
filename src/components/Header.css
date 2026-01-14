@@ -94,8 +94,8 @@
     /* More visible border */
     cursor: pointer;
     padding: 0.8rem 2.5rem;
-    border-radius: 50px;
-    /* Explicit curved shape */
+    border-radius: 12px;
+    /* Rounded Rectangle Shape */
     /* Perfect Capsule Shape */
     transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     white-space: nowrap;
@@ -112,7 +112,8 @@
 /* Hover - Subtle Glow */
 .nav-btn:hover {
     color: #fff;
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(255, 255, 255, 0.15);
+    /* border-radius inherited (12px) */
 }
 
 /* Active State - Illuminated */
@@ -130,7 +131,8 @@
 /* Primary Action Button (Register) - Solid & Premium */
 .nav-btn.secondary-btn {
     /* Neon Green */
-    color: #000;
+    color: #fff;
+    /* White text for visibility */
     font-weight: 600;
     padding: 0.8rem 2.5rem;
     /* Larger padding for primary action */
@@ -261,7 +263,7 @@
         /* Max width constraint */
         min-width: unset;
         /* Remove fixed min-width */
-        border-radius: 9999px;
+        border-radius: 16px;
         display: flex;
         justify-content: center;
         align-items: center;
