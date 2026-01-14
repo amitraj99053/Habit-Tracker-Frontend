@@ -63,6 +63,27 @@
     display: block;
 }
 
+.social-links {
+    display: flex;
+    justify-content: center;
+    /* Center the icons */
+    gap: 1.5rem;
+    /* Space between logos */
+    margin-top: 0.5rem;
+}
+
+.social-links a {
+    color: #fff;
+    transition: transform 0.2s, color 0.2s;
+    display: flex;
+    align-items: center;
+}
+
+.social-links a:hover {
+    color: #D7FF00;
+    transform: translateY(-3px);
+}
+
 .contact-form {
     background: rgba(255, 255, 255, 0.03);
     border: 1px solid rgba(255, 255, 255, 0.1);

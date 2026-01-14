@@ -284,14 +284,8 @@
     }
 
     .hero-visual {
-        height: auto;
-        min-height: 300px;
-        margin-top: 2rem;
-    }
-
-    .visual-card {
-        padding: 1.5rem;
-        max-width: 100%;
+        display: none;
+        /* Hide complex visual on mobile or simplify */
     }
 
     .stats-section {
@@ -306,6 +300,11 @@
 
     .features {
         padding: 4rem 5%;
+    }
+
+    .features-grid {
+        grid-template-columns: 1fr;
+        /* Force single column on mobile */
     }
 
     .section-title {

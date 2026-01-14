@@ -1,3 +1,7 @@
+import React from 'react';
+import { Instagram, Linkedin, Github } from 'lucide-react';
+import './Footer.css';
+
 const Footer = () => {
     return (
         <footer className="footer">
@@ -8,20 +12,13 @@ const Footer = () => {
                     <span className="logo-text">HabitFlow</span>
                 </div>
 
-                {/* Clean Navigation */}
-                <nav className="footer-nav">
-                    <a href="#">Features</a>
-                    <a href="#">Pricing</a>
-                    <a href="#">About</a>
-                    <a href="#">Contact</a>
-                    <a href="#">Privacy</a>
-                </nav>
+
 
                 {/* Minimal Socials */}
                 <div className="footer-socials">
-                    <a href="#" aria-label="Twitter">𝕏</a>
-                    <a href="#" aria-label="Instagram">Instagram</a>
-                    <a href="#" aria-label="LinkedIn">LinkedIn</a>
+                    <a href="https://github.com/amitraj99053" aria-label="GitHub"><Github size={20} /></a>
+                    <a href="https://www.instagram.com/__amit__kr_01/" aria-label="Instagram"><Instagram size={20} /></a>
+                    <a href="https://www.linkedin.com/in/amit-kumar-654895220/" aria-label="LinkedIn"><Linkedin size={20} /></a>
                 </div>
 
                 {/* Copyright */}

@@ -7,8 +7,10 @@
     /* reduced side padding slightly */
     position: fixed;
     top: 20px;
-    left: 50%;
-    transform: translateX(-50%);
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    /* transform: translateX(-50%); REMOVED to prevent containing block issue for fixed mobile menu */
     width: 95%;
     /* Wider container */
     max-width: 1400px;
@@ -17,7 +19,7 @@
 }
 
 .header.hidden {
-    transform: translate(-50%, -150%);
+    transform: translateY(-150%);
     opacity: 0;
     pointer-events: none;
 }
@@ -68,15 +70,13 @@
     letter-spacing: -0.02em;
 }
 
-/* Navigation Links - Strict Rectangular Design */
+/* Navigation Links */
 .nav-menu {
     display: flex;
     align-items: center;
     gap: 1.5rem;
-    /* Reduced from 3rem to prevent overlap */
     margin-left: auto;
     flex-wrap: nowrap;
-    /* Prevent wrapping */
 }
 
 /* Base Rounded Button (Professional Minimalist) */
@@ -84,17 +84,19 @@
     font-family: 'Inter', sans-serif;
     font-size: 0.95rem;
     font-weight: 500;
-    color: rgba(255, 255, 255, 0.7);
-    /* Softer white for unselected */
-    background: transparent;
-    /* Clean look by default */
-    /* Clean look by default */
-    border: 1px solid transparent;
+    color: rgba(255, 255, 255, 0.8);
+    /* Slightly brighter text */
+
+    /* Persistent Glass Style */
+    background: rgba(255, 255, 255, 0.08);
+    /* Slightly more visible bg */
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    /* More visible border */
     cursor: pointer;
     padding: 0.8rem 2.5rem;
-    /* Match Register button padding exactly */
-    border-radius: 30px;
-    /* Flexible Pill Shape */
+    border-radius: 50px;
+    /* Explicit curved shape */
+    /* Perfect Capsule Shape */
     transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     white-space: nowrap;
     letter-spacing: 0.01em;
@@ -103,8 +105,8 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    min-width: 100px;
-    /* Ensure minimum width but allow growth */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    /* Subtle "Object" Shadow */
 }
 
 /* Hover - Subtle Glow */
@@ -132,8 +134,8 @@
     font-weight: 600;
     padding: 0.8rem 2.5rem;
     /* Larger padding for primary action */
-    border-radius: 30px;
-    /* Match Pill Shape */
+    border-radius: 9999px;
+    /* Match Capsule Shape */
     border: none;
     box-shadow: 0 4px 15px rgba(215, 255, 0, 0.2);
     margin-left: 1rem;
@@ -205,23 +207,34 @@
         margin-left: auto;
     }
 
+    /* Premium Mobile Menu Overlay */
     .nav-menu {
         position: fixed;
         inset: 0;
-        background: #000;
+        /* Glassmorphism Background */
+        background: rgba(8, 8, 8, 0.95);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        gap: 3rem;
+        gap: 2.5rem;
+
         transform: translateY(-100%);
         opacity: 0;
         visibility: hidden;
-        transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease, visibility 0.3s;
+        transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease, visibility 0.4s;
+
         padding-top: 2rem;
         z-index: 1000;
+        /* Behind header content if needed, but here it covers screen */
         margin-left: 0;
+
+        /* Add subtle gradient border at top if desired, or simplified */
     }
 
+    /* When active, menu drops down */
     .nav-menu.active {
         transform: translateY(0);
         opacity: 1;
@@ -233,32 +246,72 @@
     }
 
     .nav-btn {
-        font-size: 1.6rem;
-        color: #888;
+        font-size: 1.1rem;
+        /* Slightly smaller font for better fit */
+        font-weight: 500;
+        color: #fff;
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        padding: 0.8rem 2rem;
+        /* Reduced padding */
+        width: 80%;
+        /* Relative width instead of fixed */
+        max-width: 300px;
+        /* Max width constraint */
+        min-width: unset;
+        /* Remove fixed min-width */
+        border-radius: 9999px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 
+    .nav-btn:hover,
     .nav-btn.active {
         color: #fff;
+        background: rgba(255, 255, 255, 0.15);
+        box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        transform: translateY(-2px);
+        /* Hover lift like Register */
     }
 
     .nav-btn.active::after {
         display: none;
-        /* No dot on mobile */
+        /* Remove dot, rely on button state */
     }
 
+    /* Primary Action Button in Mobile */
     .nav-btn.secondary-btn {
-        margin: 1rem 0 0 0;
+        margin-top: 1rem;
         background: #D7FF00;
-        width: 200px;
-        text-align: center;
-        justify-content: center;
-        display: flex;
+        color: #000;
         font-size: 1.1rem;
+        padding: 0.8rem 2rem;
+        width: 80%;
+        max-width: 300px;
+        min-width: unset;
+        border-radius: 9999px;
+        box-shadow: 0 4px 15px rgba(215, 255, 0, 0.3);
+    }
+
+    .nav-btn.secondary-btn:hover {
+        background: #e2ff4d;
+        transform: scale(1.05);
+        color: #000;
+    }
+
+    /* User Greeting adjustments for mobile if present */
+    .nav-btn.user-greeting {
+        font-size: 1.2rem;
+        margin-right: 0;
+        margin-bottom: 1rem;
     }
 
     /* Hamburger Animation */
     .hamburger .bar.active:nth-child(1) {
-        transform: rotate(45deg);
+        transform: rotate(45deg) translate(5px, 6px);
     }
 
     .hamburger .bar.active:nth-child(2) {
@@ -266,6 +319,6 @@
     }
 
     .hamburger .bar.active:nth-child(3) {
-        transform: rotate(-45deg);
+        transform: rotate(-45deg) translate(5px, -6px);
     }
 }

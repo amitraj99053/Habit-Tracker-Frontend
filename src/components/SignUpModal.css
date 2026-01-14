@@ -223,9 +223,18 @@
         padding: 1.5rem;
         width: 95%;
         margin: 1rem;
+        max-height: 90vh;
+        /* Prevent overflow on small height screens */
+        overflow-y: auto;
+        /* Allow scrolling if content is too tall */
     }
 
     .modal-content h2 {
         font-size: 1.5rem;
+    }
+
+    .auth-tab {
+        padding: 0.8rem;
+        font-size: 1rem;
     }
 }

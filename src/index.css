@@ -1,3 +1,9 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 :root {
   --primary-color: #646cff;
   --bg-color: #242424;
@@ -13,17 +19,6 @@ body {
   color: var(--text-color);
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   overflow-x: hidden;
-  /* Prevent horizontal scroll from full-width elements */
-}
-
-#root {
-  width: 100%;
-}
-
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
 }
 
 .app-container {

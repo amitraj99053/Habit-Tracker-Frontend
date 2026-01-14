@@ -16,6 +16,7 @@ const Header = () => {
 
     const isActive = (path) => location.pathname === path;
 
+
     // Handle Scroll
     React.useEffect(() => {
         const controlNavbar = () => {
@@ -34,6 +35,18 @@ const Header = () => {
         window.addEventListener('scroll', controlNavbar);
         return () => window.removeEventListener('scroll', controlNavbar);
     }, [lastScrollY]);
+
+    // Lock Body Scroll when Mobile Menu is Open
+    React.useEffect(() => {
+        if (isMobileMenuOpen) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'unset';
+        }
+        return () => {
+            document.body.style.overflow = 'unset';
+        };
+    }, [isMobileMenuOpen]);
 
     const openModal = (isLogin) => {
         setInitiallyLogin(isLogin);

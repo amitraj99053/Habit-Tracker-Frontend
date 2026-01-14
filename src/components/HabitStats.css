@@ -180,3 +180,19 @@
     background: rgba(255, 255, 255, 0.02);
     border-radius: 12px;
 }
+
+@media (max-width: 600px) {
+    .stats-widgets {
+        grid-template-columns: 1fr;
+        /* Stack widgets vertically */
+        gap: 0.8rem;
+    }
+
+    .widget-value {
+        font-size: 1.2rem;
+    }
+
+    .stats-header {
+        margin-bottom: 1.5rem;
+    }
+}

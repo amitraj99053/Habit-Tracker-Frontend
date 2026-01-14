@@ -181,6 +181,30 @@
     line-height: 1;
 }
 
+@media (max-width: 768px) {
+
+    .habit-col-header,
+    .habit-name-cell {
+        width: 140px;
+        /* Reduce sticky column width on mobile */
+        min-width: 140px;
+    }
+
+    .habit-grid {
+        min-width: 600px;
+        /* Ensure grid is still large enough to scroll */
+    }
+
+    .add-text {
+        display: none;
+        /* Hide text on very small screens if needed, or keep short */
+    }
+
+    .add-btn-content {
+        padding: 0.3rem 0.5rem;
+    }
+}
+
 .add-text {
     color: #ddd;
     font-size: 0.75rem;

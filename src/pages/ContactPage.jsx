@@ -1,4 +1,5 @@
 import React from 'react';
+import { Github, Linkedin, Instagram } from 'lucide-react';
 import './ContactPage.css';
 
 const ContactPage = () => {
@@ -20,15 +21,15 @@ const ContactPage = () => {
                         <div className="info-card">
                             <span className="info-icon">📍</span>
                             <h3>Visit Us</h3>
-                            <p>123 Productivity Lane<br />Silicon Valley, CA</p>
+                            <p>Gamma 2, Greater Noida<br /> Uttar Pradesh, India</p>
                         </div>
                         <div className="info-card">
                             <span className="info-icon">🤝</span>
                             <h3>Connect</h3>
                             <div className="social-links">
-                                <span>Twitter</span>
-                                <span>LinkedIn</span>
-                                <span>Instagram</span>
+                                <a href="https://github.com/amitraj99053" aria-label="GitHub" target="_blank" rel="noopener noreferrer"><Github size={24} /></a>
+                                <a href="https://www.linkedin.com/in/amit-kumar-654895220/" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer"><Linkedin size={24} /></a>
+                                <a href="https://www.instagram.com/__amit__kr_01/" aria-label="Instagram" target="_blank" rel="noopener noreferrer"><Instagram size={24} /></a>
                             </div>
                         </div>
                     </div>

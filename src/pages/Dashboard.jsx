@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 // HabitForm removed
 import SummaryHeader from '../components/SummaryHeader';
 import HabitGrid from '../components/HabitGrid';
@@ -8,6 +9,8 @@ import { habitService } from '../api/habitService';
 import './Dashboard.css';
 
 const Dashboard = () => {
+    const { user, loading: authLoading } = useAuth();
+    const navigate = useNavigate();
     const [habits, setHabits] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -18,14 +21,22 @@ const Dashboard = () => {
     const [journey, setJourney] = useState(location.state?.journey || 'all');
 
     useEffect(() => {
+        if (!authLoading && !user) {
+            navigate('/');
+        }
+    }, [authLoading, user, navigate]);
+
+    useEffect(() => {
         if (location.state?.journey) {
             setJourney(location.state.journey);
         }
     }, [location.state]);
 
     useEffect(() => {
-        loadHabits();
-    }, [journey]); // Reload or Re-filter when journey changes
+        if (user) {
+            loadHabits();
+        }
+    }, [journey, user]); // Reload or Re-filter when journey changes
 
     const loadHabits = async () => {
         try {

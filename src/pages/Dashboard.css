@@ -70,4 +70,13 @@ body {
         margin-top: 5rem;
         padding: 0 1rem;
     }
+
+    .dashboard-main-content {
+        gap: 1.5rem;
+    }
+
+    .left-panel,
+    .right-panel {
+        padding: 1.5rem;
+    }
 }
