@@ -1,9 +1,11 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 import './ServicesPage.css';
 
-const ServicesPage = () => {
+const ServicesPage = ({ openAuthModal }) => {
     const navigate = useNavigate();
+    const { user } = useAuth();
 
     const services = [
         {
@@ -57,7 +59,37 @@ const ServicesPage = () => {
         if (serviceId === 'task-list') {
             navigate('/tasks');
         } else {
-            navigate('/dashboard', { state: { journey: serviceId } });
+            // Check auth before navigating to dashboard
+            if (!user) {
+                // Determine if we should show login or signup. Usually "Start Tracking" -> Signup?
+                // Or maybe login. The user said dashboard is not opening.
+                // Let's default to Login for existing users or Signup if new. 
+                // Let's pass true/false based on what we think is best. 
+                // Previous Header usage was openModal(true) which was Register? Wait.
+                // In Header: openModal(true) was Register? No, let's check Header.
+                // Header said "Register" button clicks openModal(true).
+                // SignUpModal: initializedLogin = true -> Login Mode. 
+                // Wait, Header line 111: onClick={() => openModal(true)}>Register</button>
+                // So true meant Login? Let's check SignUpModal again.
+                // SignUpModal line 6: initiallyLogin = false. const [isLogin, setIsLogin] = useState(initiallyLogin).
+                // So passing true means isLogin is true. 
+                // So the "Register" button in Header was actually opening the LOGIN form? That seems wrong.
+                // Let's double check Header line 111.
+                // Ah, I might have misread logic. 
+                // If I click Register, I want Signup form. So initiallyLogin SHOULD be false.
+                // But Header was passing true? 
+                // Let's re-read Header snippet source: `onClick={() => openModal(true)}>Register`
+                // And `const openModal = (isLogin) => { setInitiallyLogin(isLogin); ... }`
+                // And `SignUpModal({ ... initiallyLogin })`.
+                // If Header calls openModal(true), then initiallyLogin=true, so SignUpModal starts in Login mode.
+                // This seems like a bug in the previous code: "Register" button opening "Login" modal.
+                // Or maybe I am misinterpreting. 
+                // Anyway, for "Start Tracking", if user is not logged in, they probably want to Sign Up (create account) or Login.
+                // Let's open the modal in Signup mode (false) so they can create account to start tracking.
+                openAuthModal(false);
+            } else {
+                navigate('/dashboard', { state: { journey: serviceId } });
+            }
         }
     };
 

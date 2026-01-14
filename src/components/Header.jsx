@@ -1,15 +1,14 @@
 import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import SignUpModal from './SignUpModal';
+// import SignUpModal from './SignUpModal'; // Moved to App.jsx
 import './Header.css';
 
-const Header = () => {
+const Header = ({ openAuthModal }) => {
     const navigate = useNavigate();
     const location = useLocation();
     const { user, logout } = useAuth();
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    const [initiallyLogin, setInitiallyLogin] = useState(false);
+    // Modal state lifted to App.jsx
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [showNavbar, setShowNavbar] = useState(true);
     const [lastScrollY, setLastScrollY] = useState(0);
@@ -48,11 +47,7 @@ const Header = () => {
         };
     }, [isMobileMenuOpen]);
 
-    const openModal = (isLogin) => {
-        setInitiallyLogin(isLogin);
-        setIsModalOpen(true);
-        setIsMobileMenuOpen(false); // Close menu when modal opens
-    };
+    // openModal function removed, using prop directly
 
     const toggleMenu = () => {
         setIsMobileMenuOpen(!isMobileMenuOpen);
@@ -108,15 +103,10 @@ const Header = () => {
                     {user ? (
                         <button className="nav-btn secondary-btn" onClick={handleLogout} style={{ background: '#ff4d4d', color: '#fff', border: 'none' }}>Logout</button>
                     ) : (
-                        <button className="nav-btn secondary-btn" onClick={() => openModal(true)}>Register</button>
+                        <button className="nav-btn secondary-btn" onClick={() => { openAuthModal(false); setIsMobileMenuOpen(false); }}>Register</button>
                     )}
                 </nav>
             </header>
-            <SignUpModal
-                isOpen={isModalOpen}
-                onClose={() => setIsModalOpen(false)}
-                initiallyLogin={initiallyLogin}
-            />
         </>
     );
 };
