@@ -17,7 +17,10 @@ export const taskService = {
             headers: getAuthHeaders(),
             body: JSON.stringify(taskData),
         });
-        if (!response.ok) throw new Error('Failed to create task');
+        if (!response.ok) {
+            const error = await response.json().catch(() => ({}));
+            throw new Error(error.message || `Failed to create task: ${response.status}`);
+        }
         return response.json();
     },
 
@@ -28,7 +31,10 @@ export const taskService = {
             headers: getAuthHeaders(),
             body: JSON.stringify(updates),
         });
-        if (!response.ok) throw new Error('Failed to update task');
+        if (!response.ok) {
+            const error = await response.json().catch(() => ({}));
+            throw new Error(error.message || `Failed to update task: ${response.status}`);
+        }
         return response.json();
     },
 
@@ -38,7 +44,10 @@ export const taskService = {
             method: 'DELETE',
             headers: getAuthHeaders() // Added Auth Headers
         });
-        if (!response.ok) throw new Error('Failed to delete task');
+        if (!response.ok) {
+            const error = await response.json().catch(() => ({}));
+            throw new Error(error.message || `Failed to delete task: ${response.status}`);
+        }
         return response.json();
     }
 };
