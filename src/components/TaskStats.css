@@ -1,32 +1,44 @@
 .task-stats-container {
-    background: #f4f4f4;
-    padding: 1.5rem;
-    border-radius: 12px 12px 0 0;
-    border-bottom: 1px solid #ddd;
+    background: transparent;
+    padding: 0;
+    margin-bottom: 2rem;
 }
 
 .task-stats-header {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-end;
     flex-wrap: wrap;
-    gap: 1rem;
-    margin-bottom: 1.5rem;
+    gap: 2rem;
+    margin-bottom: 2rem;
 }
 
 .page-title {
-    font-size: 2.5rem;
-    font-weight: 800;
-    color: #333;
+    font-size: 3.5rem;
+    font-weight: 900;
+    color: #fff;
     margin: 0;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: -2px;
+    line-height: 1;
+    background: linear-gradient(135deg, #fff 0%, #aaa 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 30px rgba(255, 255, 255, 0.1);
 }
 
 .date-display {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
+}
+
+.date-display .label {
+    font-size: 0.8rem;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 0.2rem;
 }
 
 .stats-group {
@@ -35,80 +47,108 @@
 }
 
 .stat-item {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 1rem 1.5rem;
+    border-radius: 12px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.3rem;
+    min-width: 100px;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.stat-item:hover {
+    transform: translateY(-2px);
+    border-color: rgba(215, 255, 0, 0.3);
 }
 
 .stat-item .label {
-    font-size: 0.9rem;
-    color: #666;
+    font-size: 0.8rem;
+    color: #888;
     font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 0.5rem;
 }
 
 .value-box {
-    background: white;
-    padding: 0.2rem 1.5rem;
-    border-radius: 4px;
-    font-weight: bold;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-    min-width: 60px;
-    text-align: center;
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: #fff;
+    line-height: 1;
 }
 
 .stat-item.green .value-box {
-    background: #c3e6cb;
-    color: #155724;
+    color: #D7FF00;
+    text-shadow: 0 0 10px rgba(215, 255, 0, 0.3);
 }
 
 .stat-item.red .value-box {
-    background: #f5c6cb;
-    color: #721c24;
-}
-
-.value-box.simple {
-    background: transparent;
-    box-shadow: none;
-    font-size: 1.2rem;
+    color: #ff4d4d;
+    text-shadow: 0 0 10px rgba(255, 77, 77, 0.3);
 }
 
 .task-progress-bar-container {
     display: flex;
-    align-items: center;
-    gap: 1rem;
-    background: #e0e0e0;
-    padding: 0.5rem 1rem;
-    border-radius: 8px;
+    flex-direction: column;
+    gap: 0.5rem;
+    background: transparent;
+    padding: 0;
+    border: none;
+}
+
+.progress-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 0.5rem;
+}
+
+.progress-label {
+    font-size: 0.9rem;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 .progress-text {
-    font-weight: bold;
-    color: #333;
-    min-width: 45px;
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: #D7FF00;
 }
 
 .task-progress-bar {
-    flex: 1;
-    height: 20px;
-    background: #fff;
-    border-radius: 10px;
+    width: 100%;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
     overflow: hidden;
-    border: 1px solid #ccc;
+    border: none;
 }
 
 .task-progress-fill {
     height: 100%;
-    background: #90ee90;
-    transition: width 0.5s ease;
+    background: #D7FF00;
+    box-shadow: 0 0 15px rgba(215, 255, 0, 0.5);
+    border-radius: 3px;
+    transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 @media (max-width: 768px) {
     .task-stats-header {
         flex-direction: column;
+        align-items: flex-start;
+        gap: 1.5rem;
     }
 
-    .page-title {
-        order: -1;
+    .stats-group {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .stat-item {
+        flex: 1;
     }
 }

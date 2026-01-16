@@ -1,49 +1,167 @@
+/* TaskTable.css */
 .task-table-container {
-    background: var(--card-bg);
+    background: transparent;
     border-radius: 0;
-    /* Rectangle */
-    box-shadow: var(--card-shadow);
-    padding: 1.5rem;
-    border: 1px solid rgba(0, 0, 0, 0.05);
+    box-shadow: none;
+    padding: 0;
+    border: none;
+    overflow-x: auto;
 }
 
-/* ... middle content skipped ... */
+.task-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 0.5rem;
+    /* Gap between rows */
+    font-size: 0.95rem;
+}
 
-.priority-badge {
-    padding: 0.3rem 0.8rem;
-    border-radius: 0;
-    /* Rectangle */
-    font-size: 0.8rem;
+.task-table th {
+    text-align: left;
+    padding: 1rem;
+    color: #888;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 1px;
     font-weight: 600;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.05);
 }
 
-/* ... middle content skipped ... */
+.task-table tbody tr {
+    background: rgba(255, 255, 255, 0.02);
+    transition: all 0.2s ease;
+}
 
-.status-select {
+.task-table tbody tr:hover {
+    background: rgba(255, 255, 255, 0.05);
+    transform: translateX(4px);
+}
+
+.task-table td {
+    padding: 1rem;
+    color: #eee;
+    vertical-align: middle;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.task-table td:first-child {
+    border-left: 1px solid rgba(255, 255, 255, 0.05);
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+}
+
+.task-table td:last-child {
+    border-right: 1px solid rgba(255, 255, 255, 0.05);
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+.check-col {
+    width: 40px;
+    text-align: center;
+}
+
+.task-title {
+    font-weight: 500;
+    color: #fff;
+    min-width: 200px;
+}
+
+.task-done .task-title {
+    text-decoration: line-through;
+    color: #666;
+}
+
+/* Custom Select Styling */
+.table-select,
+.status-badge {
     padding: 0.4rem 0.8rem;
-    border-radius: 0;
-    /* Rectangle */
-    border: 1px solid #eee;
-    background: #fff;
+    border-radius: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(0, 0, 0, 0.3);
+    color: #eee;
     font-family: inherit;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     cursor: pointer;
-}
-
-.status-select:focus {
-    border-color: var(--primary-color);
+    transition: all 0.2s;
     outline: none;
 }
 
-.delete-btn {
-    background: none;
-    border: none;
-    color: #ccc;
-    cursor: pointer;
-    font-size: 1.2rem;
-    transition: color 0.2s;
+.table-select:hover,
+.status-badge:hover {
+    border-color: rgba(215, 255, 0, 0.5);
 }
 
-.delete-btn:hover {
+.table-select:focus,
+.status-badge:focus {
+    border-color: #D7FF00;
+    box-shadow: 0 0 0 2px rgba(215, 255, 0, 0.1);
+}
+
+/* Status Badge Specifics */
+.status-badge {
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.5px;
+}
+
+.status-badge.not-started {
+    color: #ffa500;
+    border-color: rgba(255, 165, 0, 0.3);
+}
+
+.status-badge.in-progress {
+    color: #3b82f6;
+    border-color: rgba(59, 130, 246, 0.3);
+}
+
+.status-badge.done {
+    color: #D7FF00;
+    border-color: rgba(215, 255, 0, 0.3);
+    background: rgba(215, 255, 0, 0.05);
+}
+
+.icon-btn.delete {
+    background: none;
+    border: none;
+    color: #666;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.2s;
+    opacity: 0;
+    /* Hidden by default */
+}
+
+.task-table tr:hover .icon-btn.delete {
+    opacity: 1;
+    /* Show on hover */
+}
+
+.icon-btn.delete:hover {
     color: #FF5252;
+    transform: scale(1.1);
+}
+
+/* Add Row Placeholder */
+.add-row-placeholder td {
+    color: #666 !important;
+    font-style: italic;
+    background: transparent !important;
+    border: 1px dashed rgba(255, 255, 255, 0.1) !important;
+    text-align: center;
+}
+
+.add-row-placeholder:hover {
+    background: transparent !important;
+    transform: none !important;
+}
+
+/* Checkbox Styling */
+input[type="checkbox"] {
+    accent-color: #D7FF00;
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
 }

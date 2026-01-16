@@ -27,19 +27,22 @@ const TaskStats = ({ tasks }) => {
     return (
         <div className="task-stats-container">
             <div className="task-stats-header">
-                <div className="date-display">
-                    <span className="label">Date</span>
-                    <span className="value">{today.toLocaleDateString()}</span>
+                <div className="title-section">
+                    <h1 className="page-title">Task Master</h1>
+                    <div className="date-display">
+                        <span className="label">Today's Date</span>
+                        <span className="value">{today.toLocaleDateString(undefined, { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</span>
+                    </div>
                 </div>
-                <h1 className="page-title">TASK LIST</h1>
+
                 <div className="stats-group">
                     <div className="stat-item green">
-                        <span className="label">Today</span>
+                        <span className="label">Tasks Today</span>
                         <span className="value-box">{tasksToday}</span>
                     </div>
                     <div className="stat-item">
-                        <span className="label">Total Tasks</span>
-                        <span className="value-box simple">{totalTasks}</span>
+                        <span className="label">Total Pending</span>
+                        <span className="value-box simple">{totalTasks - completed}</span>
                     </div>
                     <div className="stat-item red">
                         <span className="label">Overdue</span>
@@ -48,8 +51,11 @@ const TaskStats = ({ tasks }) => {
                 </div>
             </div>
 
-            <div className="task-progress-bar-container">
-                <span className="progress-text">{progress}%</span>
+            <div className="bg-glass p-6 rounded-2xl border border-white/10">
+                <div className="progress-header">
+                    <span className="progress-label">Completion Status</span>
+                    <span className="progress-text">{progress}%</span>
+                </div>
                 <div className="task-progress-bar">
                     <div className="task-progress-fill" style={{ width: `${progress}%` }}></div>
                 </div>
