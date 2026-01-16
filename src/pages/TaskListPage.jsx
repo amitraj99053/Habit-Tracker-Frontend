@@ -26,9 +26,14 @@ const TaskListPage = () => {
 
     const handleTaskAdded = async (e) => {
         e.preventDefault();
-        if (!newTaskTitle.trim()) return;
+        console.log("Attempting to add task:", newTaskTitle);
+        if (!newTaskTitle.trim()) {
+            console.warn("Task title is empty");
+            return;
+        }
 
         try {
+            console.log("Sending request to create task...");
             const newTask = await taskService.createTask({
                 title: newTaskTitle,
                 dueDate: new Date(), // Default to today
@@ -36,10 +41,12 @@ const TaskListPage = () => {
                 status: 'Not Started',
                 category: 'Work'
             });
+            console.log("Task created successfully:", newTask);
             setTasks([...tasks, newTask]);
             setNewTaskTitle('');
         } catch (error) {
-            console.error(error);
+            console.error("Failed to add task:", error);
+            alert("Failed to add task: " + error.message);
         }
     };
 
