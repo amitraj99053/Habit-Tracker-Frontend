@@ -1,0 +1,74 @@
+/* ProfileModal styling matching SignUpModal dark glass theme */
+
+.profile-modal-content {
+    background: rgba(10, 10, 12, 0.96) !important;
+    border: 1px solid var(--border-glass) !important;
+    border-radius: var(--border-radius-lg) !important;
+}
+
+.modal-title {
+    font-size: 1.8rem;
+    font-weight: 800;
+    margin-bottom: 0.4rem;
+    color: #fff;
+    text-align: left;
+    font-family: 'Outfit', sans-serif;
+}
+
+.modal-subtitle {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+    text-align: left;
+    line-height: 1.4;
+}
+
+.profile-label {
+    display: block;
+    margin-bottom: 0.4rem;
+    color: var(--text-secondary);
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    text-align: left;
+}
+
+.profile-password-section-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #fff;
+    margin: 2rem 0 1rem 0;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border-glass);
+    text-align: left;
+}
+
+.profile-password-section-title .helper-text {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    font-weight: 400;
+}
+
+/* Specific styling for Date Input calendar icon */
+.profile-date-input::-webkit-calendar-picker-indicator {
+    filter: invert(1) brightness(0.8);
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+.profile-date-input::-webkit-calendar-picker-indicator:hover {
+    filter: invert(1) brightness(1);
+    opacity: 1;
+}
+
+/* Custom transitions and animations */
+.submit-btn:disabled {
+    background: rgba(215, 255, 0, 0.4) !important;
+    color: rgba(0, 0, 0, 0.5) !important;
+    cursor: not-allowed;
+    box-shadow: none !important;
+    transform: none !important;
+}

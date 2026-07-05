@@ -9,6 +9,7 @@ import Dashboard from './pages/Dashboard';
 import TaskListPage from './pages/TaskListPage';
 import ContactPage from './pages/ContactPage';
 import SignUpModal from './components/SignUpModal';
+import ProfileModal from './components/ProfileModal';
 import './App.css'
 
 import { AuthProvider } from './context/AuthContext';
@@ -18,6 +19,7 @@ function AppContent() {
     const navigate = useNavigate();
     const { user } = useAuth();
     const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
+    const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
     const [initiallyLogin, setInitiallyLogin] = useState(false);
     const [pendingRedirect, setPendingRedirect] = useState(null);
 
@@ -44,7 +46,7 @@ function AppContent() {
 
     return (
         <div className="app-container">
-            <Header openAuthModal={openAuthModal} />
+            <Header openAuthModal={openAuthModal} openProfileModal={() => setIsProfileModalOpen(true)} />
             <main>
                 <Routes>
                     <Route path="/" element={<LandingPage />} />
@@ -60,6 +62,11 @@ function AppContent() {
                 isOpen={isAuthModalOpen}
                 onClose={() => setIsAuthModalOpen(false)}
                 initiallyLogin={initiallyLogin}
+            />
+
+            <ProfileModal
+                isOpen={isProfileModalOpen}
+                onClose={() => setIsProfileModalOpen(false)}
             />
         </div>
     );

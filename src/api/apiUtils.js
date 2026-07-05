@@ -20,28 +20,46 @@ export const getAuthHeaders = () => {
 };
 
 export const fetchWithTimeout = async (endpoint, options = {}) => {
-    const { timeout = 30000, ...fetchOptions } = options;
+    const { timeout = 60000, maxRetries = 1, ...fetchOptions } = options;
 
-    const controller = new AbortController();
-    const id = setTimeout(() => controller.abort(), timeout);
+    let attempt = 0;
+    while (true) {
+        const controller = new AbortController();
+        const id = setTimeout(() => controller.abort(), timeout);
 
-    try {
-        const response = await fetch(`${API_URL}${endpoint}`, {
-            ...fetchOptions,
-            signal: controller.signal
-        });
-        clearTimeout(id);
+        try {
+            const response = await fetch(`${API_URL}${endpoint}`, {
+                ...fetchOptions,
+                signal: controller.signal
+            });
+            clearTimeout(id);
 
-        if (response.status === 401) {
-            window.dispatchEvent(new CustomEvent('auth-unauthorized'));
+            if (response.status === 401) {
+                window.dispatchEvent(new CustomEvent('auth-unauthorized'));
+            }
+
+            return response;
+        } catch (error) {
+            clearTimeout(id);
+            attempt++;
+
+            const isTimeout = error.name === 'AbortError';
+            const isNetworkError = error.message && (
+                error.message.includes('Failed to fetch') || 
+                error.message.includes('NetworkError') || 
+                error.message.includes('network')
+            );
+
+            if (attempt <= maxRetries && (isTimeout || isNetworkError)) {
+                console.warn(`Request to ${endpoint} failed (attempt ${attempt}/${maxRetries + 1}). Retrying in 1.5s due to: ${error.message || error.name}...`);
+                await new Promise(resolve => setTimeout(resolve, 1500));
+                continue;
+            }
+
+            if (isTimeout) {
+                throw new Error('Request timed out. Please check your connection.');
+            }
+            throw error;
         }
-
-        return response;
-    } catch (error) {
-        clearTimeout(id);
-        if (error.name === 'AbortError') {
-            throw new Error('Request timed out. Please check your connection.');
-        }
-        throw error;
     }
 };

@@ -4,7 +4,7 @@ import { useAuth } from '../context/AuthContext';
 // import SignUpModal from './SignUpModal'; // Moved to App.jsx
 import './Header.css';
 
-const Header = ({ openAuthModal }) => {
+const Header = ({ openAuthModal, openProfileModal }) => {
     const navigate = useNavigate();
     const location = useLocation();
     const { user, logout } = useAuth();
@@ -102,7 +102,7 @@ const Header = ({ openAuthModal }) => {
 
                     {user ? (
                         <>
-                            <span className="nav-btn user-greeting" title={user.username}>Hi, {user.username}</span>
+                            <span className="nav-btn user-greeting clickable-greeting" title="Edit Profile Settings" onClick={() => { openProfileModal(); setIsMobileMenuOpen(false); }}>Hi, {user.username}</span>
                             <button className="nav-btn secondary-btn" onClick={handleLogout} style={{ background: '#ff4d4d', color: '#fff', border: 'none' }}>Logout</button>
                         </>
                     ) : (

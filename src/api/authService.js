@@ -1,4 +1,4 @@
-import { fetchWithTimeout } from './apiUtils';
+import { fetchWithTimeout, getAuthHeaders } from './apiUtils';
 
 export const authService = {
     login: async (email, password) => {
@@ -29,6 +29,20 @@ export const authService = {
         const data = await response.json();
         if (!response.ok) {
             throw new Error(data.message || 'Signup failed');
+        }
+        return data;
+    },
+
+    updateProfile: async (profileData) => {
+        const response = await fetchWithTimeout('/auth/profile', {
+            method: 'PATCH',
+            headers: getAuthHeaders(),
+            body: JSON.stringify(profileData)
+        });
+
+        const data = await response.json();
+        if (!response.ok) {
+            throw new Error(data.message || 'Profile update failed');
         }
         return data;
     }

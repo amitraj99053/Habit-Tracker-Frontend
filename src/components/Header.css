@@ -131,9 +131,14 @@
     padding: 0.75rem 1.5rem;
 }
 
-.nav-btn.user-greeting:hover {
-    background: rgba(255, 255, 255, 0.03);
-    color: #fff;
+.nav-btn.user-greeting.clickable-greeting {
+    cursor: pointer;
+}
+
+.nav-btn.user-greeting.clickable-greeting:hover {
+    background: rgba(215, 255, 0, 0.05);
+    border-color: rgba(215, 255, 0, 0.25);
+    color: var(--primary-color);
 }
 
 /* Divider */
