@@ -1,37 +1,51 @@
-/* TaskListPage.css */
+/* Premium Dark Theme TaskListPage Layout */
+
 .task-list-page {
-    min-height: 100vh;
-    padding: 2rem;
-    background-color: #0a0a0a; /* Deep dark background */
-    color: #e5e5e5;
-    font-family: 'Inter', sans-serif;
+    width: 100%;
+    min-height: calc(100vh - var(--header-height));
+    color: var(--text-primary);
+    padding-bottom: 4rem;
 }
 
 .task-dashboard {
     max-width: 1200px;
-    margin: 0 auto;
+    margin: 1rem auto 0;
     display: flex;
     flex-direction: column;
     gap: 2rem;
+    width: 100%;
 }
 
 .task-table-wrapper {
-    background: rgba(255, 255, 255, 0.03);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 16px;
-    padding: 1.5rem;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-    overflow: hidden;
+    background: var(--card-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--border-glass);
+    border-radius: var(--border-radius-lg);
+    padding: 2rem;
+    box-shadow: var(--card-shadow);
+    overflow-x: auto; /* Allow horizontal scrolling if table overflows on small viewports */
+    width: 100%;
 }
 
+/* Quick Add Bar */
 .quick-add-bar {
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 12px;
-    padding: 1rem;
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--border-glass);
+    border-radius: var(--border-radius);
+    padding: 0.6rem 1.2rem;
     display: flex;
+    align-items: center;
+    width: 100%;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.quick-add-bar form {
+    display: flex;
+    gap: 1rem;
+    width: 100%;
     align-items: center;
 }
 
@@ -39,38 +53,72 @@
     flex: 1;
     background: transparent;
     border: none;
-    color: white;
+    color: #fff;
     font-size: 1rem;
-    padding: 0.8rem;
+    padding: 0.8rem 0.5rem;
     outline: none;
+    font-family: 'Inter', sans-serif;
 }
 
 .quick-add-input::placeholder {
-    color: rgba(255, 255, 255, 0.4);
+    color: var(--text-muted);
 }
 
 .quick-add-btn {
-    background: #D7FF00; /* Neon Green */
+    background: var(--primary-color);
     color: #000;
     border: none;
     padding: 0.8rem 2rem;
-    border-radius: 8px;
+    border-radius: 10px;
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.05em;
     cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 0 10px rgba(215, 255, 0, 0.2);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 15px rgba(215, 255, 0, 0.2);
+    font-size: 0.85rem;
 }
 
 .quick-add-btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 0 20px rgba(215, 255, 0, 0.4);
+    box-shadow: 0 6px 20px rgba(215, 255, 0, 0.4);
+    background: #e2ff2b;
+}
+
+.quick-add-btn:active {
+    transform: translateY(0);
 }
 
 .loading {
     text-align: center;
-    padding: 2rem;
-    color: rgba(255, 255, 255, 0.5);
+    padding: 3rem;
+    color: var(--text-muted);
     font-style: italic;
+    font-size: 1rem;
+}
+
+/* RESPONSIVENESS AND OVERLAP PREVENTION */
+@media (max-width: 768px) {
+    .task-list-page {
+        padding: 0;
+    }
+
+    .task-table-wrapper {
+        padding: 1.5rem 1rem;
+        border-radius: var(--border-radius);
+    }
+
+    .quick-add-bar {
+        padding: 0.5rem 0.8rem;
+        border-radius: 12px;
+    }
+
+    .quick-add-bar form {
+        gap: 0.5rem;
+    }
+
+    .quick-add-btn {
+        padding: 0.7rem 1.2rem;
+        font-size: 0.8rem;
+    }
 }

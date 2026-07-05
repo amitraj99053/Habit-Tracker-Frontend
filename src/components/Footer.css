@@ -1,32 +1,28 @@
 /* Professional Glassmorphism Footer - Matches Header */
 .footer {
-    /* Reset generic footer styles */
     background: transparent;
     border-top: none;
     padding: 0;
     margin-top: auto;
-
-    /* Center the floating bar */
     display: flex;
     justify-content: center;
     padding-bottom: 20px;
-    /* Space from bottom of window */
     font-family: 'Inter', sans-serif;
+    z-index: 2;
+    position: relative;
 }
 
-/* The actual floating bar container */
+/* Floating bar container */
 .footer-container {
     width: 95%;
     max-width: 1400px;
-    padding: 1rem 2rem;
+    padding: 1rem 2.2rem;
     margin: 0 auto;
-
-    /* Glassmorphism Logic (Same as Header) */
-    background: rgba(8, 8, 8, 0.85);
+    background: rgba(10, 10, 12, 0.7);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 16px;
+    border: 1px solid var(--border-glass);
+    border-radius: var(--border-radius);
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
 
     /* Layout */
@@ -45,43 +41,47 @@
     font-size: 1.1rem;
     font-weight: 700;
     color: #fff;
-    margin-bottom: 0;
+    font-family: 'Outfit', sans-serif;
 }
 
 /* Socials */
 .footer-socials {
     display: flex;
-    gap: 1.5rem;
+    gap: 1.2rem;
 }
 
 .footer-socials a {
-    color: rgba(255, 255, 255, 0.7);
+    color: var(--text-secondary);
     transition: all 0.2s;
     display: flex;
     align-items: center;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 0.5rem;
+    border-radius: 50%;
 }
 
 .footer-socials a:hover {
-    color: #fff;
+    color: var(--primary-color);
+    background: rgba(215, 255, 0, 0.1);
+    border-color: rgba(215, 255, 0, 0.3);
     transform: translateY(-2px);
-    filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.3));
 }
 
 /* Copyright */
 .footer-copyright {
-    color: rgba(255, 255, 255, 0.5);
+    color: var(--text-muted);
     font-size: 0.85rem;
     font-weight: 500;
-    margin-top: 0;
 }
 
 /* Responsive - Stack on mobile */
-@media (max-width: 800px) {
+@media (max-width: 768px) {
     .footer-container {
         flex-direction: column;
         gap: 1.2rem;
         padding: 1.5rem;
-        width: 94%;
-        /* Match header mobile width */
+        width: 92%;
+        text-align: center;
     }
 }
