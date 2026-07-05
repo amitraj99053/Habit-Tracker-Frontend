@@ -37,6 +37,7 @@
     z-index: 1001;
     min-width: max-content;
     transition: transform 0.2s;
+    flex-shrink: 0;
 }
 
 .logo:hover {
@@ -64,8 +65,9 @@
 .nav-menu {
     display: flex;
     align-items: center;
-    gap: 1.5rem;
+    gap: 1.2rem;
     margin-left: auto;
+    flex-shrink: 0;
 }
 
 /* Base Nav Button */
@@ -172,7 +174,7 @@
 }
 
 /* MOBILE BREAKPOINT */
-@media (max-width: 1024px) {
+@media (max-width: 1150px) {
     .header {
         width: 92%;
         padding: 0.6rem 1.2rem;
