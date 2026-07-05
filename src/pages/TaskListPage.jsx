@@ -1,17 +1,29 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 import TaskStats from '../components/TaskStats';
 import TaskTable from '../components/TaskTable';
 import { taskService } from '../api/taskService';
 import './TaskListPage.css';
 
 const TaskListPage = () => {
+    const { user, loading: authLoading } = useAuth();
+    const navigate = useNavigate();
     const [tasks, setTasks] = useState([]);
     const [loading, setLoading] = useState(true);
     const [newTaskTitle, setNewTaskTitle] = useState('');
 
     useEffect(() => {
-        loadTasks();
-    }, []);
+        if (!authLoading && !user) {
+            navigate('/');
+        }
+    }, [authLoading, user, navigate]);
+
+    useEffect(() => {
+        if (user) {
+            loadTasks();
+        }
+    }, [user]);
 
     const loadTasks = async () => {
         try {

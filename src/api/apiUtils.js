@@ -20,7 +20,7 @@ export const getAuthHeaders = () => {
 };
 
 export const fetchWithTimeout = async (endpoint, options = {}) => {
-    const { timeout = 8000, ...fetchOptions } = options;
+    const { timeout = 30000, ...fetchOptions } = options;
 
     const controller = new AbortController();
     const id = setTimeout(() => controller.abort(), timeout);
@@ -31,6 +31,11 @@ export const fetchWithTimeout = async (endpoint, options = {}) => {
             signal: controller.signal
         });
         clearTimeout(id);
+
+        if (response.status === 401) {
+            window.dispatchEvent(new CustomEvent('auth-unauthorized'));
+        }
+
         return response;
     } catch (error) {
         clearTimeout(id);

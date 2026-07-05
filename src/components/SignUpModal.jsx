@@ -13,13 +13,23 @@ const SignUpModal = ({ isOpen, onClose, initiallyLogin = false }) => {
     });
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
 
     const [isLogin, setIsLogin] = useState(initiallyLogin);
 
-    // Update state when modal opens with new prop
+    // Update state when modal opens with new prop & reset data/errors
     React.useEffect(() => {
         if (isOpen) {
             setIsLogin(initiallyLogin);
+            setError('');
+            setSuccess('');
+            setIsLoading(false);
+            setFormData({
+                username: '',
+                email: '',
+                password: '',
+                confirmPassword: ''
+            });
         }
     }, [isOpen, initiallyLogin]);
 
@@ -33,6 +43,7 @@ const SignUpModal = ({ isOpen, onClose, initiallyLogin = false }) => {
     };
 
     const toggleMode = () => {
+        if (isLoading) return;
         setIsLogin(!isLogin);
         setError('');
         setSuccess('');
@@ -48,19 +59,22 @@ const SignUpModal = ({ isOpen, onClose, initiallyLogin = false }) => {
         e.preventDefault();
         setError('');
         setSuccess('');
+        setIsLoading(true);
 
         if (!isLogin && formData.password !== formData.confirmPassword) {
             setError('Passwords do not match');
+            setIsLoading(false);
             return;
         }
 
         try {
+            const emailTrimmed = formData.email.trim().toLowerCase();
             let data;
             if (isLogin) {
-                data = await authService.login(formData.email, formData.password);
+                data = await authService.login(emailTrimmed, formData.password);
                 setSuccess('Login successful!');
             } else {
-                data = await authService.signup(formData.username, formData.email, formData.password);
+                data = await authService.signup(formData.username.trim(), emailTrimmed, formData.password);
                 setSuccess('Account created successfully!');
             }
 
@@ -71,10 +85,12 @@ const SignUpModal = ({ isOpen, onClose, initiallyLogin = false }) => {
                 onClose();
                 setSuccess('');
                 setFormData({ username: '', email: '', password: '', confirmPassword: '' });
+                setIsLoading(false);
             }, 2000);
 
         } catch (err) {
             console.error('Auth Error:', err);
+            setIsLoading(false);
             // Handle timeout or network errors specifically
             if (err.message.includes('timed out') || err.message.includes('Failed to fetch')) {
                 setError('Unable to connect to server. Please check your internet or try again later.');
@@ -85,9 +101,9 @@ const SignUpModal = ({ isOpen, onClose, initiallyLogin = false }) => {
     };
 
     return (
-        <div className="modal-overlay" onClick={onClose}>
+        <div className="modal-overlay" onClick={() => !isLoading && onClose()}>
             <div className="modal-content" onClick={e => e.stopPropagation()}>
-                <button className="close-btn" onClick={onClose}>&times;</button>
+                <button className="close-btn" onClick={onClose} disabled={isLoading}>&times;</button>
                 {/* Header replaced by Tabs */}
 
                 {error && (
@@ -104,13 +120,15 @@ const SignUpModal = ({ isOpen, onClose, initiallyLogin = false }) => {
                 <div className="auth-tabs">
                     <button
                         className={`auth-tab ${isLogin ? 'active' : ''}`}
-                        onClick={() => { setIsLogin(true); setError(''); setSuccess(''); }}
+                        onClick={() => { if (!isLoading) { setIsLogin(true); setError(''); setSuccess(''); } }}
+                        disabled={isLoading}
                     >
                         Log In
                     </button>
                     <button
                         className={`auth-tab ${!isLogin ? 'active' : ''}`}
-                        onClick={() => { setIsLogin(false); setError(''); setSuccess(''); }}
+                        onClick={() => { if (!isLoading) { setIsLogin(false); setError(''); setSuccess(''); } }}
+                        disabled={isLoading}
                     >
                         Sign Up
                     </button>
@@ -127,6 +145,7 @@ const SignUpModal = ({ isOpen, onClose, initiallyLogin = false }) => {
                                     value={formData.username}
                                     onChange={handleChange}
                                     required={!isLogin}
+                                    disabled={isLoading}
                                 />
                             </div>
                         </div>
@@ -141,6 +160,7 @@ const SignUpModal = ({ isOpen, onClose, initiallyLogin = false }) => {
                                 value={formData.email}
                                 onChange={handleChange}
                                 required
+                                disabled={isLoading}
                             />
                         </div>
                     </div>
@@ -154,11 +174,12 @@ const SignUpModal = ({ isOpen, onClose, initiallyLogin = false }) => {
                                 value={formData.password}
                                 onChange={handleChange}
                                 required
+                                disabled={isLoading}
                             />
                         </div>
                         {isLogin && (
                             <div className="forgot-password">
-                                <span onClick={() => alert("Password reset feature coming soon!")}>
+                                <span onClick={() => !isLoading && alert("Password reset feature coming soon!")}>
                                     Forgot Password?
                                 </span>
                             </div>
@@ -175,12 +196,15 @@ const SignUpModal = ({ isOpen, onClose, initiallyLogin = false }) => {
                                     value={formData.confirmPassword}
                                     onChange={handleChange}
                                     required={!isLogin}
+                                    disabled={isLoading}
                                 />
                             </div>
                         </div>
                     )}
 
-                    <button type="submit" className="submit-btn">{isLogin ? 'Log In' : 'Sign Up'}</button>
+                    <button type="submit" className="submit-btn" disabled={isLoading}>
+                        {isLoading ? (isLogin ? 'Logging In...' : 'Signing Up...') : (isLogin ? 'Log In' : 'Sign Up')}
+                    </button>
                 </form>
             </div>
         </div>

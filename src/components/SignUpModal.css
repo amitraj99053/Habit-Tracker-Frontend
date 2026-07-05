@@ -151,6 +151,14 @@
     transform: translateY(0);
 }
 
+.submit-btn:disabled {
+    background: rgba(215, 255, 0, 0.4);
+    color: rgba(0, 0, 0, 0.5);
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
 .error-message {
     background-color: rgba(220, 38, 38, 0.1);
     color: #ff6b6b;
