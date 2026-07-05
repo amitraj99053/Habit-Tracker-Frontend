@@ -65,7 +65,7 @@
 .nav-menu {
     display: flex;
     align-items: center;
-    gap: 1.2rem;
+    gap: 1.6rem;
     margin-left: auto;
     flex-shrink: 0;
 }
@@ -79,7 +79,7 @@
     background: transparent;
     border: 1px solid transparent;
     cursor: pointer;
-    padding: 0.6rem 1.2rem;
+    padding: 0.75rem 1.5rem;
     border-radius: 10px;
     transition: all 0.25s ease;
     white-space: nowrap;
@@ -105,11 +105,11 @@
     background: var(--primary-color);
     color: #000;
     font-weight: 700;
-    padding: 0.6rem 1.5rem;
+    padding: 0.75rem 1.8rem;
     border-radius: 10px;
     border: none;
     box-shadow: 0 4px 15px rgba(215, 255, 0, 0.2);
-    margin-left: 0.5rem;
+    margin-left: 0.8rem;
 }
 
 .nav-btn.secondary-btn:hover {
@@ -128,7 +128,7 @@
     cursor: default;
     background: rgba(255, 255, 255, 0.03);
     border: 1px solid var(--border-glass);
-    padding: 0.6rem 1.2rem;
+    padding: 0.75rem 1.5rem;
 }
 
 .nav-btn.user-greeting:hover {
@@ -196,7 +196,7 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        gap: 1.8rem;
+        gap: 2.2rem;
         transform: translateY(-100%);
         opacity: 0;
         visibility: hidden;
@@ -256,7 +256,7 @@
     .nav-btn.user-greeting {
         font-size: 1.1rem;
         margin-right: 0;
-        margin-bottom: 0.5rem;
+        margin-bottom: 0;
     }
 
     /* Hamburger Animation */
