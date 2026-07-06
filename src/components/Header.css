@@ -122,9 +122,6 @@
 /* User Greeting */
 .nav-btn.user-greeting {
     color: #fff;
-    max-width: 250px;
-    overflow: hidden;
-    text-overflow: ellipsis;
     cursor: default;
     background: rgba(255, 255, 255, 0.03);
     border: 2px solid rgba(255, 255, 255, 0.25);
