@@ -2,11 +2,10 @@ import React from 'react';
 import { ChevronLeft, ChevronRight, Download } from 'lucide-react';
 import './SummaryHeader.css';
 
-const SummaryHeader = ({ habits, currentMonth, onNextMonth, onPrevMonth, onExport }) => {
+const SummaryHeader = ({ habits, currentMonth, onNextMonth, onPrevMonth, onExport, journey }) => {
     const totalHabits = habits.length;
 
     // Calculate total updates/completions for the current month vs goal
-    // Note: Use a simple completion rate for now
     let totalCompletions = 0;
     habits.forEach(habit => {
         const monthCompletions = habit.completedDates.filter(date => {
@@ -23,8 +22,21 @@ const SummaryHeader = ({ habits, currentMonth, onNextMonth, onPrevMonth, onExpor
     const monthName = currentMonth.toLocaleString('default', { month: 'long' });
     const year = currentMonth.getFullYear();
 
+    const trackerNames = {
+        'daily': '☀️ Daily Habits Tracker',
+        'weekly': '🎯 Weekly Goals Tracker',
+        'wellness': '❤️ Wellness Tracker',
+        'productivity': '⚡ Productivity Tracker',
+        'all': '✨ All Habits Tracker'
+    };
+    const trackerName = trackerNames[journey] || '✨ Habit Tracker';
+
     return (
         <div className="summary-header">
+            <div className="tracker-banner">
+                <h1 className="tracker-title">{trackerName}</h1>
+            </div>
+            
             <div className="header-top">
                 <div className="month-nav-container">
                     <button className="nav-btn" onClick={onPrevMonth}><ChevronLeft size={18} /></button>

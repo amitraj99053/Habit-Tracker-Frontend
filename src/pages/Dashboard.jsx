@@ -163,6 +163,7 @@ const Dashboard = () => {
                 onNextMonth={nextMonth}
                 onPrevMonth={prevMonth}
                 onExport={handleExport}
+                journey={journey}
             />
 
             <div className="dashboard-main-content">
