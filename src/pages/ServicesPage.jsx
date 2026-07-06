@@ -17,7 +17,7 @@ const ServicesPage = ({ openAuthModal }) => {
             Icon: Sun,
             color: '#FFD700',
             tags: ['Consistency', 'Routine', 'Growth'],
-            previewColor: '#FFF9C4'
+            previewBg: 'radial-gradient(circle at center, rgba(255, 215, 0, 0.15) 0%, rgba(20, 20, 25, 0.4) 100%)'
         },
         {
             id: 'weekly',
@@ -26,7 +26,7 @@ const ServicesPage = ({ openAuthModal }) => {
             Icon: Target,
             color: '#646cff',
             tags: ['Planning', 'Overview', 'Strategy'],
-            previewColor: '#E8EAF6'
+            previewBg: 'radial-gradient(circle at center, rgba(100, 108, 255, 0.15) 0%, rgba(20, 20, 25, 0.4) 100%)'
         },
         {
             id: 'wellness',
@@ -35,7 +35,7 @@ const ServicesPage = ({ openAuthModal }) => {
             Icon: Heart,
             color: '#ff6b6b',
             tags: ['Health', 'Mindfulness', 'Self-care'],
-            previewColor: '#FFEBEE'
+            previewBg: 'radial-gradient(circle at center, rgba(255, 107, 107, 0.15) 0%, rgba(20, 20, 25, 0.4) 100%)'
         },
         {
             id: 'productivity',
@@ -44,7 +44,7 @@ const ServicesPage = ({ openAuthModal }) => {
             Icon: Zap,
             color: '#4ecdc4',
             tags: ['Work', 'Focus', 'Projects'],
-            previewColor: '#E0F2F1'
+            previewBg: 'radial-gradient(circle at center, rgba(78, 205, 196, 0.15) 0%, rgba(20, 20, 25, 0.4) 100%)'
         },
         {
             id: 'task-list',
@@ -53,7 +53,7 @@ const ServicesPage = ({ openAuthModal }) => {
             Icon: ListTodo,
             color: '#90ee90',
             tags: ['To-Do', 'Deadlines', 'Organization'],
-            previewColor: '#F1F8E9'
+            previewBg: 'radial-gradient(circle at center, rgba(144, 238, 144, 0.15) 0%, rgba(20, 20, 25, 0.4) 100%)'
         }
     ];
 
@@ -80,11 +80,12 @@ const ServicesPage = ({ openAuthModal }) => {
                     <div
                         key={service.id}
                         className="service-card"
+                        style={{ '--card-accent': service.color }}
                         onClick={() => handleServiceClick(service.id)}
                     >
-                        <div className="card-preview" style={{ backgroundColor: service.previewColor }}>
+                        <div className="card-preview" style={{ background: service.previewBg }}>
                             {/* Creative Icon Representation with Glow */}
-                            <div className="icon-glow-container">
+                            <div className="icon-glow-container" style={{ filter: `drop-shadow(0 0 25px ${service.color}33)` }}>
                                 <service.Icon size={64} color={service.color} strokeWidth={1.5} />
                             </div>
                         </div>
@@ -96,11 +97,12 @@ const ServicesPage = ({ openAuthModal }) => {
                             <p>{service.description}</p>
                             <div className="service-tags">
                                 {service.tags.map(tag => (
-                                    <span key={tag} className="tag">{tag}</span>
+                                    <span key={tag} className="tag" style={{ color: service.color, borderColor: `${service.color}22`, background: `${service.color}0a` }}>{tag}</span>
                                 ))}
                             </div>
                             <button
                                 className="select-btn"
+                                style={{ '--hover-bg': service.color }}
                                 onClick={(e) => {
                                     e.stopPropagation();
                                     handleServiceClick(service.id);
