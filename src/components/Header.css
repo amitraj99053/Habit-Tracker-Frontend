@@ -137,6 +137,7 @@
     background: rgba(215, 255, 0, 0.05);
     border-color: var(--primary-color);
     color: var(--primary-color);
+    box-shadow: 0 0 12px rgba(215, 255, 0, 0.35);
 }
 
 /* Divider */
