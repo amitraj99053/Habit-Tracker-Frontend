@@ -1,9 +1,90 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
+import { habitService } from '../api/habitService';
+import { taskService } from '../api/taskService';
 import './LandingPage.css';
 
 const LandingPage = () => {
     const navigate = useNavigate();
+    const { user } = useAuth();
+    const [stats, setStats] = useState({
+        streak: 0,
+        tasksCompleted: 0,
+        totalTasks: 0,
+        productivityScore: 0
+    });
+
+    useEffect(() => {
+        if (!user) return;
+
+        const fetchStats = async () => {
+            try {
+                const [habits, tasks] = await Promise.all([
+                    habitService.getAllHabits(),
+                    taskService.getAllTasks()
+                ]);
+
+                // Calculate current streak
+                let maxStreak = 0;
+                const today = new Date();
+                today.setHours(0, 0, 0, 0);
+
+                habits.forEach(habit => {
+                    let streak = 0;
+                    let checkDate = new Date(today);
+                    
+                    while (true) {
+                        const dateStr = checkDate.toDateString();
+                        const isCompleted = habit.completedDates.some(d => new Date(d).toDateString() === dateStr);
+                        if (isCompleted) {
+                            streak++;
+                            checkDate.setDate(checkDate.getDate() - 1);
+                        } else {
+                            if (checkDate.getTime() === today.getTime()) {
+                                checkDate.setDate(checkDate.getDate() - 1);
+                                const wasCompletedYesterday = habit.completedDates.some(d => new Date(d).toDateString() === checkDate.toDateString());
+                                if (wasCompletedYesterday) {
+                                    continue;
+                                }
+                            }
+                            break;
+                        }
+                    }
+                    if (streak > maxStreak) maxStreak = streak;
+                });
+
+                // Calculate completed tasks
+                const completedTasks = tasks.filter(t => t.status === 'Done').length;
+
+                // Calculate productivity score based on completions today
+                const habitsCompletedToday = habits.filter(habit =>
+                    habit.completedDates.some(d => new Date(d).toDateString() === today.toDateString())
+                ).length;
+                const totalHabits = habits.length;
+                const habitScore = totalHabits > 0 ? (habitsCompletedToday / totalHabits) * 100 : 0;
+                const taskScore = tasks.length > 0 ? (completedTasks / tasks.length) * 100 : 0;
+
+                let finalScore = 0;
+                if (totalHabits > 0 && tasks.length > 0) {
+                    finalScore = Math.round((habitScore + taskScore) / 2);
+                } else {
+                    finalScore = Math.round(totalHabits > 0 ? habitScore : (tasks.length > 0 ? taskScore : 0));
+                }
+
+                setStats({
+                    streak: maxStreak,
+                    tasksCompleted: completedTasks,
+                    totalTasks: tasks.length,
+                    productivityScore: finalScore
+                });
+            } catch (error) {
+                console.error("Failed to load landing page stats", error);
+            }
+        };
+
+        fetchStats();
+    }, [user]);
 
     return (
         <div className="landing-page">
@@ -29,21 +110,27 @@ const LandingPage = () => {
                             <div className="stat-icon">🔥</div>
                             <div>
                                 <strong>Current Streak</strong>
-                                <div style={{ fontSize: '0.9rem', color: '#666' }}>12 Days Consistent</div>
+                                <div style={{ fontSize: '0.9rem', color: '#a1a1aa' }}>
+                                    {user ? `${stats.streak} Days Consistent` : "12 Days Consistent"}
+                                </div>
                             </div>
                         </div>
                         <div className="mock-stat">
                             <div className="stat-icon">✅</div>
                             <div>
                                 <strong>Tasks Completed</strong>
-                                <div style={{ fontSize: '0.9rem', color: '#666' }}>8/10 Today</div>
+                                <div style={{ fontSize: '0.9rem', color: '#a1a1aa' }}>
+                                    {user ? `${stats.tasksCompleted}/${stats.totalTasks} Done` : "8/10 Today"}
+                                </div>
                             </div>
                         </div>
                         <div className="mock-stat">
                             <div className="stat-icon">📈</div>
                             <div>
                                 <strong>Productivity Score</strong>
-                                <div style={{ fontSize: '0.9rem', color: '#666' }}>94% Efficiency</div>
+                                <div style={{ fontSize: '0.9rem', color: '#a1a1aa' }}>
+                                    {user ? `${stats.productivityScore}% Efficiency` : "94% Efficiency"}
+                                </div>
                             </div>
                         </div>
                     </div>
