@@ -5,11 +5,22 @@ import { suggestedHabits } from '../data/suggestedHabits';
 import { Trash2 } from 'lucide-react';
 import './HabitGrid.css';
 
-const HabitGrid = ({ habits, currentMonth, onHabitUpdated, onHabitAdded, onHabitDeleted }) => {
+const HabitGrid = ({ habits, currentMonth, onHabitUpdated, onHabitAdded, onHabitDeleted, journey }) => {
     const [editingId, setEditingId] = React.useState(null);
     const [tempName, setTempName] = React.useState('');
     const [pickerOpen, setPickerOpen] = React.useState(null); // stores habit ID
     const [pickerCoords, setPickerCoords] = React.useState({ top: 0, left: 0 });
+
+    const filteredSuggestions = useMemo(() => {
+        const untracked = suggestedHabits.filter(s => !habits.some(h => h.name.toLowerCase() === s.name.toLowerCase()));
+        if (!journey || journey === 'all') {
+            return untracked;
+        }
+        if (journey === 'daily') {
+            return untracked.filter(s => s.frequency === 'daily');
+        }
+        return untracked.filter(s => s.category.toLowerCase() === journey.toLowerCase());
+    }, [habits, journey]);
 
     // Expanded Emoji List for Picker
     const EMOJI_LIST = [
@@ -322,7 +333,7 @@ const HabitGrid = ({ habits, currentMonth, onHabitUpdated, onHabitAdded, onHabit
                     )}
 
                     {/* Suggested Habits Ghost Rows */}
-                    {suggestedHabits.filter(s => !habits.some(h => h.name === s.name)).map((habit, index) => (
+                    {filteredSuggestions.map((habit, index) => (
                         <tr
                             key={`suggestion-${index}`}
                             className="suggestion-row"

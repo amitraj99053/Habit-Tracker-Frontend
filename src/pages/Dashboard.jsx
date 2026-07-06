@@ -182,6 +182,7 @@ const Dashboard = () => {
                             onHabitUpdated={handleHabitUpdated}
                             onHabitAdded={handleHabitAdded}
                             onHabitDeleted={handleHabitDeleted}
+                            journey={journey}
                         />
                     )}
 
