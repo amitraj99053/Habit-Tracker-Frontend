@@ -103,11 +103,11 @@ const Header = ({ openAuthModal, openProfileModal }) => {
                     {user ? (
                         <>
                             <span className="nav-btn user-greeting clickable-greeting" title="Edit Profile Settings" onClick={() => { openProfileModal(); setIsMobileMenuOpen(false); }}>Hi, {user.username}</span>
-                            <button className="nav-btn secondary-btn" onClick={handleLogout} style={{ background: '#ff4d4d', color: '#fff', border: '2px solid transparent' }}>Logout</button>
+                            <button className="nav-btn secondary-btn" onClick={handleLogout} style={{ background: '#ff4d4d', color: '#fff', border: '3px solid transparent' }}>Logout</button>
                         </>
                     ) : (
                         <>
-                            <button className="nav-btn" onClick={() => { openAuthModal(true); setIsMobileMenuOpen(false); }} style={{ background: 'transparent', border: '2px solid transparent', boxShadow: 'none' }}>Log In</button>
+                            <button className="nav-btn" onClick={() => { openAuthModal(true); setIsMobileMenuOpen(false); }} style={{ background: 'transparent', border: '3px solid transparent', boxShadow: 'none' }}>Log In</button>
                             <button className="nav-btn secondary-btn" onClick={() => { openAuthModal(false); setIsMobileMenuOpen(false); }}>Register</button>
                         </>
                     )}
