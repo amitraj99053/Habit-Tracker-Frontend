@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { authService } from '../api/authService';
 import './SignUpModal.css';
 
 const SignUpModal = ({ isOpen, onClose, initiallyLogin = false }) => {
     const { login } = useAuth();
+    const navigate = useNavigate();
     const [formData, setFormData] = useState({
         username: '',
         email: '',
@@ -86,6 +88,7 @@ const SignUpModal = ({ isOpen, onClose, initiallyLogin = false }) => {
                 setSuccess('');
                 setFormData({ username: '', email: '', password: '', confirmPassword: '' });
                 setIsLoading(false);
+                navigate('/');
             }, 2000);
 
         } catch (err) {
